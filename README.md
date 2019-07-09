@@ -14,7 +14,7 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.0.0
+  liquid_swipe: ^1.0.1
   
   ```
 * Get package from Pub:
