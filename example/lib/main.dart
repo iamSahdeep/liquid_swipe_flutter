@@ -104,21 +104,21 @@ class MyApp extends StatelessWidget {
           Column(
             children: <Widget>[
               new Text(
-                "Its",
+                "Liked?",
                 style: TextStyle(
                     fontSize: 30,
                     fontFamily: "Billy",
                     fontWeight: FontWeight.w600),
               ),
               new Text(
-                "Third",
+                "Fork!",
                 style: TextStyle(
                     fontSize: 30,
                     fontFamily: "Billy",
                     fontWeight: FontWeight.w600),
               ),
               new Text(
-                "View",
+                "Give Star!",
                 style: TextStyle(
                     fontSize: 30,
                     fontFamily: "Billy",
