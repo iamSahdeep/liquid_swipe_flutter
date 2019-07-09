@@ -1,21 +1,29 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class WaveLayer extends CustomPainter {
+import 'package:flutter/material.dart';
+import 'package:liquid_swipe/Constants/constants.dart';
+
+class WaveLayer extends CustomClipper<Path> {
+  double revealPercent;
   double waveCenterY;
   double waveHorRadius;
   double waveVertRadius;
   double sideWidth;
+  SlideDirection slideDirection;
 
   WaveLayer({
-    @required this.waveCenterY,
-    @required this.waveHorRadius,
-    @required this.waveVertRadius,
-    @required this.sideWidth,
+    @required this.revealPercent,
+    @required this.slideDirection,
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
+  getClip(Size size) {
     Path path = new Path();
+    sideWidth = sidewidth(size);
+    waveVertRadius = waveVertRadiusF(size);
+    waveCenterY = size.height * 0.7167487685;
+    waveHorRadius = waveHorRadiusF(size);
+
     var maskWidth = size.width - sideWidth;
     path.moveTo(maskWidth - sideWidth, 0);
     path.lineTo(0, 0);
@@ -108,11 +116,57 @@ class WaveLayer extends CustomPainter {
 
     path.lineTo(maskWidth, 0);
     path.close();
-    canvas.drawPath(path, new Paint()..color = Colors.red..style = PaintingStyle.fill);
+    return path;
+  }
+
+  double sidewidth(Size size) {
+    var p1 = 0.2;
+    var p2 = 0.8;
+    if (revealPercent <= p1) {
+      return 15.0;
+    }
+    if (revealPercent >= p2) {
+      return size.width;
+    }
+    return 15.0 + (size.width - 15.0) * (revealPercent - p1) / (p2 - p1);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
+  bool shouldReclip(CustomClipper oldClipper) {
     return true;
+  }
+
+  double waveVertRadiusF(Size size) {
+    var p1 = 0.4;
+    if (revealPercent <= 0) {
+      return 82.0;
+    }
+    if (revealPercent >= p1) {
+      return size.height * 0.9;
+    }
+    return 82.0 + ((size.height * 0.9) - 82.0) * revealPercent / p1;
+  }
+
+  double waveHorRadiusF(Size size) {
+    if (revealPercent <= 0) {
+      return 48;
+    }
+    if (revealPercent >= 1) {
+      return 0;
+    }
+    var p1 = 0.4;
+    if (revealPercent <= p1) {
+      return 48.0 + revealPercent / p1 * ((size.width * 0.8) - 48.0);
+    }
+    var t = (revealPercent - p1) / (1.0 - p1);
+    var A = size.width * 0.8;
+    var r = 40;
+    var m = 9.8;
+    var beta = r / (2 * m);
+    var k = 50;
+    var omega0 = k / m;
+    var omega = pow(-pow(beta, 2) + pow(omega0, 2), 0.5);
+
+    return A * exp(-beta * t) * cos(omega * t);
   }
 }
