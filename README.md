@@ -1,4 +1,4 @@
-# liquid_swipe [![Pub](https://img.shields.io/pub/v/flutter_visualizers.svg?style=flat-square)](https://pub.dartlang.org/packages/liquid_swipe)
+# liquid_swipe [![Pub](https://img.shields.io/pub/v/liquid_swipe.svg?style=flat-square)](https://pub.dartlang.org/packages/liquid_swipe)
 
 
 Liquid swipe is the revealing clipper to stacked Container and inspired by [Cuberto's liquid swipe](https://github.com/Cuberto/liquid-swipe) and [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter).
