@@ -2,6 +2,32 @@
 
 Demonstrates how to use the liquid_swipe plugin.
 
+
+### Sample
+
+![Video](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/example.gif)
+
+### APK
+ [Download](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/app-release.apk)
+
+## Usage
+* Add this to your pubspec.yaml
+  ```
+  dependencies:
+  liquid_swipe: ^1.0.2
+
+  ```
+* Get package from Pub:
+
+  ```
+  flutter packages get
+  ```
+* Import it in your file
+
+  ```
+  import 'package:liquid_swipe/liquid_swipe.dart';
+  ```
+
 ## Example
 
  * First, create a list of Containers.

@@ -49,7 +49,7 @@ flutter:
   fonts:
     - family: Billy
       fonts:
-        - asset: assets/Billy Argel Font___.ttf
+        - asset: assets/font.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
