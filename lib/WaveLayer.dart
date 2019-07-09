@@ -22,8 +22,11 @@ class WaveLayer extends CustomClipper<Path> {
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
     waveCenterY = size.height * 0.7167487685;
-    waveHorRadius = waveHorRadiusF(size);
-
+    if (slideDirection == SlideDirection.leftToRight) {
+      waveHorRadius = waveHorRadiusFBack(size);
+    } else {
+      waveHorRadius = waveHorRadiusF(size);
+    }
     var maskWidth = size.width - sideWidth;
     path.moveTo(maskWidth - sideWidth, 0);
     path.lineTo(0, 0);
@@ -116,6 +119,7 @@ class WaveLayer extends CustomClipper<Path> {
 
     path.lineTo(maskWidth, 0);
     path.close();
+
     return path;
   }
 
@@ -160,6 +164,29 @@ class WaveLayer extends CustomClipper<Path> {
     }
     var t = (revealPercent - p1) / (1.0 - p1);
     var A = size.width * 0.8;
+    var r = 40;
+    var m = 9.8;
+    var beta = r / (2 * m);
+    var k = 50;
+    var omega0 = k / m;
+    var omega = pow(-pow(beta, 2) + pow(omega0, 2), 0.5);
+
+    return A * exp(-beta * t) * cos(omega * t);
+  }
+
+  double waveHorRadiusFBack(Size size) {
+    if (revealPercent <= 0) {
+      return 48;
+    }
+    if (revealPercent >= 1) {
+      return 0;
+    }
+    var p1 = 0.4;
+    if (revealPercent <= p1) {
+      return 48.0 + revealPercent / p1 * 48.0;
+    }
+    var t = (revealPercent - p1) / (1.0 - p1);
+    var A = 96;
     var r = 40;
     var m = 9.8;
     var beta = r / (2 * m);
