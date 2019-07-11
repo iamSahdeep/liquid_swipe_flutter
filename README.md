@@ -168,7 +168,7 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
     );
   }
  ```
- * You can also add fullTransition along with pages to vary the sensitivity. Actually it describes the number of pixels for the reveal to cover in complete drag. Default is `300.0`
+ * You can also add fullTransition along with pages to vary the sensitivity. Default is `300.0`
  * Remember pages can only be containers.
  * Check out the complete [Example](https://github.com/iamSahdeep/liquid_swipe_flutter/tree/master/example)
  
