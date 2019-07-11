@@ -17,7 +17,7 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
   liquid_swipe: ^1.0.2
   
   ```
-* Get package from Pub:
+* Get the package from Pub:
 
   ```
   flutter packages get
@@ -174,7 +174,7 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
  
 ### Credits
    - [Cuberto](https://github.com/Cuberto) for awesome [Liquid Swipe](https://github.com/Cuberto/liquid-swipe) in Swift.
-   - [@aagarwal1012](https://github.com/aagarwal1012) for [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter), It made my work too less.
+   - [@aagarwal1012](https://github.com/aagarwal1012) for [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter), it made my work too easy.
  
  
 ## Author & support
