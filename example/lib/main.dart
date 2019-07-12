@@ -137,7 +137,9 @@ class MyApp extends StatelessWidget {
       home: Builder(
           builder: (context) =>
               LiquidSwipe(
-                  pages: pages
+                pages: pages,
+                fullTransition: 500.0,
+                initPage: 2,
               )),
     );
   }

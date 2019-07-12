@@ -12,12 +12,18 @@ import 'Animation_Gesture/page_reveal.dart';
 class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
   final double fullTransition;
+  final int initPage;
 
   const LiquidSwipe({
     Key key,
-    this.pages,
+    @required this.pages,
     this.fullTransition = FULL_TARNSITION_PX,
-  }) : super(key: key);
+    this.initPage = 0,
+  })
+      : assert(pages != null),
+        assert(fullTransition != null),
+        assert(initPage != null && initPage >= 0 && initPage < pages.length),
+        super(key: key);
 
   @override
   State<StatefulWidget> createState() => _LiquidSwipe();
@@ -49,6 +55,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    activePageIndex = widget.initPage;
+    nextPageIndex = widget.initPage;
     //Stream Controller initialization
     slideUpdateStream = StreamController<SlideUpdate>();
     //listening to updates of stream controller
