@@ -9,20 +9,22 @@ import 'package:liquid_swipe/page.dart';
 
 import 'Animation_Gesture/page_reveal.dart';
 
+final key = new GlobalKey<_LiquidSwipe>();
 class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
-  final double fullTransition;
-  final int initPage;
+  final double fullTransitionValue;
+  final int initialPage;
 
   const LiquidSwipe({
     Key key,
     @required this.pages,
-    this.fullTransition = FULL_TARNSITION_PX,
-    this.initPage = 0,
+    this.fullTransitionValue = FULL_TARNSITION_PX,
+    this.initialPage = 0,
   })
       : assert(pages != null),
-        assert(fullTransition != null),
-        assert(initPage != null && initPage >= 0 && initPage < pages.length),
+        assert(fullTransitionValue != null),
+        assert(initialPage != null && initialPage >= 0 &&
+            initialPage < pages.length),
         super(key: key);
 
   @override
@@ -40,6 +42,8 @@ class SlideUpdate {
 }
 
 class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
+
+
   StreamController<SlideUpdate>
   // ignore: close_sinks
   slideUpdateStream; //Stream controller is used to get all the updates when user slides across screen.
@@ -55,8 +59,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    activePageIndex = widget.initPage;
-    nextPageIndex = widget.initPage;
+    activePageIndex = widget.initialPage;
+    nextPageIndex = widget.initialPage;
     //Stream Controller initialization
     slideUpdateStream = StreamController<SlideUpdate>();
     //listening to updates of stream controller
@@ -119,7 +123,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         else if (event.updateType == UpdateType.doneAnimating) {
           activePageIndex = nextPageIndex;
           slideDirection = SlideDirection.none;
-          slidePercent = 0.0;
+          slidePercent = 0.5;
         }
       });
     });
@@ -159,14 +163,20 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
                 percentVisible: slidePercent),
             slideDirection: slideDirection,
           ),
-
           PageDragger(
             //Used for gesture control
-            fullTransitionPX: widget.fullTransition,
+            fullTransitionPX: widget.fullTransitionValue,
             slideUpdateStream: this.slideUpdateStream,
           ), //PageDragger
         ], //Widget
       ), //Stack
     ); //Scaffold
+  }
+
+  next() {
+    _LiquidSwipe().setState(() {
+      activePageIndex += 1;
+      nextPageIndex = activePageIndex + 1;
+    });
   }
 }

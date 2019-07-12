@@ -16,6 +16,10 @@ class Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return this.pageView;
+    return Stack(
+      children: <Widget>[
+        this.pageView,
+      ],
+    );
   }
 }

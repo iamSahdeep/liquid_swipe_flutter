@@ -27,7 +27,7 @@ class _PageDraggerState extends State<PageDragger> {
   //Variables
   Offset dragStart;
   SlideDirection slideDirection;
-  double slidePercent = 0.0;
+  double slidePercent = 0;
 
   // This methods executes when user starts dragging.
   onDragStart(DragStartDetails details) {
@@ -72,6 +72,8 @@ class _PageDraggerState extends State<PageDragger> {
         SlideDirection.none, slidePercent, UpdateType.doneDragging));
 
     //Making dragStart to null for the reallocation
+    slidePercent = 0;
+    slideDirection = SlideDirection.none;
     dragStart = null;
   }
 
@@ -79,9 +81,27 @@ class _PageDraggerState extends State<PageDragger> {
   Widget build(BuildContext context) {
     //Gesture Detector for horizontal drag
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onHorizontalDragStart: onDragStart,
       onHorizontalDragUpdate: onDragUpdate,
       onHorizontalDragEnd: onDragEnd,
+      child: Align(
+          alignment: Alignment(1 - slidePercent + 0.005,
+              MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.00061),
+          child: Opacity(
+              opacity: 1 - slidePercent,
+              child: FloatingActionButton(
+                onPressed: null,
+                backgroundColor: Colors.transparent,
+                disabledElevation: 0.0,
+                child: slideDirection == SlideDirection.leftToRight
+                    ? null
+                    : Icon(Icons.arrow_back_ios),
+                foregroundColor: Colors.black,
+              ))),
     );
   }
 }

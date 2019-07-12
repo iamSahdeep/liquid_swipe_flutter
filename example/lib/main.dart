@@ -129,18 +129,92 @@ class MyApp extends StatelessWidget {
         ],
       ),
     ),
+    Container(
+      color: Colors.yellowAccent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Image.asset(
+            'assets/1.png',
+            fit: BoxFit.cover,
+          ),
+          Padding(padding: const EdgeInsets.all(20.0)),
+          Column(
+            children: <Widget>[
+              new Text(
+                "Can be",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: "Billy",
+                    fontWeight: FontWeight.w600),
+              ),
+              new Text(
+                "Used for",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: "Billy",
+                    fontWeight: FontWeight.w600),
+              ),
+              new Text(
+                "Onboarding Design",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: "Billy",
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Colors.redAccent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Image.asset(
+            'assets/1.png',
+            fit: BoxFit.cover,
+          ),
+          Padding(padding: const EdgeInsets.all(20.0)),
+          Column(
+            children: <Widget>[
+              new Text(
+                "Do",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: "Billy",
+                    fontWeight: FontWeight.w600),
+              ),
+              new Text(
+                "Try",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: "Billy",
+                    fontWeight: FontWeight.w600),
+              ),
+              new Text(
+                "It, Thank You",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: "Billy",
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          )
+        ],
+      ),
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home: Builder(
-          builder: (context) =>
-              LiquidSwipe(
-                pages: pages,
-                fullTransition: 500.0,
-                initPage: 2,
-              )),
-    );
+        home: new Scaffold(
+            body: LiquidSwipe(key: key, pages: pages, initialPage: 1)));
   }
 }
