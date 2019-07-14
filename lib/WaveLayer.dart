@@ -21,7 +21,7 @@ class WaveLayer extends CustomClipper<Path> {
     Path path = new Path();
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
-    waveCenterY = size.height * 0.7167487685;
+    waveCenterY = size.height * 0.75;
     if (slideDirection == SlideDirection.leftToRight) {
       waveHorRadius = waveHorRadiusFBack(size);
     } else {

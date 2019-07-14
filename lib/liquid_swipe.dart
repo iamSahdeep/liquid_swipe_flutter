@@ -14,12 +14,14 @@ class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
   final double fullTransitionValue;
   final int initialPage;
+  final bool enableSlideIcon;
 
   const LiquidSwipe({
     Key key,
     @required this.pages,
     this.fullTransitionValue = FULL_TARNSITION_PX,
     this.initialPage = 0,
+    this.enableSlideIcon = false,
   })
       : assert(pages != null),
         assert(fullTransitionValue != null),
@@ -105,6 +107,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               slideUpdateStream: slideUpdateStream,
               vsync: this,
             );
+
             nextPageIndex = activePageIndex;
             //to continue in the loop of pages
             if (nextPageIndex > widget.pages.length - 1)
@@ -167,6 +170,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             //Used for gesture control
             fullTransitionPX: widget.fullTransitionValue,
             slideUpdateStream: this.slideUpdateStream,
+            enableSlideIcon: widget.enableSlideIcon,
           ), //PageDragger
         ], //Widget
       ), //Stack

@@ -191,14 +191,14 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.w600),
               ),
               new Text(
-                "Try",
+                "Try it",
                 style: TextStyle(
                     fontSize: 30,
                     fontFamily: "Billy",
                     fontWeight: FontWeight.w600),
               ),
               new Text(
-                "It, Thank You",
+                "Thank You",
                 style: TextStyle(
                     fontSize: 30,
                     fontFamily: "Billy",
@@ -215,6 +215,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
         home: new Scaffold(
-            body: LiquidSwipe(key: key, pages: pages, initialPage: 1)));
+            body: LiquidSwipe(
+              pages: pages,
+              fullTransitionValue: 500,
+              enableSlideIcon: true,
+            )));
   }
 }
