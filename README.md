@@ -1,20 +1,39 @@
-# liquid_swipe [![Pub](https://img.shields.io/pub/v/liquid_swipe.svg?style=flat-square)](https://pub.dartlang.org/packages/liquid_swipe)
+<h1 align="center" xmlns="http://www.w3.org/1999/html">
+  <br>
+   <img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/page1.png" alt="Logo Liquid Swipe" title="Logo by  FotoJet ( https://www.fotojet.com/ )" />
+  <br>
+</h1>
+<p align="center">  
+ <a href="https://github.com/iamSahdeep/liquid_swipe_flutter/releases" <img height="20" alt="GitHub All Releases" src="https://img.shields.io/github/downloads/iamSahdeep/liquid_swipe_flutter/total.svg?style=for-the-badge"></a>
+<a href="https://www.codacy.com/app/iamSahdeep/liquid_swipe_flutter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iamSahdeep/liquid_swipe_flutter&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/ccdaffb33883461b8570cd80f5051631"/></a>
+ <a href="https://pub.dev/packages/liquid_swipe" <img height="20" alt="Pub" src="https://img.shields.io/pub/v/liquid_swipe.svg?style=for-the-badge"></a>
+ <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-APACHE2.0-blue.svg"></a>
+   <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Built%20for-Flutter-blue.svg?longCache=true&style=flat-square" "></a>
+</p>
 
+<p align="center">
+  This repository contains the <strong>Liquid Swipe</strong> source code.
+  Liquid swipe is the revealing clipper to bring off amazing liquid like swipe to stacked Container and inspired by <a href="https://github.com/Cuberto/liquid-swipe"> Cuberto's liquid swipe</a> and <a href="https://github.com/aagarwal1012/IntroViews-Flutter">IntroViews</a>.
 
-Liquid swipe is the revealing clipper to stacked Container and inspired by [Cuberto's liquid swipe](https://github.com/Cuberto/liquid-swipe) and [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter).
+</p>
 
-### Sample 
+<p align="center">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/example.gif" width="360" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/example.gif" width="360" height="640">
+</p>
 
-![Video](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/example.gif)
+### Sample APK
 
-### APK
- [Download](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/app-release.apk)
+Download example apk as shown in sample.
 
-## Usage
+<a href='https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/app-release.apk'><img alt='Get it from Github Releases' src='https://i0.wp.com/dimitrology.com/wp-content/uploads/2017/02/download-apk.png?resize=172%2C100&ssl=1' width="200" height="100"/></a>
+ 
+
+## Getting Started
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.0.2
+  liquid_swipe: ^1.1.0
   
   ```
 * Get the package from Pub:
@@ -27,135 +46,19 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
   ```
   import 'package:liquid_swipe/liquid_swipe.dart';
   ```
-## Example
+  
+## Usage
 
- * First, create a list of Containers.
+ - *`Liquid Swipe`* just requires the list of [`containers`](https://api.flutter.dev/flutter/widgets/Container-class.html). Just to provide flexibity to the developer to design its own view through it.
  ```
  final pages = [
-    Container(
-      color: Colors.pink,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Image.asset(
-            'assets/1.png',
-            fit: BoxFit.cover,
-          ),
-          Padding(padding: const EdgeInsets.all(20.0)),
-          Column(
-            children: <Widget>[
-              new Text(
-                "Hi",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                "It's Me",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                "Sahdeep",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-          )
-        ],
-      ),
-    ),
-    Container(
-      color: Colors.deepPurpleAccent,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Image.asset(
-            'assets/1.png',
-            fit: BoxFit.cover,
-          ),
-          Padding(padding: const EdgeInsets.all(20.0)),
-          Column(
-            children: <Widget>[
-              new Text(
-                "Take a",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                "look at",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                "Liquid Swipe",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-          )
-        ],
-      ),
-    ),
-    Container(
-      color: Colors.greenAccent,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Image.asset(
-            'assets/1.png',
-            fit: BoxFit.cover,
-          ),
-          Padding(padding: const EdgeInsets.all(20.0)),
-          Column(
-            children: <Widget>[
-              new Text(
-                "Liked?",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                "Fork!",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                "Give Star!",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-          )
-        ],
-      ),
-    ),
+    Container(...),
+    Container(...),
+    Container(...),
   ];
  ```
  
- * Second, just pass it to liquidswipe constructor.
+ * Now just pass these pages to LiquidSwipe widget.
  ```
   @override
   Widget build(BuildContext context) {
@@ -168,8 +71,7 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
     );
   }
  ```
- * You can also add fullTransition along with pages to vary the sensitivity. Default is `300.0`
- * Remember pages can only be containers.
+
  * Check out the complete [Example](https://github.com/iamSahdeep/liquid_swipe_flutter/tree/master/example)
  
 ### Credits
@@ -180,5 +82,5 @@ Liquid swipe is the revealing clipper to stacked Container and inspired by [Cube
 ## Author & support
 This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See the [Credits](https://github.com/iamSahdeep/Bop/blob/master/README.md#credits).
 
-<img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="60" height="30">
+<img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="80" height="35">
 
