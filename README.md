@@ -74,8 +74,7 @@ Download example apk as shown in sample.
 
  * Check out the complete [Example](https://github.com/iamSahdeep/liquid_swipe_flutter/tree/master/example)
  
-### Attributes
- ### Attributes  
+### Attributes  
   
 | Attribute        | Datatype       |     Description                                                                                   |                                          Default Value                                          |                                          Comments                                          |
 | :-------------------- | :------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------: |:---------------------------------------------------------------------------------------------: |
