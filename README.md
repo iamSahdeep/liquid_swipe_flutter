@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/70f4d92c809b40019b004f6d1f4a262e)](https://app.codacy.com/app/iamSahdeep/liquid_swipe_flutter?utm_source=github.com&utm_medium=referral&utm_content=iamSahdeep/liquid_swipe_flutter&utm_campaign=Badge_Grade_Dashboard)
 # liquid_swipe [![Pub](https://img.shields.io/pub/v/liquid_swipe.svg?style=flat-square)](https://pub.dartlang.org/packages/liquid_swipe)
 
 
