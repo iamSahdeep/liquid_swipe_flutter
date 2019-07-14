@@ -19,7 +19,7 @@
 
 <p align="center">
 <img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/example.gif" width="360" height="640">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/example.gif" width="360" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/another.gif" width="360" height="640">
 </p>
 
 ### Sample APK
@@ -74,6 +74,16 @@ Download example apk as shown in sample.
 
  * Check out the complete [Example](https://github.com/iamSahdeep/liquid_swipe_flutter/tree/master/example)
  
+### Attributes
+ ### Attributes  
+  
+| Attribute        | Datatype       |     Description                                                                                   |                                          Default Value                                          |                                          Comments                                          |
+| :-------------------- | :------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------: |:---------------------------------------------------------------------------------------------: |
+| pages             | `List<Container>`         | Set the Pages/ views/ Containers                   |                                              Null                                               | A Page can contain anything, look for an example|
+| fullTransitionValue             | `double` | Sets the scroll distance or sensitivity for a complete swipe.                                       |                                              400.0 | This transition value can be used to increase or decrease the sensitivity of the swipe. 100.0 would make swipe really fast with even a bit of drag                                               |
+| initialPage                 | `int`  | Set the initial Page                                       |                                              0   | Should not be >= no.of pages or smaller than 0                                               |
+| enableSlideIcon                  |`bool`  | Used to enable Slide icon to the right for where the wave would originate                                       |                                              false   | Gives a ios style arrow to right side of the screen. Might include modification to it soon.                                               |
+
 ### Credits
    - [Cuberto](https://github.com/Cuberto) for awesome [Liquid Swipe](https://github.com/Cuberto/liquid-swipe) in Swift.
    - [@aagarwal1012](https://github.com/aagarwal1012) for [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter), it made my work too easy.

@@ -2,19 +2,11 @@
 
 Demonstrates how to use the liquid_swipe plugin.
 
-
-### Sample
-
-![Video](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/example.gif)
-
-### APK
- [Download](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/app-release.apk)
-
 ## Usage
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.0.2
+  liquid_swipe: ^1.1.0
 
   ```
 * Get package from Pub:
@@ -156,22 +148,21 @@ Demonstrates how to use the liquid_swipe plugin.
   ];
  ```
  
- * Second, just pass it to liquidswipe constructor.
+ * Second, just pass it to Liquid Swipe Widget.
  ```
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      home: Builder(
-          builder: (context) =>
-              LiquidSwipe(
-                  pages: pages
-              )),
-    );
+        home: new Scaffold(
+            body: LiquidSwipe(
+              pages: pages,
+              fullTransitionValue: 500,
+              enableSlideIcon: true,
+            )));
   }
  ```
  * Remember pages can only be containers.
- * Check out the complete [Example](https://github.com/iamSahdeep/liquid_swipe_flutter/tree/master/example)
- 
+ * More Examples might come soon. 
 
 ## Getting Started
 
