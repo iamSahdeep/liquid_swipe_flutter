@@ -24,9 +24,9 @@
 
 ### Sample APK
 
-Download example apk as shown in sample.
+Download sample apk as shown in example from releases.
 
-<a href='https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/app-release.apk'><img alt='Get it from Github Releases' src='https://i0.wp.com/dimitrology.com/wp-content/uploads/2017/02/download-apk.png?resize=172%2C100&ssl=1' width="200" height="100"/></a>
+<a href='https://github.com/iamSahdeep/liquid_swipe_flutter/releases'><img alt='Get it from Github Releases' src='https://i0.wp.com/dimitrology.com/wp-content/uploads/2017/02/download-apk.png?resize=172%2C100&ssl=1' width="200" height="100"/></a>
  
 
 ## Getting Started
