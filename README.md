@@ -1,6 +1,6 @@
 <h1 align="center" xmlns="http://www.w3.org/1999/html">
   <br>
-   <img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/page1.png" alt="Logo Liquid Swipe" title="Logo by  FotoJet ( https://www.fotojet.com/ )" />
+   <img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/page1.png" alt="Logo Liquid Swipe" title="Logo by  FotoJet ( https://www.fotojet.com/ )" />
   <br>
 </h1>
 <p align="center">  
@@ -18,8 +18,8 @@
 </p>
 
 <p align="center">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/example.gif" width="360" height="640">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/assets/another.gif" width="360" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/example.gif" width="360" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/another.gif" width="360" height="640">
 </p>
 
 ### Sample APK
@@ -92,5 +92,5 @@ Download example apk as shown in sample.
 ## Author & support
 This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See the [Credits](https://github.com/iamSahdeep/Bop/blob/master/README.md#credits).
 
-<img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="80" height="35">
+<img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="90" height="35">
 
