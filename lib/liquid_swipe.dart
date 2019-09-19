@@ -10,11 +10,13 @@ import 'package:liquid_swipe/page.dart';
 import 'Animation_Gesture/page_reveal.dart';
 
 final key = new GlobalKey<_LiquidSwipe>();
+
 class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
   final double fullTransitionValue;
   final int initialPage;
   final bool enableSlideIcon;
+  final Widget slideIconWidget;
 
   const LiquidSwipe({
     Key key,
@@ -22,10 +24,11 @@ class LiquidSwipe extends StatefulWidget {
     this.fullTransitionValue = FULL_TARNSITION_PX,
     this.initialPage = 0,
     this.enableSlideIcon = false,
-  })
-      : assert(pages != null),
+    this.slideIconWidget = const Icon(Icons.arrow_back_ios),
+  })  : assert(pages != null),
         assert(fullTransitionValue != null),
-        assert(initialPage != null && initialPage >= 0 &&
+        assert(initialPage != null &&
+            initialPage >= 0 &&
             initialPage < pages.length),
         super(key: key);
 
@@ -38,20 +41,20 @@ class SlideUpdate {
   final SlideDirection direction;
   final double slidePercent;
 
-  SlideUpdate(this.direction,
-      this.slidePercent,
-      this.updateType,);
+  SlideUpdate(
+    this.direction,
+    this.slidePercent,
+    this.updateType,
+  );
 }
 
 class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
-
-
   StreamController<SlideUpdate>
-  // ignore: close_sinks
-  slideUpdateStream; //Stream controller is used to get all the updates when user slides across screen.
+      // ignore: close_sinks
+      slideUpdateStream; //Stream controller is used to get all the updates when user slides across screen.
 
   AnimatedPageDragger
-  animatedPageDragger; //When user stops dragging then by using this page automatically drags.
+      animatedPageDragger; //When user stops dragging then by using this page automatically drags.
 
   int activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
@@ -171,6 +174,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             fullTransitionPX: widget.fullTransitionValue,
             slideUpdateStream: this.slideUpdateStream,
             enableSlideIcon: widget.enableSlideIcon,
+            slideIconWidget: widget.slideIconWidget,
           ), //PageDragger
         ], //Widget
       ), //Stack
