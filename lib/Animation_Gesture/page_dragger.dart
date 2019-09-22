@@ -10,6 +10,7 @@ import '../liquid_swipe.dart';
 class PageDragger extends StatefulWidget {
   final double fullTransitionPX;
   final bool enableSlideIcon;
+  final Widget slideIconWidget;
 
   //Stream controller
   final StreamController<SlideUpdate> slideUpdateStream;
@@ -19,6 +20,7 @@ class PageDragger extends StatefulWidget {
     this.slideUpdateStream,
     this.fullTransitionPX = FULL_TARNSITION_PX,
     this.enableSlideIcon = false,
+    this.slideIconWidget,
   }) : assert(fullTransitionPX != null);
 
   @override
@@ -87,19 +89,21 @@ class _PageDraggerState extends State<PageDragger> {
       onHorizontalDragStart: onDragStart,
       onHorizontalDragUpdate: onDragUpdate,
       onHorizontalDragEnd: onDragEnd,
-      child: widget.enableSlideIcon ? Align(
-          alignment: Alignment(1 - slidePercent + 0.005, 0.54),
-          child: Opacity(
-              opacity: 1 - slidePercent,
-              child: FloatingActionButton(
-                onPressed: null,
-                backgroundColor: Colors.transparent,
-                elevation: 0.0,
-                child: slideDirection == SlideDirection.leftToRight
-                    ? null
-                    : Icon(Icons.arrow_back_ios),
-                foregroundColor: Colors.black,
-              ))) : null,
+      child: widget.enableSlideIcon
+          ? Align(
+              alignment: Alignment(1 - slidePercent + 0.005, 0.54),
+              child: Opacity(
+                  opacity: 1 - slidePercent,
+                  child: FloatingActionButton(
+                    onPressed: null,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0.0,
+                    child: slideDirection == SlideDirection.leftToRight
+                        ? null
+                        : widget.slideIconWidget,
+                    foregroundColor: Colors.black,
+                  )))
+          : null,
     );
   }
 }
