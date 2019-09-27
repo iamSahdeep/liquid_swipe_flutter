@@ -11,6 +11,7 @@ class PageDragger extends StatefulWidget {
   final double fullTransitionPX;
   final bool enableSlideIcon;
   final Widget slideIconWidget;
+  final double iconPosition;
 
   //Stream controller
   final StreamController<SlideUpdate> slideUpdateStream;
@@ -21,6 +22,7 @@ class PageDragger extends StatefulWidget {
     this.fullTransitionPX = FULL_TARNSITION_PX,
     this.enableSlideIcon = false,
     this.slideIconWidget,
+    this.iconPosition,
   }) : assert(fullTransitionPX != null);
 
   @override
@@ -91,7 +93,8 @@ class _PageDraggerState extends State<PageDragger> {
       onHorizontalDragEnd: onDragEnd,
       child: widget.enableSlideIcon
           ? Align(
-              alignment: Alignment(1 - slidePercent + 0.005, 0.54),
+          alignment: Alignment(1 - slidePercent + 0.005,
+              widget.iconPosition + widget.iconPosition / 10),
               child: Opacity(
                   opacity: 1 - slidePercent,
                   child: FloatingActionButton(

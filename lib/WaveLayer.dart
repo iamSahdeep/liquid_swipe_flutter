@@ -9,11 +9,13 @@ class WaveLayer extends CustomClipper<Path> {
   double waveHorRadius;
   double waveVertRadius;
   double sideWidth;
+  double iconPosition;
   SlideDirection slideDirection;
 
   WaveLayer({
     @required this.revealPercent,
     @required this.slideDirection,
+    @required this.iconPosition,
   });
 
   @override
@@ -21,7 +23,7 @@ class WaveLayer extends CustomClipper<Path> {
     Path path = new Path();
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
-    waveCenterY = size.height * 0.75;
+    waveCenterY = size.height * (iconPosition + 1) / 2;
     if (slideDirection == SlideDirection.leftToRight) {
       waveHorRadius = waveHorRadiusFBack(size);
     } else {

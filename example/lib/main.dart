@@ -219,6 +219,8 @@ class MyApp extends StatelessWidget {
               pages: pages,
               fullTransitionValue: 500,
               enableSlideIcon: true,
+              enableLoop: false,
+              positionSlideIcon: -0.5,
             )));
   }
 }

@@ -17,6 +17,8 @@ class LiquidSwipe extends StatefulWidget {
   final int initialPage;
   final bool enableSlideIcon;
   final Widget slideIconWidget;
+  final double positionSlideIcon;
+  final bool enableLoop;
 
   const LiquidSwipe({
     Key key,
@@ -25,11 +27,14 @@ class LiquidSwipe extends StatefulWidget {
     this.initialPage = 0,
     this.enableSlideIcon = false,
     this.slideIconWidget = const Icon(Icons.arrow_back_ios),
+    this.positionSlideIcon = 0.54,
+    this.enableLoop = true,
   })  : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
             initialPage < pages.length),
+        assert(positionSlideIcon >= -1 && positionSlideIcon <= 1),
         super(key: key);
 
   @override
@@ -79,17 +84,20 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           slidePercent = event.slidePercent;
 
           //conditions on slide direction
-          if (slideDirection == SlideDirection.leftToRight) {
+          if (slideDirection == SlideDirection.leftToRight &&
+              activePageIndex != 0) {
             nextPageIndex = activePageIndex - 1;
-          } else if (slideDirection == SlideDirection.rightToLeft) {
+          } else if (slideDirection == SlideDirection.rightToLeft &&
+              activePageIndex != widget.pages.length - 1) {
             nextPageIndex = activePageIndex + 1;
           } else {
             nextPageIndex = activePageIndex;
           }
           // making pages to be in loop
-          if (nextPageIndex > widget.pages.length - 1)
-            nextPageIndex = 0;
-          else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
+          if (widget.enableLoop)
+            if (nextPageIndex > widget.pages.length - 1)
+              nextPageIndex = 0;
+            else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
         }
         //if the user has done dragging
         else if (event.updateType == UpdateType.doneDragging) {
@@ -112,10 +120,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             );
 
             nextPageIndex = activePageIndex;
-            //to continue in the loop of pages
-            if (nextPageIndex > widget.pages.length - 1)
-              nextPageIndex = 0;
-            else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
+
           }
           //Run the animation
           animatedPageDragger.run();
@@ -168,6 +173,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
                     : pages[activePageIndex],
                 percentVisible: slidePercent),
             slideDirection: slideDirection,
+            iconPosition: widget.positionSlideIcon,
           ),
           PageDragger(
             //Used for gesture control
@@ -175,6 +181,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             slideUpdateStream: this.slideUpdateStream,
             enableSlideIcon: widget.enableSlideIcon,
             slideIconWidget: widget.slideIconWidget,
+            iconPosition: widget.positionSlideIcon,
           ), //PageDragger
         ], //Widget
       ), //Stack

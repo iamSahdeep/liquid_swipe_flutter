@@ -9,12 +9,14 @@ class PageReveal extends StatelessWidget {
   final double revealPercent;
   final Widget child;
   final SlideDirection slideDirection;
+  final double iconPosition;
 
   //Constructor
   PageReveal({
     this.revealPercent,
     this.child,
     this.slideDirection,
+    this.iconPosition
   });
 
   @override
@@ -25,7 +27,8 @@ class PageReveal extends StatelessWidget {
           revealPercent: slideDirection == SlideDirection.leftToRight
               ? 1.0 - revealPercent
               : revealPercent,
-          slideDirection: slideDirection),
+          slideDirection: slideDirection,
+          iconPosition: iconPosition),
       child: child,
     );
   }
