@@ -85,7 +85,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           slideDirection = event.direction;
           slidePercent = event.slidePercent;
 
-
           // making pages to be in loop
           if (widget.enableLoop) {
             //conditions on slide direction
@@ -112,7 +111,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               nextPageIndex = activePageIndex;
             }
           }
-
         }
         //if the user has done dragging
         else if (event.updateType == UpdateType.doneDragging) {
@@ -135,7 +133,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             );
 
             nextPageIndex = activePageIndex;
-
           }
           //Run the animation
           animatedPageDragger.run();
@@ -211,4 +208,3 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     });
   }
 }
-
