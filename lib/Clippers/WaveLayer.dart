@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/Constants/constants.dart';
+import 'package:liquid_swipe/Constants/Helpers.dart';
 
 class WaveLayer extends CustomClipper<Path> {
   double revealPercent;
@@ -23,7 +23,10 @@ class WaveLayer extends CustomClipper<Path> {
     Path path = new Path();
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
+    //To range (-1,1) into (0,1) here (iconPosition + 1) / 2
+    // refer - https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
     waveCenterY = size.height * (iconPosition + 1) / 2;
+
     if (slideDirection == SlideDirection.leftToRight) {
       waveHorRadius = waveHorRadiusFBack(size);
     } else {

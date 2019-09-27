@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_swipe/Animation_Gesture/animated_page_dragger.dart';
 import 'package:liquid_swipe/Animation_Gesture/page_dragger.dart';
-import 'package:liquid_swipe/Constants/constants.dart';
 import 'package:liquid_swipe/page.dart';
 
 import 'Animation_Gesture/page_reveal.dart';
+import 'Constants/Helpers.dart';
 
 final key = new GlobalKey<_LiquidSwipe>();
 
@@ -19,6 +19,7 @@ class LiquidSwipe extends StatefulWidget {
   final Widget slideIconWidget;
   final double positionSlideIcon;
   final bool enableLoop;
+  final WaveType waveType;
 
   const LiquidSwipe({
     Key key,
@@ -29,6 +30,7 @@ class LiquidSwipe extends StatefulWidget {
     this.slideIconWidget = const Icon(Icons.arrow_back_ios),
     this.positionSlideIcon = 0.54,
     this.enableLoop = true,
+    this.waveType = WaveType.liquidReveal,
   })  : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
@@ -83,21 +85,34 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           slideDirection = event.direction;
           slidePercent = event.slidePercent;
 
-          //conditions on slide direction
-          if (slideDirection == SlideDirection.leftToRight &&
-              activePageIndex != 0) {
-            nextPageIndex = activePageIndex - 1;
-          } else if (slideDirection == SlideDirection.rightToLeft &&
-              activePageIndex != widget.pages.length - 1) {
-            nextPageIndex = activePageIndex + 1;
-          } else {
-            nextPageIndex = activePageIndex;
-          }
+
           // making pages to be in loop
-          if (widget.enableLoop)
+          if (widget.enableLoop) {
+            //conditions on slide direction
+            if (slideDirection == SlideDirection.leftToRight) {
+              nextPageIndex = activePageIndex - 1;
+            } else if (slideDirection == SlideDirection.rightToLeft) {
+              nextPageIndex = activePageIndex + 1;
+            } else {
+              nextPageIndex = activePageIndex;
+            }
+
             if (nextPageIndex > widget.pages.length - 1)
               nextPageIndex = 0;
             else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
+          } else {
+            //conditions on slide direction
+            if (slideDirection == SlideDirection.leftToRight &&
+                activePageIndex != 0) {
+              nextPageIndex = activePageIndex - 1;
+            } else if (slideDirection == SlideDirection.rightToLeft &&
+                activePageIndex != widget.pages.length - 1) {
+              nextPageIndex = activePageIndex + 1;
+            } else {
+              nextPageIndex = activePageIndex;
+            }
+          }
+
         }
         //if the user has done dragging
         else if (event.updateType == UpdateType.doneDragging) {
@@ -174,6 +189,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
                 percentVisible: slidePercent),
             slideDirection: slideDirection,
             iconPosition: widget.positionSlideIcon,
+            waveType: widget.waveType,
           ),
           PageDragger(
             //Used for gesture control
@@ -195,3 +211,4 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     });
   }
 }
+

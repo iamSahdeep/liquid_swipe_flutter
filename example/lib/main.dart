@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_swipe/Constants/Helpers.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+
 
 void main() {
   runApp(
@@ -220,7 +222,8 @@ class MyApp extends StatelessWidget {
               fullTransitionValue: 500,
               enableSlideIcon: true,
               enableLoop: false,
-              positionSlideIcon: -0.5,
+              positionSlideIcon: 0.5,
+              waveType: WaveType.liquidReveal,
             )));
   }
 }

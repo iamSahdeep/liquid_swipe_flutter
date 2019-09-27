@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:liquid_swipe/Constants/Helpers.dart';
 
-import '../Constants/constants.dart';
 import '../liquid_swipe.dart';
 
 /// This class provides the animation controller

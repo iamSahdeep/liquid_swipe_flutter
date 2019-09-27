@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/Constants/constants.dart';
+import 'package:liquid_swipe/Constants/Helpers.dart';
 
 import '../liquid_swipe.dart';
 
