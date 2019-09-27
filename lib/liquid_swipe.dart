@@ -2,14 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:liquid_swipe/Animation_Gesture/animated_page_dragger.dart';
-import 'package:liquid_swipe/Animation_Gesture/page_dragger.dart';
-import 'package:liquid_swipe/page.dart';
+import 'Animation_Gesture/animated_page_dragger.dart';
+import 'Animation_Gesture/page_dragger.dart';
+import 'Constants/constants.dart';
+import 'page.dart';
 
 import 'Animation_Gesture/page_reveal.dart';
-import 'Constants/Helpers.dart';
 
 final key = new GlobalKey<_LiquidSwipe>();
+
+typedef OnPageChangeCallback = void Function(int activePageIndex);
 
 class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
@@ -17,9 +19,8 @@ class LiquidSwipe extends StatefulWidget {
   final int initialPage;
   final bool enableSlideIcon;
   final Widget slideIconWidget;
-  final double positionSlideIcon;
-  final bool enableLoop;
-  final WaveType waveType;
+
+  final OnPageChangeCallback onPageChangeCallback;
 
   const LiquidSwipe({
     Key key,
@@ -28,15 +29,12 @@ class LiquidSwipe extends StatefulWidget {
     this.initialPage = 0,
     this.enableSlideIcon = false,
     this.slideIconWidget = const Icon(Icons.arrow_back_ios),
-    this.positionSlideIcon = 0.54,
-    this.enableLoop = true,
-    this.waveType = WaveType.liquidReveal,
+    this.onPageChangeCallback,
   })  : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
             initialPage < pages.length),
-        assert(positionSlideIcon >= -1 && positionSlideIcon <= 1),
         super(key: key);
 
   @override
@@ -63,15 +61,21 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   AnimatedPageDragger
       animatedPageDragger; //When user stops dragging then by using this page automatically drags.
 
-  int activePageIndex = 0; //active page index
+  int _activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
   SlideDirection slideDirection = SlideDirection.none; //slide direction
   double slidePercent = 0.0; //slide percentage (0.0 to 1.0)
   StreamSubscription<SlideUpdate> slideUpdateStream$;
 
+  set activePageIndex(int value) {
+    _activePageIndex = value;
+
+    widget.onPageChangeCallback(_activePageIndex);
+  }
+
   @override
   void initState() {
-    activePageIndex = widget.initialPage;
+    _activePageIndex = widget.initialPage;
     nextPageIndex = widget.initialPage;
     //Stream Controller initialization
     slideUpdateStream = StreamController<SlideUpdate>();
@@ -85,32 +89,18 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           slideDirection = event.direction;
           slidePercent = event.slidePercent;
 
-          // making pages to be in loop
-          if (widget.enableLoop) {
-            //conditions on slide direction
-            if (slideDirection == SlideDirection.leftToRight) {
-              nextPageIndex = activePageIndex - 1;
-            } else if (slideDirection == SlideDirection.rightToLeft) {
-              nextPageIndex = activePageIndex + 1;
-            } else {
-              nextPageIndex = activePageIndex;
-            }
-
-            if (nextPageIndex > widget.pages.length - 1)
-              nextPageIndex = 0;
-            else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
+          //conditions on slide direction
+          if (slideDirection == SlideDirection.leftToRight) {
+            nextPageIndex = _activePageIndex - 1;
+          } else if (slideDirection == SlideDirection.rightToLeft) {
+            nextPageIndex = _activePageIndex + 1;
           } else {
-            //conditions on slide direction
-            if (slideDirection == SlideDirection.leftToRight &&
-                activePageIndex != 0) {
-              nextPageIndex = activePageIndex - 1;
-            } else if (slideDirection == SlideDirection.rightToLeft &&
-                activePageIndex != widget.pages.length - 1) {
-              nextPageIndex = activePageIndex + 1;
-            } else {
-              nextPageIndex = activePageIndex;
-            }
+            nextPageIndex = _activePageIndex;
           }
+          // making pages to be in loop
+          if (nextPageIndex > widget.pages.length - 1)
+            nextPageIndex = 0;
+          else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
         }
         //if the user has done dragging
         else if (event.updateType == UpdateType.doneDragging) {
@@ -132,7 +122,11 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               vsync: this,
             );
 
-            nextPageIndex = activePageIndex;
+            nextPageIndex = _activePageIndex;
+            //to continue in the loop of pages
+            if (nextPageIndex > widget.pages.length - 1)
+              nextPageIndex = 0;
+            else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
           }
           //Run the animation
           animatedPageDragger.run();
@@ -171,7 +165,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         children: <Widget>[
           Page(
             pageView: slideDirection == SlideDirection.leftToRight
-                ? pages[activePageIndex]
+                ? pages[_activePageIndex]
                 : pages[nextPageIndex],
             percentVisible: 1.0,
           ),
@@ -182,11 +176,9 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             child: Page(
                 pageView: slideDirection == SlideDirection.leftToRight
                     ? pages[nextPageIndex]
-                    : pages[activePageIndex],
+                    : pages[_activePageIndex],
                 percentVisible: slidePercent),
             slideDirection: slideDirection,
-            iconPosition: widget.positionSlideIcon,
-            waveType: widget.waveType,
           ),
           PageDragger(
             //Used for gesture control
@@ -194,7 +186,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             slideUpdateStream: this.slideUpdateStream,
             enableSlideIcon: widget.enableSlideIcon,
             slideIconWidget: widget.slideIconWidget,
-            iconPosition: widget.positionSlideIcon,
           ), //PageDragger
         ], //Widget
       ), //Stack
@@ -203,8 +194,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   next() {
     _LiquidSwipe().setState(() {
-      activePageIndex += 1;
-      nextPageIndex = activePageIndex + 1;
+      activePageIndex = _activePageIndex + 1;
+      nextPageIndex = _activePageIndex + 1;
     });
   }
 }
