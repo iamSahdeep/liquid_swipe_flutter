@@ -46,11 +46,12 @@ class LiquidSwipe extends StatefulWidget {
 class SlideUpdate {
   final UpdateType updateType;
   final SlideDirection direction;
-  final double slidePercent;
+  final double slidePercentHor, slidePercentVer;
 
   SlideUpdate(
     this.direction,
-    this.slidePercent,
+      this.slidePercentHor,
+      this.slidePercentVer,
     this.updateType,
   );
 }
@@ -66,11 +67,13 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   int activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
   SlideDirection slideDirection = SlideDirection.none; //slide direction
-  double slidePercent = 0.0; //slide percentage (0.0 to 1.0)
+  double slidePercentHor,
+      slidePercentVer = 0.0; //slide percentage (0.0 to 1.0)
   StreamSubscription<SlideUpdate> slideUpdateStream$;
 
   @override
   void initState() {
+    slidePercentHor = slidePercentVer = 0;
     activePageIndex = widget.initialPage;
     nextPageIndex = widget.initialPage;
     //Stream Controller initialization
@@ -83,7 +86,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         //if the user is dragging then
         if (event.updateType == UpdateType.dragging) {
           slideDirection = event.direction;
-          slidePercent = event.slidePercent;
+          slidePercentHor = event.slidePercentHor;
+          slidePercentVer = event.slidePercentVer;
 
           // making pages to be in loop
           if (widget.enableLoop) {
@@ -115,11 +119,12 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         //if the user has done dragging
         else if (event.updateType == UpdateType.doneDragging) {
           // slidepercent > 0.2 so that it wont reveal itself unless this condition is true
-          if (slidePercent > 0.2) {
+          if (slidePercentHor > 0.2) {
             animatedPageDragger = AnimatedPageDragger(
               slideDirection: slideDirection,
               transitionGoal: TransitionGoal.open,
-              slidePercent: slidePercent,
+              slidePercentHor: slidePercentHor,
+              slidePercentVer: slidePercentVer,
               slideUpdateStream: slideUpdateStream,
               vsync: this,
             );
@@ -127,7 +132,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             animatedPageDragger = AnimatedPageDragger(
               slideDirection: slideDirection,
               transitionGoal: TransitionGoal.close,
-              slidePercent: slidePercent,
+              slidePercentHor: slidePercentHor,
+              slidePercentVer: slidePercentVer,
               slideUpdateStream: slideUpdateStream,
               vsync: this,
             );
@@ -140,13 +146,15 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         //when animating
         else if (event.updateType == UpdateType.animating) {
           slideDirection = event.direction;
-          slidePercent = event.slidePercent;
+          slidePercentHor = event.slidePercentHor;
+          slidePercentVer = event.slidePercentVer;
         }
         //done animating
         else if (event.updateType == UpdateType.doneAnimating) {
           activePageIndex = nextPageIndex;
           slideDirection = SlideDirection.none;
-          slidePercent = 0.5;
+          slidePercentHor = 0.5;
+          slidePercentVer = widget.positionSlideIcon;
         }
       });
     });
@@ -173,20 +181,20 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             pageView: slideDirection == SlideDirection.leftToRight
                 ? pages[activePageIndex]
                 : pages[nextPageIndex],
-            percentVisible: 1.0,
           ),
           //Pages
           PageReveal(
             //next page reveal
-            revealPercent: slidePercent,
+            revealPercent: slidePercentHor,
             child: Page(
                 pageView: slideDirection == SlideDirection.leftToRight
                     ? pages[nextPageIndex]
-                    : pages[activePageIndex],
-                percentVisible: slidePercent),
+                    : pages[activePageIndex]),
             slideDirection: slideDirection,
             iconPosition: widget.positionSlideIcon,
+
             waveType: widget.waveType,
+            vertReveal: slidePercentVer,
           ),
           PageDragger(
             //Used for gesture control

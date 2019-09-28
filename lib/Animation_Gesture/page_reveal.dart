@@ -12,13 +12,14 @@ class PageReveal extends StatelessWidget {
   final SlideDirection slideDirection;
   final double iconPosition;
   final WaveType waveType;
+  final double vertReveal;
 
   //Constructor
   PageReveal({this.revealPercent,
     this.child,
     this.slideDirection,
     this.iconPosition,
-    this.waveType });
+    this.waveType, this.vertReveal });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,8 @@ class PageReveal extends StatelessWidget {
                   ? 1.0 - revealPercent
                   : revealPercent,
               slideDirection: slideDirection,
-              iconPosition: iconPosition),
+              iconPosition: iconPosition,
+              verReveal: vertReveal),
           child: child,
         );
         break;
@@ -51,7 +53,8 @@ class PageReveal extends StatelessWidget {
                   ? 1.0 - revealPercent
                   : revealPercent,
               slideDirection: slideDirection,
-              iconPosition: iconPosition),
+              iconPosition: iconPosition,
+              verReveal: vertReveal),
           child: child,
         );
         break;

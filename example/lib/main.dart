@@ -219,7 +219,7 @@ class MyApp extends StatelessWidget {
         home: new Scaffold(
             body: LiquidSwipe(
               pages: pages,
-              fullTransitionValue: 500,
+              fullTransitionValue: 200,
               enableSlideIcon: true,
               enableLoop: false,
               positionSlideIcon: 0.5,

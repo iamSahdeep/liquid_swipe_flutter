@@ -5,13 +5,9 @@ class Page extends StatelessWidget {
   ///page details
   final Container pageView;
 
-  ///percent visible of page
-  final double percentVisible;
-
   //Constructor
   Page({
     this.pageView,
-    this.percentVisible = 1.0,
   });
 
   @override
