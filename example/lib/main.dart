@@ -10,6 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   final pages = [
     Container(
       color: Colors.pink,
@@ -212,7 +213,7 @@ class MyApp extends StatelessWidget {
       ),
     ),
   ];
-
+  int page = 0;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -224,6 +225,11 @@ class MyApp extends StatelessWidget {
               enableLoop: false,
               positionSlideIcon: 0.5,
               waveType: WaveType.liquidReveal,
+              onPageChangeCallback: (page) => pageChangeCallback(page),
             )));
+  }
+
+  pageChangeCallback(int page) {
+    print(page);
   }
 }

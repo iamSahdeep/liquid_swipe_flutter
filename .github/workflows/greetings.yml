@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: 'Hey, Thanks for creating the first issue. I will respond in a day or two. If doesn''t, feel free to ping me.'
+          pr-message: 'Hey, Thanks for creating the first Pull Request. I will respond in a day or two. If doesn''t, feel free to ping me.'
