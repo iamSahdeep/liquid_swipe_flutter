@@ -17,5 +17,5 @@ jobs:
          channel: 'stable' # or: 'dev' or 'beta'
       - run: flutter pub get
       - run: flutter test
-      - run cd/example
+      - run: cd/example
       - run: flutter build apk
