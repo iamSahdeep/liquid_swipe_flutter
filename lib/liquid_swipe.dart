@@ -11,6 +11,8 @@ import 'Constants/Helpers.dart';
 
 final key = new GlobalKey<_LiquidSwipe>();
 
+typedef OnPageChangeCallback = void Function(int activePageIndex);
+
 class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
   final double fullTransitionValue;
@@ -20,6 +22,8 @@ class LiquidSwipe extends StatefulWidget {
   final double positionSlideIcon;
   final bool enableLoop;
   final WaveType waveType;
+
+  final OnPageChangeCallback onPageChangeCallback;
 
   const LiquidSwipe({
     Key key,
@@ -31,7 +35,9 @@ class LiquidSwipe extends StatefulWidget {
     this.positionSlideIcon = 0.54,
     this.enableLoop = true,
     this.waveType = WaveType.liquidReveal,
+    this.onPageChangeCallback,
   })  : assert(pages != null),
+        assert(onPageChangeCallback != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
@@ -70,6 +76,12 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   double slidePercentHor,
       slidePercentVer = 0.0; //slide percentage (0.0 to 1.0)
   StreamSubscription<SlideUpdate> slideUpdateStream$;
+
+  set setActivePageIndex(int value) {
+    activePageIndex = value;
+
+    widget.onPageChangeCallback(activePageIndex);
+  }
 
   @override
   void initState() {
@@ -152,6 +164,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         //done animating
         else if (event.updateType == UpdateType.doneAnimating) {
           activePageIndex = nextPageIndex;
+          widget.onPageChangeCallback(activePageIndex);
           slideDirection = SlideDirection.none;
           slidePercentHor = 0.5;
           slidePercentVer = widget.positionSlideIcon;
@@ -207,12 +220,5 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         ], //Widget
       ), //Stack
     ); //Scaffold
-  }
-
-  next() {
-    _LiquidSwipe().setState(() {
-      activePageIndex += 1;
-      nextPageIndex = activePageIndex + 1;
-    });
   }
 }
