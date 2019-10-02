@@ -1,19 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/Constants/constants.dart';
+import 'package:liquid_swipe/Constants/Helpers.dart';
 
 class WaveLayer extends CustomClipper<Path> {
   double revealPercent;
+  double verReveal;
   double waveCenterY;
   double waveHorRadius;
   double waveVertRadius;
   double sideWidth;
+  double iconPosition;
   SlideDirection slideDirection;
 
   WaveLayer({
     @required this.revealPercent,
     @required this.slideDirection,
+    @required this.iconPosition,
+    @required this.verReveal
   });
 
   @override
@@ -21,7 +25,8 @@ class WaveLayer extends CustomClipper<Path> {
     Path path = new Path();
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
-    waveCenterY = size.height * 0.75;
+
+    waveCenterY = size.height * (2 * verReveal / 3);
     if (slideDirection == SlideDirection.leftToRight) {
       waveHorRadius = waveHorRadiusFBack(size);
     } else {

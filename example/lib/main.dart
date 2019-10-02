@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_swipe/Constants/Helpers.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+
 
 void main() {
   runApp(
@@ -8,6 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   final pages = [
     Container(
       color: Colors.pink,
@@ -210,15 +213,23 @@ class MyApp extends StatelessWidget {
       ),
     ),
   ];
-
+  int page = 0;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
         home: new Scaffold(
             body: LiquidSwipe(
               pages: pages,
-              fullTransitionValue: 500,
+              fullTransitionValue: 200,
               enableSlideIcon: true,
+              enableLoop: false,
+              positionSlideIcon: 0.5,
+              waveType: WaveType.liquidReveal,
+              onPageChangeCallback: (page) => pageChangeCallback(page),
             )));
+  }
+
+  pageChangeCallback(int page) {
+    print(page);
   }
 }

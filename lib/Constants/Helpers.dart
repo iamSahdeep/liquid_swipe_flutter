@@ -22,3 +22,8 @@ enum TransitionGoal {
   open,
   close,
 }
+
+enum WaveType {
+  circularReveal,
+  liquidReveal
+}
