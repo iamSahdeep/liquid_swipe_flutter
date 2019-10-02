@@ -12,6 +12,7 @@ import 'Constants/Helpers.dart';
 final key = new GlobalKey<_LiquidSwipe>();
 
 typedef OnPageChangeCallback = void Function(int activePageIndex);
+typedef CurrentUpdateTypeCallback = void Function(UpdateType updateType);
 
 class LiquidSwipe extends StatefulWidget {
   final List<Container> pages;
@@ -24,6 +25,7 @@ class LiquidSwipe extends StatefulWidget {
   final WaveType waveType;
 
   final OnPageChangeCallback onPageChangeCallback;
+  final CurrentUpdateTypeCallback currentUpdateTypeCallback;
 
   const LiquidSwipe({
     Key key,
@@ -36,6 +38,7 @@ class LiquidSwipe extends StatefulWidget {
     this.enableLoop = true,
     this.waveType = WaveType.liquidReveal,
     this.onPageChangeCallback,
+    this.currentUpdateTypeCallback,
   })  : assert(pages != null),
         assert(onPageChangeCallback != null),
         assert(fullTransitionValue != null),
@@ -56,8 +59,8 @@ class SlideUpdate {
 
   SlideUpdate(
     this.direction,
-      this.slidePercentHor,
-      this.slidePercentVer,
+    this.slidePercentHor,
+    this.slidePercentVer,
     this.updateType,
   );
 }
@@ -73,8 +76,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   int activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
   SlideDirection slideDirection = SlideDirection.none; //slide direction
-  double slidePercentHor,
-      slidePercentVer = 0.0; //slide percentage (0.0 to 1.0)
+  double slidePercentHor, slidePercentVer = 0.0; //slide percentage (0.0 to 1.0)
   StreamSubscription<SlideUpdate> slideUpdateStream$;
 
   set setActivePageIndex(int value) {
@@ -93,6 +95,9 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     //listening to updates of stream controller
     slideUpdateStream$ = slideUpdateStream.stream.listen((SlideUpdate event) {
       setState(() {
+        //send the current update type through a callback
+        widget.currentUpdateTypeCallback(event.updateType);
+
         //setState is used to change the values dynamically
 
         //if the user is dragging then
