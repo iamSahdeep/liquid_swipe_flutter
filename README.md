@@ -91,6 +91,21 @@ Download sample apk as shown in example from releases.
 | waveType                 |`WaveType`  | Select the type of reveal you want.                                      |                                              WaveType.liquidReveal   | You can use circularReveal, more coming soon. Import Helpers.dart file if Autoimport doesn't work.                                              |
 
 
+
+# Contributors
+
+Thanks to all these wonderful people and everyone that created issues. ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/mourad-brahim"><img src="https://avatars1.githubusercontent.com/u/17046133?s=400&v=4" width="100px;" alt="mourad-brahim"/><br /><sub><b>Mourad</b></sub></a><br /><a href="https://github.com/iamSahdeep/liquid_swipe_flutter/commits?author=mourad-brahim" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/YasserOJ"><img src="https://avatars2.githubusercontent.com/u/26030291?s=400&v=4" width="100px;" alt="YasserOJ"/><br /><sub><b>YasserOJ</b></sub></a><br /><a href="https://github.com/iamSahdeep/liquid_swipe_flutter/issues/created_by/yasseroj" title="Bug reports">🐛</a><a href="https://github.com/iamSahdeep/liquid_swipe_flutter/commits?author=yasseroj" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/JJCLane"><img src="https://avatars0.githubusercontent.com/u/3543345?s=400&v=4" width="100px;" alt="JJCLane"/><br /><sub><b>Jordon</b></sub></a><br /><a href="https://github.com/iamSahdeep/liquid_swipe_flutter/commits?author=JJCLane" title="Content">🖋</a></td>
+  </tr>
+</table>
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 ### Credits
    - [Cuberto](https://github.com/Cuberto) for awesome [Liquid Swipe](https://github.com/Cuberto/liquid-swipe) in Swift.
    - [@aagarwal1012](https://github.com/aagarwal1012) for [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter), it made my work too easy.
