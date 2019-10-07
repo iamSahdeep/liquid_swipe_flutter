@@ -112,7 +112,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
  
  
 ## Author & support
-This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See the [Credits](https://github.com/iamSahdeep/Bop/blob/master/README.md#credits).
+This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See the [Credits](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/README.md#credits).
 
 <img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="90" height="35">
 
