@@ -78,6 +78,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   SlideDirection slideDirection = SlideDirection.none; //slide direction
   double slidePercentHor, slidePercentVer = 0.0; //slide percentage (0.0 to 1.0)
   StreamSubscription<SlideUpdate> slideUpdateStream$;
+  UpdateType prevUpdate;
 
   set setActivePageIndex(int value) {
     activePageIndex = value;
@@ -96,10 +97,11 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     slideUpdateStream$ = slideUpdateStream.stream.listen((SlideUpdate event) {
       setState(() {
         //send the current update type through a callback
+        if(prevUpdate != event.updateType)
         widget.currentUpdateTypeCallback(event.updateType);
 
+        prevUpdate = event.updateType;
         //setState is used to change the values dynamically
-
         //if the user is dragging then
         if (event.updateType == UpdateType.dragging) {
           slideDirection = event.direction;

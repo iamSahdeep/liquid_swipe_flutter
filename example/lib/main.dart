@@ -214,6 +214,7 @@ class MyApp extends StatelessWidget {
     ),
   ];
   int page = 0;
+  UpdateType updateType;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -226,10 +227,14 @@ class MyApp extends StatelessWidget {
               positionSlideIcon: 0.5,
               waveType: WaveType.liquidReveal,
               onPageChangeCallback: (page) => pageChangeCallback(page),
+              currentUpdateTypeCallback: (updateType) => updateTypeCallback(updateType),
             )));
   }
 
   pageChangeCallback(int page) {
     print(page);
+  }
+  updateTypeCallback(UpdateType updateType) {
+    print(updateType);
   }
 }
