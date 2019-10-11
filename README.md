@@ -36,7 +36,7 @@ Download sample apk as shown in example from releases.
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.2.0
+  liquid_swipe: ^1.3.0
   
   ```
 * Get the package from Pub:
@@ -89,12 +89,15 @@ Download sample apk as shown in example from releases.
 | positionSlideIcon                  |`double`  | Position your icon in y-axis at right side of the screen                               |                                              0.54   | Range from -1 to 1, -1 represents extreme top and 1 represent extreme bottom. Soon add x-axis position, if required!                                        |
 | enableLoop                 |`bool`  | Enable or disable pages recurrence.                                      |                                              true   | If you dont want to make pages to be in the loop, use this attribute.                                               |
 | waveType                 |`WaveType`  | Select the type of reveal you want.                                      |                                              WaveType.liquidReveal   | You can use circularReveal, more coming soon. Import Helpers.dart file if Autoimport doesn't work.                                              |
+| onPageChangeCallback                 |`CallBack`  | Pass your method as a callback, it will return a pageNo.                                     |                                              None   | see Example                                              |
+| currentUpdateTypeCallback                 |`CallBack`  | same  Callback but returns an UpdateType                                     |                                              None   |  see Example                                            |
 
 
 
 # Contributors
 
-Thanks to all these wonderful people and everyone that created issues. ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks to all these wonderful people and everyone that created issues.
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <table>
   <tr>

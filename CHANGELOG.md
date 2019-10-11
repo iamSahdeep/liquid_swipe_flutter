@@ -1,7 +1,16 @@
 #ChangeLog
 
+
+## 1.3.0
+* UpdateTypeCallback [6128029f311590db7b1ce38e9bfd7e078c347f4f](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/6128029f311590db7b1ce38e9bfd7e078c347f4f)
+* pageChangeCallback 
+  [5033ddbf4f912eb7a12a560286635e2a669b13f6](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/5033ddbf4f912eb7a12a560286635e2a669b13f6)
+* Thumb Follow
+  [c30f2f109d25c37d7203cc6659ec45b0c5b9a78d](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/c30f2f109d25c37d7203cc6659ec45b0c5b9a78d)
+
 ## 1.2.0
-* CustomIcon [5cbd32c583126e14d135ad3e9d6e6ea8221edb3d](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/5cbd32c583126e14d135ad3e9d6e6ea8221edb3d)
+* CustomIcon
+  [5cbd32c583126e14d135ad3e9d6e6ea8221edb3d](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/5cbd32c583126e14d135ad3e9d6e6ea8221edb3d)
 * Enable page recurrence [fdbcfc1e14e148201685fc401ea2505cc26a5cd4](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/fdbcfc1e14e148201685fc401ea2505cc26a5cd4)
 * New Clipper : CircularReveal [ad844b2e9c0cdaa124e2a2a76caad5cc35dce67b](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/ad844b2e9c0cdaa124e2a2a76caad5cc35dce67b)
 
