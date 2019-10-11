@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 class CircularWave extends CustomClipper<Path> {
   final double revealPercent;
   final double iconPosition;
+  final double verReveal;
 
-  CircularWave(this.iconPosition, {this.revealPercent});
+  CircularWave(this.iconPosition, this.revealPercent, this.verReveal);
 
   @override
   Path getClip(Size size) {
-    final center = new Offset(size.width, size.height * (iconPosition + 1) / 2);
+    print(verReveal);
+    final center = new Offset(size.width, size.height * (2 * verReveal / 3));
     final radius = 1000 * revealPercent;
     final diameter = 2 * radius;
     final path = Path();

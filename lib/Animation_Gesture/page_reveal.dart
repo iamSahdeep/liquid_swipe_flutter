@@ -40,9 +40,10 @@ class PageReveal extends StatelessWidget {
       case WaveType.circularReveal:
         return ClipPath(
           clipper: CircularWave(iconPosition,
-              revealPercent: slideDirection == SlideDirection.leftToRight
+              slideDirection == SlideDirection.leftToRight
                   ? 1.0 - revealPercent
-                  : revealPercent),
+                  : revealPercent, vertReveal),
+
           child: child,
         );
         break;
