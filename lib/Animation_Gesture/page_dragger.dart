@@ -100,8 +100,8 @@ class _PageDraggerState extends State<PageDragger> {
       onVerticalDragUpdate: onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
-          alignment: Alignment(1 - slidePercentHor + 0.005,
-              widget.iconPosition + widget.iconPosition / 10),
+              alignment: Alignment(1 - slidePercentHor + 0.005,
+                  widget.iconPosition + widget.iconPosition / 10),
               child: Opacity(
                   opacity: 1 - slidePercentHor,
                   child: FloatingActionButton(

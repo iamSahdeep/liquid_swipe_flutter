@@ -19,7 +19,8 @@ class PageReveal extends StatelessWidget {
     this.child,
     this.slideDirection,
     this.iconPosition,
-    this.waveType, this.vertReveal });
+    this.waveType,
+    this.vertReveal});
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +40,12 @@ class PageReveal extends StatelessWidget {
         break;
       case WaveType.circularReveal:
         return ClipPath(
-          clipper: CircularWave(iconPosition,
+          clipper: CircularWave(
+              iconPosition,
               slideDirection == SlideDirection.leftToRight
                   ? 1.0 - revealPercent
-                  : revealPercent, vertReveal),
-
+                  : revealPercent,
+              vertReveal),
           child: child,
         );
         break;

@@ -218,13 +218,13 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
         home: new Scaffold(
             body: LiquidSwipe(
-              pages: pages,
-              fullTransitionValue: 200,
-              enableSlideIcon: true,
-              enableLoop: true,
-              positionSlideIcon: 0.5,
-              waveType: WaveType.liquidReveal,
-            )));
+      pages: pages,
+      fullTransitionValue: 200,
+      enableSlideIcon: true,
+      enableLoop: true,
+      positionSlideIcon: 0.5,
+      waveType: WaveType.liquidReveal,
+    )));
   }
 
   pageChangeCallback(int page) {
