@@ -9,7 +9,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   final pages = [
     Container(
       color: Colors.pink,
@@ -225,14 +224,13 @@ class MyApp extends StatelessWidget {
               enableLoop: true,
               positionSlideIcon: 0.5,
               waveType: WaveType.liquidReveal,
-              onPageChangeCallback: (page) => pageChangeCallback(page),
-              currentUpdateTypeCallback: (updateType) => updateTypeCallback(updateType),
             )));
   }
 
   pageChangeCallback(int page) {
     print(page);
   }
+
   updateTypeCallback(UpdateType updateType) {
     print(updateType);
   }

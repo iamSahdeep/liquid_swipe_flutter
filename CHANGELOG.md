@@ -1,6 +1,10 @@
 #ChangeLog
 
 
+## 1.3.1
+* Made callbacks not required
+* Now pages are list of Widgets instead Container but should use container
+
 ## 1.3.0
 * UpdateTypeCallback [6128029f311590db7b1ce38e9bfd7e078c347f4f](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/6128029f311590db7b1ce38e9bfd7e078c347f4f)
 * pageChangeCallback 

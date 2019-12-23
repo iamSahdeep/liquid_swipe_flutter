@@ -70,18 +70,16 @@ class _PageDraggerState extends State<PageDragger> {
       }
 
       // Adding to slideUpdateStream
-      widget.slideUpdateStream
-          .add(SlideUpdate(slideDirection, slidePercentHor, slidePercentVer,
-          UpdateType.dragging));
+      widget.slideUpdateStream.add(SlideUpdate(slideDirection, slidePercentHor,
+          slidePercentVer, UpdateType.dragging));
     }
   }
 
   // This method executes when user ends dragging.
   onDragEnd(DragEndDetails details) {
     // Adding to slideUpdateStream
-    widget.slideUpdateStream.add(SlideUpdate(
-        SlideDirection.none, slidePercentHor, slidePercentVer,
-        UpdateType.doneDragging));
+    widget.slideUpdateStream.add(SlideUpdate(SlideDirection.none,
+        slidePercentHor, slidePercentVer, UpdateType.doneDragging));
 
     //Making dragStart to null for the reallocation
     slidePercentHor = slidePercentVer = 0;

@@ -15,7 +15,7 @@ typedef OnPageChangeCallback = void Function(int activePageIndex);
 typedef CurrentUpdateTypeCallback = void Function(UpdateType updateType);
 
 class LiquidSwipe extends StatefulWidget {
-  final List<Container> pages;
+  final List<Widget> pages;
   final double fullTransitionValue;
   final int initialPage;
   final bool enableSlideIcon;
@@ -40,7 +40,6 @@ class LiquidSwipe extends StatefulWidget {
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
   })  : assert(pages != null),
-        assert(onPageChangeCallback != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
@@ -82,8 +81,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   set setActivePageIndex(int value) {
     activePageIndex = value;
-
-    widget.onPageChangeCallback(activePageIndex);
+    if (widget.onPageChangeCallback != null)
+      widget.onPageChangeCallback(activePageIndex);
   }
 
   @override
@@ -97,8 +96,9 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     slideUpdateStream$ = slideUpdateStream.stream.listen((SlideUpdate event) {
       setState(() {
         //send the current update type through a callback
-        if(prevUpdate != event.updateType)
-        widget.currentUpdateTypeCallback(event.updateType);
+        if (prevUpdate != event.updateType &&
+            widget.currentUpdateTypeCallback != null)
+          widget.currentUpdateTypeCallback(event.updateType);
 
         prevUpdate = event.updateType;
         //setState is used to change the values dynamically
@@ -171,7 +171,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         //done animating
         else if (event.updateType == UpdateType.doneAnimating) {
           activePageIndex = nextPageIndex;
-          widget.onPageChangeCallback(activePageIndex);
+          if (widget.onPageChangeCallback != null)
+            widget.onPageChangeCallback(activePageIndex);
           slideDirection = SlideDirection.none;
           slidePercentHor = 0.5;
           slidePercentVer = widget.positionSlideIcon;
@@ -192,40 +193,36 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     List<Container> pages = widget.pages;
-    return Scaffold(
-      //Stack is used to place components over one another.
-      resizeToAvoidBottomPadding: false,
-      body: Stack(
-        children: <Widget>[
-          Page(
-            pageView: slideDirection == SlideDirection.leftToRight
-                ? pages[activePageIndex]
-                : pages[nextPageIndex],
-          ),
-          //Pages
-          PageReveal(
-            //next page reveal
-            revealPercent: slidePercentHor,
-            child: Page(
-                pageView: slideDirection == SlideDirection.leftToRight
-                    ? pages[nextPageIndex]
-                    : pages[activePageIndex]),
-            slideDirection: slideDirection,
-            iconPosition: widget.positionSlideIcon,
+    return Stack(
+      children: <Widget>[
+        Page(
+          pageView: slideDirection == SlideDirection.leftToRight
+              ? pages[activePageIndex]
+              : pages[nextPageIndex],
+        ),
+        //Pages
+        PageReveal(
+          //next page reveal
+          revealPercent: slidePercentHor,
+          child: Page(
+              pageView: slideDirection == SlideDirection.leftToRight
+                  ? pages[nextPageIndex]
+                  : pages[activePageIndex]),
+          slideDirection: slideDirection,
+          iconPosition: widget.positionSlideIcon,
 
-            waveType: widget.waveType,
-            vertReveal: slidePercentVer,
-          ),
-          PageDragger(
-            //Used for gesture control
-            fullTransitionPX: widget.fullTransitionValue,
-            slideUpdateStream: this.slideUpdateStream,
-            enableSlideIcon: widget.enableSlideIcon,
-            slideIconWidget: widget.slideIconWidget,
-            iconPosition: widget.positionSlideIcon,
-          ), //PageDragger
-        ], //Widget
-      ), //Stack
+          waveType: widget.waveType,
+          vertReveal: slidePercentVer,
+        ),
+        PageDragger(
+          //Used for gesture control
+          fullTransitionPX: widget.fullTransitionValue,
+          slideUpdateStream: this.slideUpdateStream,
+          enableSlideIcon: widget.enableSlideIcon,
+          slideIconWidget: widget.slideIconWidget,
+          iconPosition: widget.positionSlideIcon,
+        ), //PageDragger
+      ], //Widget//Stack
     ); //Scaffold
   }
 }

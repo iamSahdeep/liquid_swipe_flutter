@@ -13,12 +13,10 @@ class WaveLayer extends CustomClipper<Path> {
   double iconPosition;
   SlideDirection slideDirection;
 
-  WaveLayer({
-    @required this.revealPercent,
+  WaveLayer({@required this.revealPercent,
     @required this.slideDirection,
     @required this.iconPosition,
-    @required this.verReveal
-  });
+    @required this.verReveal});
 
   @override
   getClip(Size size) {
