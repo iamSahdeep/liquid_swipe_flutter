@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:liquid_swipe/Animation_Gesture/animated_page_dragger.dart';
 import 'package:liquid_swipe/Animation_Gesture/page_dragger.dart';
 import 'package:liquid_swipe/page.dart';
+import 'package:liquid_swipe/slide_update.dart';
 
 import 'Animation_Gesture/page_reveal.dart';
 import 'Constants/Helpers.dart';
@@ -23,7 +24,6 @@ class LiquidSwipe extends StatefulWidget {
   final double positionSlideIcon;
   final bool enableLoop;
   final WaveType waveType;
-
   final OnPageChangeCallback onPageChangeCallback;
   final CurrentUpdateTypeCallback currentUpdateTypeCallback;
 
@@ -51,19 +51,6 @@ class LiquidSwipe extends StatefulWidget {
   State<StatefulWidget> createState() => _LiquidSwipe();
 }
 
-class SlideUpdate {
-  final UpdateType updateType;
-  final SlideDirection direction;
-  final double slidePercentHor, slidePercentVer;
-
-  SlideUpdate(
-    this.direction,
-    this.slidePercentHor,
-    this.slidePercentVer,
-    this.updateType,
-  );
-}
-
 class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
   StreamController<SlideUpdate>
       // ignore: close_sinks
@@ -87,6 +74,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    super.initState();
+
     slidePercentHor = slidePercentVer = 0;
     activePageIndex = widget.initialPage;
     nextPageIndex = widget.initialPage;
@@ -102,6 +91,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
         prevUpdate = event.updateType;
         //setState is used to change the values dynamically
+
         //if the user is dragging then
         if (event.updateType == UpdateType.dragging) {
           slideDirection = event.direction;
@@ -120,20 +110,21 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
             if (nextPageIndex > widget.pages.length - 1) {
               nextPageIndex = 0;
-            }
-            else if (nextPageIndex < 0) {
+            } else if (nextPageIndex < 0) {
               nextPageIndex = widget.pages.length - 1;
             }
-          } else {
-            //conditions on slide direction
-            if (slideDirection == SlideDirection.leftToRight &&
-                activePageIndex != 0) {
-              nextPageIndex = activePageIndex - 1;
-            } else if (slideDirection == SlideDirection.rightToLeft &&
-                activePageIndex != widget.pages.length - 1) {
-              nextPageIndex = activePageIndex + 1;
-            }
+            return;
           }
+
+          //conditions on slide direction
+          if (slideDirection == SlideDirection.leftToRight &&
+              activePageIndex != 0) {
+            nextPageIndex = activePageIndex - 1;
+          } else if (slideDirection == SlideDirection.rightToLeft &&
+              activePageIndex != widget.pages.length - 1) {
+            nextPageIndex = activePageIndex + 1;
+          }
+          return;
         }
         //if the user has done dragging
         else if (event.updateType == UpdateType.doneDragging) {
@@ -161,33 +152,27 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           }
           //Run the animation
           animatedPageDragger.run();
+          return;
         }
         //when animating
         else if (event.updateType == UpdateType.animating) {
           slideDirection = event.direction;
           slidePercentHor = event.slidePercentHor;
           slidePercentVer = event.slidePercentVer;
+          return;
         }
+
         //done animating
-        else if (event.updateType == UpdateType.doneAnimating) {
-          activePageIndex = nextPageIndex;
-          if (widget.onPageChangeCallback != null)
-            widget.onPageChangeCallback(activePageIndex);
-          slideDirection = SlideDirection.none;
-          slidePercentHor = 0.5;
-          slidePercentVer = widget.positionSlideIcon;
+        activePageIndex = nextPageIndex;
+        if (widget.onPageChangeCallback != null) {
+          widget.onPageChangeCallback(activePageIndex);
         }
+        slideDirection = SlideDirection.none;
+        slidePercentHor = 0.5;
+        slidePercentVer = widget.positionSlideIcon;
+        return;
       });
     });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    slideUpdateStream$?.cancel();
-    animatedPageDragger?.dispose();
-    slideUpdateStream?.close();
-    super.dispose();
   }
 
   @override
@@ -224,5 +209,14 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         ), //PageDragger
       ], //Widget//Stack
     ); //Scaffold
+  }
+
+  @override
+  void dispose() {
+    slideUpdateStream$?.cancel();
+    animatedPageDragger?.dispose();
+    slideUpdateStream?.close();
+
+    super.dispose();
   }
 }

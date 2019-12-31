@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b04d5b3a-dc41-4077-ba5e-a292d819e0ae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/elotech.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/liquid_swipe_flutter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/liquid_swipe_flutter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Animation_Gesture/animated_page_dragger.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Animation_Gesture/animated_page_dragger.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Animation_Gesture/page_dragger.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Animation_Gesture/page_dragger.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Animation_Gesture/page_reveal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Animation_Gesture/page_reveal.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Clippers/CircularWave.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Clippers/CircularWave.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Clippers/WaveLayer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Clippers/WaveLayer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Constants/Helpers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Constants/Helpers.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/liquid_swipe.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/liquid_swipe.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/liquid_swipe_test.dart" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -35,39 +25,27 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="Samsung_Tab_A_API_29" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/liquid_swipe.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+            <state relative-caret-position="515">
+              <caret line="150" column="41" selection-start-line="150" selection-start-column="41" selection-end-line="150" selection-end-column="41" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#6698#6826#0" />
+                <element signature="e#3629#4834#0" />
+                <element signature="e#6006#6163#0" />
+                <element signature="e#6805#7920#0" />
+                <element signature="e#7595#7728#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/Animation_Gesture/animated_page_dragger.dart">
+        <entry file="file://$PROJECT_DIR$/lib/Constants/Helpers.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="74" column="41" selection-start-line="74" selection-start-column="41" selection-end-line="74" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/Animation_Gesture/page_dragger.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="56" column="28" lean-forward="true" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="195">
+              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -108,16 +86,17 @@
         <option value="$PROJECT_DIR$/example/lib/secondExample.dart" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/lib/providerModel/UIModel.dart" />
-        <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/lib/liquid_swipe.dart" />
         <option value="$PROJECT_DIR$/lib/Constants/Helpers.dart" />
         <option value="$PROJECT_DIR$/lib/Clippers/WaveLayer.dart" />
         <option value="$PROJECT_DIR$/lib/Clippers/CircularWave.dart" />
+        <option value="$PROJECT_DIR$/lib/Animation_Gesture/page_reveal.dart" />
+        <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/Animation_Gesture/animated_page_dragger.dart" />
         <option value="$PROJECT_DIR$/lib/Animation_Gesture/page_dragger.dart" />
-        <option value="$PROJECT_DIR$/lib/Animation_Gesture/page_reveal.dart" />
+        <option value="$PROJECT_DIR$/lib/slide_update.dart" />
+        <option value="$PROJECT_DIR$/lib/liquid_swipe.dart" />
       </list>
     </option>
   </component>
@@ -125,6 +104,9 @@
     <option name="x" value="1807" />
     <option name="width" value="1479" />
     <option name="height" value="1072" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -271,20 +253,17 @@
     <frame x="1807" y="0" width="1479" height="1072" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Build Variants" side_tool="true" />
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.19539428" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19539428" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="Resources Explorer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Logcat" />
-      <window_info anchor="bottom" id="Find" />
-      <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
+      <window_info id="Build Variants" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.32799146" />
-      <window_info active="true" anchor="bottom" id="Run" order="1" visible="true" weight="0.26495728" />
+      <window_info anchor="bottom" id="Run" order="1" visible="true" weight="0.26602563" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.31666666" />
@@ -292,13 +271,16 @@
       <window_info anchor="bottom" id="Flutter Performance" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.2275641" />
-      <window_info anchor="right" id="Device File Explorer" side_tool="true" />
+      <window_info anchor="bottom" id="Logcat" order="9" />
+      <window_info anchor="bottom" id="Android Profiler" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="11" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Flutter Inspector" order="2" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="right" id="Flutter Outline" order="4" weight="0.32954547" />
       <window_info anchor="right" id="Key Promoter X" order="5" />
+      <window_info anchor="right" id="Device File Explorer" order="6" side_tool="true" />
     </layout>
     <layout-to-restore>
       <window_info id="Captures" order="0" weight="0.25" />
@@ -357,16 +339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="849">
-          <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -391,10 +363,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Constants/Helpers.dart">
+    <entry file="file://$PROJECT_DIR$/lib/Animation_Gesture/page_reveal.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="405">
+          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/liquid_swipe_test.dart" />
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="196" column="33" lean-forward="true" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#377#1157#0" />
+            <element signature="e#1172#1973#0" />
+            <element signature="e#1988#2780#0" />
+            <element signature="e#2795#3598#0" />
+            <element signature="e#3613#4399#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/slide_update.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -407,48 +408,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/Animation_Gesture/animated_page_dragger.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="41" selection-start-line="74" selection-start-column="41" selection-end-line="74" selection-end-column="41" />
+        <state relative-caret-position="60">
+          <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/liquid_swipe.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#6698#6826#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Animation_Gesture/page_reveal.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/liquid_swipe_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/Animation_Gesture/page_dragger.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="56" column="28" lean-forward="true" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/Constants/Helpers.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/liquid_swipe.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="150" column="41" selection-start-line="150" selection-start-column="41" selection-end-line="150" selection-end-column="41" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#3629#4834#0" />
+            <element signature="e#6006#6163#0" />
+            <element signature="e#6805#7920#0" />
+            <element signature="e#7595#7728#0" />
           </folding>
         </state>
       </provider>

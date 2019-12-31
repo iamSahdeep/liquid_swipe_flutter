@@ -4,11 +4,19 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 
 void main() {
   runApp(
-    new MyApp(),
+    MyApp(),
   );
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
+  int page = 0;
+  UpdateType updateType;
+  static final style = TextStyle(
+    fontSize: 30,
+    fontFamily: "Billy",
+    fontWeight: FontWeight.w600,
+  );
   final pages = [
     Container(
       color: Colors.pink,
@@ -21,32 +29,25 @@ class MyApp extends StatelessWidget {
             'assets/1.png',
             fit: BoxFit.cover,
           ),
-          Padding(padding: const EdgeInsets.all(20.0)),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+          ),
           Column(
             children: <Widget>[
-              new Text(
+              Text(
                 "Hi",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "It's Me",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Sahdeep",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
             ],
-          )
+          ),
         ],
       ),
     ),
@@ -61,32 +62,25 @@ class MyApp extends StatelessWidget {
             'assets/1.png',
             fit: BoxFit.cover,
           ),
-          Padding(padding: const EdgeInsets.all(20.0)),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+          ),
           Column(
             children: <Widget>[
-              new Text(
+              Text(
                 "Take a",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "look at",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Liquid Swipe",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
             ],
-          )
+          ),
         ],
       ),
     ),
@@ -101,32 +95,25 @@ class MyApp extends StatelessWidget {
             'assets/1.png',
             fit: BoxFit.cover,
           ),
-          Padding(padding: const EdgeInsets.all(20.0)),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+          ),
           Column(
             children: <Widget>[
-              new Text(
+              Text(
                 "Liked?",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Fork!",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Give Star!",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
             ],
-          )
+          ),
         ],
       ),
     ),
@@ -141,32 +128,25 @@ class MyApp extends StatelessWidget {
             'assets/1.png',
             fit: BoxFit.cover,
           ),
-          Padding(padding: const EdgeInsets.all(20.0)),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+          ),
           Column(
             children: <Widget>[
-              new Text(
+              Text(
                 "Can be",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Used for",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Onboarding Design",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
             ],
-          )
+          ),
         ],
       ),
     ),
@@ -181,50 +161,44 @@ class MyApp extends StatelessWidget {
             'assets/1.png',
             fit: BoxFit.cover,
           ),
-          Padding(padding: const EdgeInsets.all(20.0)),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+          ),
           Column(
             children: <Widget>[
-              new Text(
+              Text(
                 "Do",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Try it",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
-              new Text(
+              Text(
                 "Thank You",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "Billy",
-                    fontWeight: FontWeight.w600),
+                style: style,
               ),
             ],
-          )
+          ),
         ],
       ),
     ),
   ];
-  int page = 0;
-  UpdateType updateType;
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: new Scaffold(
-            body: LiquidSwipe(
-      pages: pages,
-      fullTransitionValue: 200,
-      enableSlideIcon: true,
-      enableLoop: true,
-      positionSlideIcon: 0.5,
-      waveType: WaveType.liquidReveal,
-    )));
+    return MaterialApp(
+      home: Scaffold(
+        body: LiquidSwipe(
+          pages: pages,
+          fullTransitionValue: 200,
+          enableSlideIcon: true,
+          enableLoop: true,
+          positionSlideIcon: 0.5,
+          waveType: WaveType.liquidReveal,
+        ),
+      ),
+    );
   }
 
   pageChangeCallback(int page) {

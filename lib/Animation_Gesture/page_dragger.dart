@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Constants/Helpers.dart';
-
-import '../liquid_swipe.dart';
+import 'package:liquid_swipe/slide_update.dart';
 
 /// This class is used to get user gesture and work according to it.
 

@@ -3,8 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Constants/Helpers.dart';
-
-import '../liquid_swipe.dart';
+import 'package:liquid_swipe/slide_update.dart';
 
 /// This class provides the animation controller
 /// used when then user stops dragging and page
