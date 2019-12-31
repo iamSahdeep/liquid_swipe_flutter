@@ -32,8 +32,8 @@ class _PageDraggerState extends State<PageDragger> {
   //Variables
   Offset dragStart;
   SlideDirection slideDirection;
-  double slidePercentHor = 0;
-  double slidePercentVer = 0;
+  double slidePercentHor = 0.0;
+  double slidePercentVer = 0.0;
 
   // This methods executes when user starts dragging.
   onDragStart(DragStartDetails details) {
@@ -62,9 +62,6 @@ class _PageDraggerState extends State<PageDragger> {
         //clamp method is used to clamp the value of slidePercent from 0.0 to 1.0, after 1.0 it set to 1.0
         slidePercentHor = (dx / widget.fullTransitionPX).abs().clamp(0.0, 1.0);
         slidePercentVer = (dy / 500).abs().clamp(0.0, 1.25);
-      } else {
-        slidePercentHor = 0.0;
-        slidePercentVer = 0.0;
       }
 
       // Adding to slideUpdateStream

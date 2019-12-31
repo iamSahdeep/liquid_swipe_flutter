@@ -83,6 +83,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     slideUpdateStream = StreamController<SlideUpdate>();
     //listening to updates of stream controller
     slideUpdateStream$ = slideUpdateStream.stream.listen((SlideUpdate event) {
+      //setState is used to change the values dynamically
       setState(() {
         //send the current update type through a callback
         if (prevUpdate != event.updateType &&
@@ -90,7 +91,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           widget.currentUpdateTypeCallback(event.updateType);
 
         prevUpdate = event.updateType;
-        //setState is used to change the values dynamically
 
         //if the user is dragging then
         if (event.updateType == UpdateType.dragging) {

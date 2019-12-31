@@ -39,14 +39,16 @@ class AnimatedPageDragger {
       final slideRemaining = 1.0 - slidePercentHor;
       //Standard value take for drag velocity to avoid complex calculations.
       duration = Duration(
-          milliseconds: (slideRemaining / PERCENT_PER_MILLISECOND).round());
+        milliseconds: (slideRemaining / PERCENT_PER_MILLISECOND).round(),
+      );
     }
     //We have to close the page reveal
     else {
       endSlidePercentHor = endSlidePercentVer = 0.0;
 
       duration = Duration(
-          milliseconds: (slidePercentHor / PERCENT_PER_MILLISECOND).round());
+        milliseconds: (slidePercentHor / PERCENT_PER_MILLISECOND).round(),
+      );
     }
 
     //Adding listener to animation controller
@@ -56,10 +58,16 @@ class AnimatedPageDragger {
       vsync: vsync,
     )
       ..addListener(() {
-        final slidePercent = lerpDouble(startSlidePercentHor,
-            endSlidePercentHor, completionAnimationController.value);
-        final slidePercentVer = lerpDouble(startSlidePercentVer,
-            endSlidePercentVer, completionAnimationController.value);
+        final slidePercent = lerpDouble(
+          startSlidePercentHor,
+          endSlidePercentHor,
+          completionAnimationController.value,
+        );
+        final slidePercentVer = lerpDouble(
+          startSlidePercentVer,
+          endSlidePercentVer,
+          completionAnimationController.value,
+        );
         //Adding to slide update stream
         slideUpdateStream.add(SlideUpdate(
           slideDirection,
