@@ -50,13 +50,12 @@ class _PageDraggerState extends State<PageDragger> {
       final dx = dragStart.dx - newPosition.dx;
       final dy = newPosition.dy;
 
+      slideDirection = SlideDirection.none;
       //predicting slide direction
       if (dx > 0.0) {
         slideDirection = SlideDirection.rightToLeft;
       } else if (dx < 0.0) {
         slideDirection = SlideDirection.leftToRight;
-      } else {
-        slideDirection = SlideDirection.none;
       }
 
       //predicting slide percent
@@ -70,16 +69,24 @@ class _PageDraggerState extends State<PageDragger> {
       }
 
       // Adding to slideUpdateStream
-      widget.slideUpdateStream.add(SlideUpdate(slideDirection, slidePercentHor,
-          slidePercentVer, UpdateType.dragging));
+      widget.slideUpdateStream.add(SlideUpdate(
+        slideDirection,
+        slidePercentHor,
+        slidePercentVer,
+        UpdateType.dragging,
+      ));
     }
   }
 
   // This method executes when user ends dragging.
   onDragEnd(DragEndDetails details) {
     // Adding to slideUpdateStream
-    widget.slideUpdateStream.add(SlideUpdate(SlideDirection.none,
-        slidePercentHor, slidePercentVer, UpdateType.doneDragging));
+    widget.slideUpdateStream.add(SlideUpdate(
+      SlideDirection.none,
+      slidePercentHor,
+      slidePercentVer,
+      UpdateType.doneDragging,
+    ));
 
     //Making dragStart to null for the reallocation
     slidePercentHor = slidePercentVer = 0;
@@ -100,19 +107,23 @@ class _PageDraggerState extends State<PageDragger> {
       onVerticalDragUpdate: onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
-              alignment: Alignment(1 - slidePercentHor + 0.005,
-                  widget.iconPosition + widget.iconPosition / 10),
+              alignment: Alignment(
+                1 - slidePercentHor + 0.005,
+                widget.iconPosition + widget.iconPosition / 10,
+              ),
               child: Opacity(
-                  opacity: 1 - slidePercentHor,
-                  child: FloatingActionButton(
-                    onPressed: null,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    child: slideDirection == SlideDirection.leftToRight
-                        ? null
-                        : widget.slideIconWidget,
-                    foregroundColor: Colors.black,
-                  )))
+                opacity: 1 - slidePercentHor,
+                child: FloatingActionButton(
+                  onPressed: null,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  child: slideDirection != SlideDirection.leftToRight
+                      ? widget.slideIconWidget
+                      : null,
+                  foregroundColor: Colors.black,
+                ),
+              ),
+            )
           : null,
     );
   }

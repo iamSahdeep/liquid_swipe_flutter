@@ -109,19 +109,21 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           slidePercentVer = event.slidePercentVer;
 
           // making pages to be in loop
+          nextPageIndex = activePageIndex;
           if (widget.enableLoop) {
             //conditions on slide direction
             if (slideDirection == SlideDirection.leftToRight) {
               nextPageIndex = activePageIndex - 1;
             } else if (slideDirection == SlideDirection.rightToLeft) {
               nextPageIndex = activePageIndex + 1;
-            } else {
-              nextPageIndex = activePageIndex;
             }
 
-            if (nextPageIndex > widget.pages.length - 1)
+            if (nextPageIndex > widget.pages.length - 1) {
               nextPageIndex = 0;
-            else if (nextPageIndex < 0) nextPageIndex = widget.pages.length - 1;
+            }
+            else if (nextPageIndex < 0) {
+              nextPageIndex = widget.pages.length - 1;
+            }
           } else {
             //conditions on slide direction
             if (slideDirection == SlideDirection.leftToRight &&
@@ -130,8 +132,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             } else if (slideDirection == SlideDirection.rightToLeft &&
                 activePageIndex != widget.pages.length - 1) {
               nextPageIndex = activePageIndex + 1;
-            } else {
-              nextPageIndex = activePageIndex;
             }
           }
         }
@@ -205,12 +205,12 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           //next page reveal
           revealPercent: slidePercentHor,
           child: Page(
-              pageView: slideDirection == SlideDirection.leftToRight
-                  ? pages[nextPageIndex]
-                  : pages[activePageIndex]),
+            pageView: slideDirection == SlideDirection.leftToRight
+                ? pages[nextPageIndex]
+                : pages[activePageIndex],
+          ),
           slideDirection: slideDirection,
           iconPosition: widget.positionSlideIcon,
-
           waveType: widget.waveType,
           vertReveal: slidePercentVer,
         ),

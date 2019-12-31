@@ -52,23 +52,33 @@ class AnimatedPageDragger {
 
     //Adding listener to animation controller
     //Also value to animation controller vary from 0.0 to 1.0 according to duration.
-    completionAnimationController =
-    AnimationController(duration: duration, vsync: vsync)
+    completionAnimationController = AnimationController(
+      duration: duration,
+      vsync: vsync,
+    )
       ..addListener(() {
         final slidePercent = lerpDouble(startSlidePercentHor,
             endSlidePercentHor, completionAnimationController.value);
         final slidePercentVer = lerpDouble(startSlidePercentVer,
             endSlidePercentVer, completionAnimationController.value);
         //Adding to slide update stream
-        slideUpdateStream.add(SlideUpdate(slideDirection, slidePercent,
-            slidePercentVer, UpdateType.animating));
+        slideUpdateStream.add(SlideUpdate(
+          slideDirection,
+          slidePercent,
+          slidePercentVer,
+          UpdateType.animating,
+        ));
       })
       ..addStatusListener((AnimationStatus status) {
         //When animation has done executing
         if (status == AnimationStatus.completed) {
           //Adding to slide update stream
-          slideUpdateStream.add(SlideUpdate(slideDirection, slidePercentHor,
-              slidePercentVer, UpdateType.doneAnimating));
+          slideUpdateStream.add(SlideUpdate(
+            slideDirection,
+            slidePercentHor,
+            slidePercentVer,
+            UpdateType.doneAnimating,
+          ));
         }
       });
   }

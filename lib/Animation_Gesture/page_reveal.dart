@@ -15,52 +15,41 @@ class PageReveal extends StatelessWidget {
   final double vertReveal;
 
   //Constructor
-  PageReveal({this.revealPercent,
+  PageReveal({
+    this.revealPercent,
     this.child,
     this.slideDirection,
     this.iconPosition,
     this.waveType,
-    this.vertReveal});
+    this.vertReveal,
+  });
 
   @override
   Widget build(BuildContext context) {
     //ClipPath clips our Container (page) with clipper based on path..
-    switch (waveType) {
-      case WaveType.liquidReveal:
-        return ClipPath(
-          clipper: WaveLayer(
-              revealPercent: slideDirection == SlideDirection.leftToRight
-                  ? 1.0 - revealPercent
-                  : revealPercent,
-              slideDirection: slideDirection,
-              iconPosition: iconPosition,
-              verReveal: vertReveal),
-          child: child,
-        );
-        break;
-      case WaveType.circularReveal:
-        return ClipPath(
-          clipper: CircularWave(
-              iconPosition,
-              slideDirection == SlideDirection.leftToRight
-                  ? 1.0 - revealPercent
-                  : revealPercent,
-              vertReveal),
-          child: child,
-        );
-        break;
-      default:
-        return ClipPath(
-          clipper: WaveLayer(
-              revealPercent: slideDirection == SlideDirection.leftToRight
-                  ? 1.0 - revealPercent
-                  : revealPercent,
-              slideDirection: slideDirection,
-              iconPosition: iconPosition,
-              verReveal: vertReveal),
-          child: child,
-        );
-        break;
+    if (waveType == WaveType.circularReveal) {
+      return ClipPath(
+        clipper: CircularWave(
+          iconPosition,
+          slideDirection == SlideDirection.leftToRight
+              ? 1.0 - revealPercent
+              : revealPercent,
+          vertReveal,
+        ),
+        child: child,
+      );
     }
+
+    return ClipPath(
+      clipper: WaveLayer(
+        revealPercent: slideDirection == SlideDirection.leftToRight
+            ? 1.0 - revealPercent
+            : revealPercent,
+        slideDirection: slideDirection,
+        iconPosition: iconPosition,
+        verReveal: vertReveal,
+      ),
+      child: child,
+    );
   }
 }
