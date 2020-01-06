@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Constants/Helpers.dart';
-
-import '../liquid_swipe.dart';
+import 'package:liquid_swipe/slide_update.dart';
 
 /// This class is used to get user gesture and work according to it.
 
@@ -33,8 +32,8 @@ class _PageDraggerState extends State<PageDragger> {
   //Variables
   Offset dragStart;
   SlideDirection slideDirection;
-  double slidePercentHor = 0;
-  double slidePercentVer = 0;
+  double slidePercentHor = 0.0;
+  double slidePercentVer = 0.0;
 
   // This methods executes when user starts dragging.
   onDragStart(DragStartDetails details) {
@@ -50,13 +49,12 @@ class _PageDraggerState extends State<PageDragger> {
       final dx = dragStart.dx - newPosition.dx;
       final dy = newPosition.dy;
 
+      slideDirection = SlideDirection.none;
       //predicting slide direction
       if (dx > 0.0) {
         slideDirection = SlideDirection.rightToLeft;
       } else if (dx < 0.0) {
         slideDirection = SlideDirection.leftToRight;
-      } else {
-        slideDirection = SlideDirection.none;
       }
 
       //predicting slide percent
@@ -64,22 +62,27 @@ class _PageDraggerState extends State<PageDragger> {
         //clamp method is used to clamp the value of slidePercent from 0.0 to 1.0, after 1.0 it set to 1.0
         slidePercentHor = (dx / widget.fullTransitionPX).abs().clamp(0.0, 1.0);
         slidePercentVer = (dy / 500).abs().clamp(0.0, 1.25);
-      } else {
-        slidePercentHor = 0.0;
-        slidePercentVer = 0.0;
       }
 
       // Adding to slideUpdateStream
-      widget.slideUpdateStream.add(SlideUpdate(slideDirection, slidePercentHor,
-          slidePercentVer, UpdateType.dragging));
+      widget.slideUpdateStream.add(SlideUpdate(
+        slideDirection,
+        slidePercentHor,
+        slidePercentVer,
+        UpdateType.dragging,
+      ));
     }
   }
 
   // This method executes when user ends dragging.
   onDragEnd(DragEndDetails details) {
     // Adding to slideUpdateStream
-    widget.slideUpdateStream.add(SlideUpdate(SlideDirection.none,
-        slidePercentHor, slidePercentVer, UpdateType.doneDragging));
+    widget.slideUpdateStream.add(SlideUpdate(
+      SlideDirection.none,
+      slidePercentHor,
+      slidePercentVer,
+      UpdateType.doneDragging,
+    ));
 
     //Making dragStart to null for the reallocation
     slidePercentHor = slidePercentVer = 0;
@@ -100,19 +103,23 @@ class _PageDraggerState extends State<PageDragger> {
       onVerticalDragUpdate: onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
-              alignment: Alignment(1 - slidePercentHor + 0.005,
-                  widget.iconPosition + widget.iconPosition / 10),
+              alignment: Alignment(
+                1 - slidePercentHor + 0.005,
+                widget.iconPosition + widget.iconPosition / 10,
+              ),
               child: Opacity(
-                  opacity: 1 - slidePercentHor,
-                  child: FloatingActionButton(
-                    onPressed: null,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    child: slideDirection == SlideDirection.leftToRight
-                        ? null
-                        : widget.slideIconWidget,
-                    foregroundColor: Colors.black,
-                  )))
+                opacity: 1 - slidePercentHor,
+                child: FloatingActionButton(
+                  onPressed: null,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  child: slideDirection != SlideDirection.leftToRight
+                      ? widget.slideIconWidget
+                      : null,
+                  foregroundColor: Colors.black,
+                ),
+              ),
+            )
           : null,
     );
   }

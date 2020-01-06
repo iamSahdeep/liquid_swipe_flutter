@@ -8,12 +8,18 @@ class CircularWave extends CustomClipper<Path> {
   final double iconPosition;
   final double verReveal;
 
-  CircularWave(this.iconPosition, this.revealPercent, this.verReveal);
+  CircularWave(
+    this.iconPosition,
+    this.revealPercent,
+    this.verReveal,
+  );
 
   @override
   Path getClip(Size size) {
-    print(verReveal);
-    final center = new Offset(size.width, size.height * (2 * verReveal / 3));
+    final center = Offset(
+      size.width,
+      size.height * (2 * verReveal / 3),
+    );
     final radius = 1000 * revealPercent;
     final diameter = 2 * radius;
     final path = Path();
@@ -23,7 +29,11 @@ class CircularWave extends CustomClipper<Path> {
     path.lineTo(0, size.height);
 
     final rect = Rect.fromLTWH(
-        center.dx - radius, center.dy - radius, diameter, diameter);
+      center.dx - radius,
+      center.dy - radius,
+      diameter,
+      diameter,
+    );
 
     ///Adding Oval with path.addOval() Makes the clipper totally inverse
     ///So have to use addArc().It took me 3 hours to make this workaround, lol.

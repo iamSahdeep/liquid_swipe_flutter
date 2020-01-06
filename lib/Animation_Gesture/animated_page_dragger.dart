@@ -3,8 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Constants/Helpers.dart';
-
-import '../liquid_swipe.dart';
+import 'package:liquid_swipe/slide_update.dart';
 
 /// This class provides the animation controller
 /// used when then user stops dragging and page
@@ -40,35 +39,53 @@ class AnimatedPageDragger {
       final slideRemaining = 1.0 - slidePercentHor;
       //Standard value take for drag velocity to avoid complex calculations.
       duration = Duration(
-          milliseconds: (slideRemaining / PERCENT_PER_MILLISECOND).round());
+        milliseconds: (slideRemaining / PERCENT_PER_MILLISECOND).round(),
+      );
     }
     //We have to close the page reveal
     else {
       endSlidePercentHor = endSlidePercentVer = 0.0;
 
       duration = Duration(
-          milliseconds: (slidePercentHor / PERCENT_PER_MILLISECOND).round());
+        milliseconds: (slidePercentHor / PERCENT_PER_MILLISECOND).round(),
+      );
     }
 
     //Adding listener to animation controller
     //Also value to animation controller vary from 0.0 to 1.0 according to duration.
-    completionAnimationController =
-    AnimationController(duration: duration, vsync: vsync)
+    completionAnimationController = AnimationController(
+      duration: duration,
+      vsync: vsync,
+    )
       ..addListener(() {
-        final slidePercent = lerpDouble(startSlidePercentHor,
-            endSlidePercentHor, completionAnimationController.value);
-        final slidePercentVer = lerpDouble(startSlidePercentVer,
-            endSlidePercentVer, completionAnimationController.value);
+        final slidePercent = lerpDouble(
+          startSlidePercentHor,
+          endSlidePercentHor,
+          completionAnimationController.value,
+        );
+        final slidePercentVer = lerpDouble(
+          startSlidePercentVer,
+          endSlidePercentVer,
+          completionAnimationController.value,
+        );
         //Adding to slide update stream
-        slideUpdateStream.add(SlideUpdate(slideDirection, slidePercent,
-            slidePercentVer, UpdateType.animating));
+        slideUpdateStream.add(SlideUpdate(
+          slideDirection,
+          slidePercent,
+          slidePercentVer,
+          UpdateType.animating,
+        ));
       })
       ..addStatusListener((AnimationStatus status) {
         //When animation has done executing
         if (status == AnimationStatus.completed) {
           //Adding to slide update stream
-          slideUpdateStream.add(SlideUpdate(slideDirection, slidePercentHor,
-              slidePercentVer, UpdateType.doneAnimating));
+          slideUpdateStream.add(SlideUpdate(
+            slideDirection,
+            slidePercentHor,
+            slidePercentVer,
+            UpdateType.doneAnimating,
+          ));
         }
       });
   }
