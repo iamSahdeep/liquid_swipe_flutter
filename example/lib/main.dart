@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Constants/Helpers.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+
 
 void main() {
   runApp(
@@ -9,14 +12,22 @@ void main() {
 }
 
 // ignore: must_be_immutable
-class MyApp extends StatelessWidget {
-  int page = 0;
-  UpdateType updateType;
+class MyApp extends StatefulWidget {
   static final style = TextStyle(
     fontSize: 30,
     fontFamily: "Billy",
     fontWeight: FontWeight.w600,
   );
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int page = 0;
+
+  UpdateType updateType;
+
   final pages = [
     Container(
       color: Colors.pink,
@@ -36,15 +47,15 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Text(
                 "Hi",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "It's Me",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Sahdeep",
-                style: style,
+                style: MyApp.style,
               ),
             ],
           ),
@@ -69,15 +80,15 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Text(
                 "Take a",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "look at",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Liquid Swipe",
-                style: style,
+                style: MyApp.style,
               ),
             ],
           ),
@@ -102,15 +113,15 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Text(
                 "Liked?",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Fork!",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Give Star!",
-                style: style,
+                style: MyApp.style,
               ),
             ],
           ),
@@ -135,15 +146,15 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Text(
                 "Can be",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Used for",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Onboarding Design",
-                style: style,
+                style: MyApp.style,
               ),
             ],
           ),
@@ -168,15 +179,15 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Text(
                 "Do",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Try it",
-                style: style,
+                style: MyApp.style,
               ),
               Text(
                 "Thank You",
-                style: style,
+                style: MyApp.style,
               ),
             ],
           ),
@@ -185,24 +196,68 @@ class MyApp extends StatelessWidget {
     ),
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: LiquidSwipe(
-          pages: pages,
-          fullTransitionValue: 200,
-          enableSlideIcon: true,
-          enableLoop: true,
-          positionSlideIcon: 0.5,
-          waveType: WaveType.liquidReveal,
+  Widget _buildDot(int index) {
+    double selectedness = Curves.easeOut.transform(
+      max(
+        0.0,
+        1.0 - ((page ?? 0) - index).abs(),
+      ),
+    );
+    double zoom = 1.0 + (2.0 - 1.0) * selectedness;
+    return new Container(
+      width: 25.0,
+      child: new Center(
+        child: new Material(
+          color: Colors.white,
+          type: MaterialType.circle,
+          child: new Container(
+            width: 8.0 * zoom,
+            height: 8.0 * zoom,
+          ),
         ),
       ),
     );
   }
 
-  pageChangeCallback(int page) {
-    print(page);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            LiquidSwipe(
+              pages: pages,
+              fullTransitionValue: 200,
+              enableSlideIcon: true,
+              enableLoop: true,
+              positionSlideIcon: 0.5,
+              onPageChangeCallback: pageChangeCallback,
+              currentUpdateTypeCallback: updateTypeCallback,
+              waveType: WaveType.liquidReveal,
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: <Widget>[
+                  Expanded(child: SizedBox()),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List<Widget>.generate(5, _buildDot),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  pageChangeCallback(int lpage) {
+    print(lpage);
+    setState(() {
+      page = lpage;
+    });
   }
 
   updateTypeCallback(UpdateType updateType) {
