@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Clippers/CircularWave.dart';
-import 'package:liquid_swipe/Constants/Helpers.dart';
+import 'package:liquid_swipe/Helpers/Helpers.dart';
 
 import '../Clippers/WaveLayer.dart';
 
@@ -29,6 +29,7 @@ class PageReveal extends StatelessWidget {
     //ClipPath clips our Container (page) with clipper based on path..
     if (waveType == WaveType.circularReveal) {
       return ClipPath(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         clipper: CircularWave(
           iconPosition,
           slideDirection == SlideDirection.leftToRight
@@ -41,6 +42,7 @@ class PageReveal extends StatelessWidget {
     }
 
     return ClipPath(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       clipper: WaveLayer(
         revealPercent: slideDirection == SlideDirection.leftToRight
             ? 1.0 - revealPercent

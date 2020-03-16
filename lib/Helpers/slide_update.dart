@@ -1,4 +1,4 @@
-import 'package:liquid_swipe/Constants/Helpers.dart';
+import 'package:liquid_swipe/Helpers/Helpers.dart';
 
 class SlideUpdate {
   final UpdateType updateType;

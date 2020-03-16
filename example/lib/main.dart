@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/Constants/Helpers.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 
@@ -11,7 +10,6 @@ void main() {
   );
 }
 
-// ignore: must_be_immutable
 class MyApp extends StatefulWidget {
   static final style = TextStyle(
     fontSize: 30,

@@ -1,8 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/Constants/Helpers.dart';
-import 'package:liquid_swipe/slide_update.dart';
+import 'package:liquid_swipe/Helpers/Helpers.dart';
+import 'package:liquid_swipe/Helpers/slide_update.dart';
+import 'package:liquid_swipe/Provider/iamariderprovider.dart';
+import 'package:provider/provider.dart';
 
 /// This class is used to get user gesture and work according to it.
 
@@ -12,12 +12,8 @@ class PageDragger extends StatefulWidget {
   final Widget slideIconWidget;
   final double iconPosition;
 
-  //Stream controller
-  final StreamController<SlideUpdate> slideUpdateStream;
-
   //Constructor
   PageDragger({
-    this.slideUpdateStream,
     this.fullTransitionPX = FULL_TARNSITION_PX,
     this.enableSlideIcon = false,
     this.slideIconWidget,
@@ -65,7 +61,8 @@ class _PageDraggerState extends State<PageDragger> {
       }
 
       // Adding to slideUpdateStream
-      widget.slideUpdateStream.add(SlideUpdate(
+      Provider.of<IAmARiderProvider>(context, listen: false).updateSlide(
+          SlideUpdate(
         slideDirection,
         slidePercentHor,
         slidePercentVer,
@@ -77,7 +74,8 @@ class _PageDraggerState extends State<PageDragger> {
   // This method executes when user ends dragging.
   onDragEnd(DragEndDetails details) {
     // Adding to slideUpdateStream
-    widget.slideUpdateStream.add(SlideUpdate(
+    Provider.of<IAmARiderProvider>(context, listen: false).updateSlide(
+        SlideUpdate(
       SlideDirection.none,
       slidePercentHor,
       slidePercentVer,

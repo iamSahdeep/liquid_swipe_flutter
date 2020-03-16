@@ -1,9 +1,9 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/Constants/Helpers.dart';
-import 'package:liquid_swipe/slide_update.dart';
+import 'package:liquid_swipe/Helpers/Helpers.dart';
+import 'package:liquid_swipe/Helpers/slide_update.dart';
+import 'package:liquid_swipe/Provider/iamariderprovider.dart';
 
 /// This class provides the animation controller
 /// used when then user stops dragging and page
@@ -24,7 +24,7 @@ class AnimatedPageDragger {
     this.transitionGoal,
     double slidePercentVer,
     double slidePercentHor,
-    StreamController<SlideUpdate> slideUpdateStream,
+    @required IAmARiderProvider slideUpdateStream,
     TickerProvider vsync,
   }) {
     final startSlidePercentHor = slidePercentHor;
@@ -69,7 +69,7 @@ class AnimatedPageDragger {
           completionAnimationController.value,
         );
         //Adding to slide update stream
-        slideUpdateStream.add(SlideUpdate(
+        slideUpdateStream.updateSlide(SlideUpdate(
           slideDirection,
           slidePercent,
           slidePercentVer,
@@ -80,7 +80,7 @@ class AnimatedPageDragger {
         //When animation has done executing
         if (status == AnimationStatus.completed) {
           //Adding to slide update stream
-          slideUpdateStream.add(SlideUpdate(
+          slideUpdateStream.updateSlide(SlideUpdate(
             slideDirection,
             slidePercentHor,
             slidePercentVer,
