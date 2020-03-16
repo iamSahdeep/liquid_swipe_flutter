@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liquid_swipe_flutter/liquid_swipe_flutter.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('liquid_swipe_flutter');
@@ -18,6 +17,5 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await LiquidSwipeFlutter.platformVersion, '42');
   });
 }

@@ -1,5 +1,9 @@
 #ChangeLog
 
+## 1.4.0
+* Fixed : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/20
+* StateManagement using Provider.
+
 
 ## 1.3.1
 * Made callbacks not required

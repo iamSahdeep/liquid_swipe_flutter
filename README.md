@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/example.gif" width="360" height="640">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/another.gif" width="360" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/example.gif" width="330" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/another.gif" width="330" height="640">
 </p>
 
 ### Sample APK
@@ -36,7 +36,7 @@ Download sample apk as shown in example from releases.
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.3.0
+  liquid_swipe: ^1.4.0
   
   ```
 * Get the package from Pub:
@@ -115,7 +115,13 @@ This project follows the [all-contributors](https://github.com/all-contributors/
  
  
 ## Author & support
-This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See the [Credits](https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/README.md#credits).
+This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See credits.
+> If you appreciate my work, consider buying me a cup of :coffee: to keep me recharged :metal:
+>  + [PayPal](https://www.paypal.me/sahdeep)
+>
+> Or you can also endorse me on [LinkedIn](https://www.linkedin.com/in/iamsahdeep/) to keep me motivated.
+>
+> I love my work and I'm available for freelance work. Contact me on my email: sahdeepsingh98@gmail.com
+
 
 <img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="90" height="35">
-
