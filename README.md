@@ -33,6 +33,7 @@ Download sample apk as shown in example from releases.
  
 
 ## Getting Started
+* Please use v1.3.1 if you are having this https://github.com/iamSahdeep/liquid_swipe_flutter/issues/27 
 * Add this to your pubspec.yaml
   ```
   dependencies:
