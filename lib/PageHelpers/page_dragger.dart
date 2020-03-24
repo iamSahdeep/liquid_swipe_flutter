@@ -61,8 +61,8 @@ class _PageDraggerState extends State<PageDragger> {
       }
 
       // Adding to slideUpdateStream
-      Provider.of<IAmARiderProvider>(context, listen: false).updateSlide(
-          SlideUpdate(
+      Provider.of<IAmARiderProvider>(context, listen: false)
+          .updateSlide(SlideUpdate(
         slideDirection,
         slidePercentHor,
         slidePercentVer,
@@ -74,8 +74,8 @@ class _PageDraggerState extends State<PageDragger> {
   // This method executes when user ends dragging.
   onDragEnd(DragEndDetails details) {
     // Adding to slideUpdateStream
-    Provider.of<IAmARiderProvider>(context, listen: false).updateSlide(
-        SlideUpdate(
+    Provider.of<IAmARiderProvider>(context, listen: false)
+        .updateSlide(SlideUpdate(
       SlideDirection.none,
       slidePercentHor,
       slidePercentVer,

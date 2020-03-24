@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/example.gif" width="330" height="640">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/another.gif" width="330" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/example.gif" width="310" height="640">
+<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/another.gif" width="310" height="640">
 </p>
 
 ### Sample APK
@@ -33,11 +33,11 @@ Download sample apk as shown in example from releases.
  
 
 ## Getting Started
-* Please use v1.3.1 if you are having this https://github.com/iamSahdeep/liquid_swipe_flutter/issues/27 
+
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.4.0
+  liquid_swipe: ^1.4.1
   
   ```
 * Get the package from Pub:
