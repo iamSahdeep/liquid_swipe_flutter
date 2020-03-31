@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 /// This is the class which contains the Page UI.
-class Page extends StatelessWidget {
+class CustomPage extends StatelessWidget {
   ///page details
   final Widget pageView;
 
   //Constructor
-  Page({
+  CustomPage({
     this.pageView,
   });
 

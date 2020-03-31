@@ -37,7 +37,7 @@ Download sample apk as shown in example from releases.
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.4.1
+  liquid_swipe: ^1.4.2
   
   ```
 * Get the package from Pub:

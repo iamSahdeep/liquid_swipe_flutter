@@ -1,9 +1,13 @@
 #ChangeLog
 
-## 1.4.1
+
+## 1.4.2
+* Fixed : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/30
+
+## 1.4.1 (unstable)
 * Fixed : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/27
 
-## 1.4.0
+## 1.4.0 (unstable)
 * Fixed : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/20
 * StateManagement using Provider.
 

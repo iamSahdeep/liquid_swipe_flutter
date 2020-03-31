@@ -74,7 +74,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         builder: (BuildContext context, IAmARiderProvider model, _) =>
             Stack(
               children: <Widget>[
-                Page(
+                CustomPage(
                   pageView: model.slideDirection == SlideDirection.leftToRight
                       ? pages[model.activePageIndex]
                       : pages[model.nextPageIndex],
@@ -83,7 +83,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
                 PageReveal(
                   //next page reveal
                   revealPercent: model.slidePercentHor,
-                  child: Page(
+                  child: CustomPage(
                     pageView: model.slideDirection == SlideDirection.leftToRight
                         ? pages[model.nextPageIndex]
                         : pages[model.activePageIndex],
