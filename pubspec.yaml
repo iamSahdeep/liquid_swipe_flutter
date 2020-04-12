@@ -1,6 +1,6 @@
 name: liquid_swipe
 description: A Flutter plugin to implement liquid Swipe effect to provided containers.
-version: 1.4.2
+version: 1.4.3
 homepage: https://github.com/iamSahdeep/liquid_swipe_flutter
 
 environment:
