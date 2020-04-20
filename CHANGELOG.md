@@ -1,7 +1,10 @@
 #ChangeLog
 
 
-## 1.4.2
+## 1.4.3
+* Might Fix : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/32
+
+## 1.4.2 (unstable)
 * Fixed : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/30
 
 ## 1.4.1 (unstable)
