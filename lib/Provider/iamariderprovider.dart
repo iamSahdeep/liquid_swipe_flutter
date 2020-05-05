@@ -29,7 +29,7 @@ class IAmARiderProvider extends ChangeNotifier {
       double slideIcon,
       OnPageChangeCallback onPageChangeCallback,
       CurrentUpdateTypeCallback currentUpdateTypeCallback) {
-    slidePercentHor = slidePercentVer = 0;
+    slidePercentHor = slidePercentVer = 0.5;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
     enableLoop = loop;
@@ -38,6 +38,23 @@ class IAmARiderProvider extends ChangeNotifier {
     positionSlideIcon = slideIcon;
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _onPageChangeCallback = onPageChangeCallback;
+  }
+
+  animateToPage(int page) {
+//    new Timer.periodic(const Duration(seconds: 1), (t) {
+//      updateSlide(SlideUpdate(
+//          SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
+//      if (activePageIndex == page) {
+//        t.cancel();
+//      }
+//    });
+  }
+
+  jumpToPage(int page) {
+    activePageIndex = page - 1;
+    nextPageIndex = page;
+    updateSlide(SlideUpdate(
+        SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
   }
 
   updateSlide(SlideUpdate slidUpdate) {
@@ -128,7 +145,7 @@ class IAmARiderProvider extends ChangeNotifier {
       _onPageChangeCallback(activePageIndex);
     }
     slideDirection = SlideDirection.none;
-    slidePercentHor = 0.5;
+    slidePercentHor = 0.0;
     slidePercentVer = positionSlideIcon;
     return;
   }

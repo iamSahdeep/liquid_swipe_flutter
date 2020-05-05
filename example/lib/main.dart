@@ -22,8 +22,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int page = 0;
-
+  LiquidController liquidController;
   UpdateType updateType;
+
+  @override
+  void initState() {
+    liquidController = LiquidController();
+    super.initState();
+  }
 
   final pages = [
     Container(
@@ -231,6 +237,7 @@ class _MyAppState extends State<MyApp> {
               onPageChangeCallback: pageChangeCallback,
               currentUpdateTypeCallback: updateTypeCallback,
               waveType: WaveType.liquidReveal,
+              liquidController: liquidController,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -244,6 +251,16 @@ class _MyAppState extends State<MyApp> {
                 ],
               ),
             ),
+            Align(
+              alignment: Alignment.center,
+              child: FlatButton(
+                onPressed: () {
+                  liquidController.animateToPage(4);
+                },
+                child: Text("fafsdfadsfdsaf"),
+                color: Colors.white,
+              ),
+            )
           ],
         ),
       ),
