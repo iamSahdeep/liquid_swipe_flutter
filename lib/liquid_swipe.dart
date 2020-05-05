@@ -58,7 +58,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<Container> pages = widget.pages;
+    List<Widget> pages = widget.pages;
     return ChangeNotifierProvider<IAmARiderProvider>(
       create: (BuildContext context) {
         return IAmARiderProvider(
