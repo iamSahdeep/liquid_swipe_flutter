@@ -45,6 +45,8 @@ class IAmARiderProvider extends ChangeNotifier {
   animateToPage(int page, int duration) {
     if (isInProgress) return;
     isInProgress = true;
+    activePageIndex = page - 2;
+    nextPageIndex = page - 1;
     new Timer.periodic(const Duration(milliseconds: 1), (t) {
       if (t.tick < duration / 2) {
         updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
