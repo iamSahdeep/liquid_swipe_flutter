@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/slide_update.dart';
@@ -7,7 +9,7 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 class IAmARiderProvider extends ChangeNotifier {
   SlideUpdate slideUpdate;
   AnimatedPageDragger
-      animatedPageDragger; //When user stops dragging then by using this page automatically drags.
+  animatedPageDragger; //When user stops dragging then by using this page automatically drags.
 
   int activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
@@ -20,9 +22,9 @@ class IAmARiderProvider extends ChangeNotifier {
   double positionSlideIcon;
   OnPageChangeCallback _onPageChangeCallback;
   CurrentUpdateTypeCallback _currentUpdateTypeCallback;
+  bool isInProgress = false;
 
-  IAmARiderProvider(
-      int initialPage,
+  IAmARiderProvider(int initialPage,
       bool loop,
       int length,
       TickerProviderStateMixin mixin,
@@ -40,14 +42,23 @@ class IAmARiderProvider extends ChangeNotifier {
     _onPageChangeCallback = onPageChangeCallback;
   }
 
-  animateToPage(int page) {
-//    new Timer.periodic(const Duration(seconds: 1), (t) {
-//      updateSlide(SlideUpdate(
-//          SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
-//      if (activePageIndex == page) {
-//        t.cancel();
-//      }
-//    });
+  animateToPage(int page, int duration) {
+    if (isInProgress) return;
+    isInProgress = true;
+    new Timer.periodic(const Duration(milliseconds: 1), (t) {
+      if (t.tick < duration / 2) {
+        updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
+            1, UpdateType.dragging));
+      } else if (t.tick < duration) {
+        updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
+            1, UpdateType.animating));
+      } else {
+        updateSlide(SlideUpdate(
+            SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
+        t.cancel();
+        isInProgress = false;
+      }
+    });
   }
 
   jumpToPage(int page) {

@@ -252,13 +252,17 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             Align(
-              alignment: Alignment.center,
-              child: FlatButton(
-                onPressed: () {
-                  liquidController.animateToPage(4);
-                },
-                child: Text("fafsdfadsfdsaf"),
-                color: Colors.white,
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: FlatButton(
+                  onPressed: () {
+                    liquidController.animateToPage(
+                        page: pages.length, duration: 1000);
+                  },
+                  child: Text("Skip to End"),
+                  color: Colors.white.withOpacity(0.1),
+                ),
               ),
             )
           ],

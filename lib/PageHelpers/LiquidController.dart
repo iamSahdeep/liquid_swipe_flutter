@@ -11,11 +11,12 @@ class LiquidController {
     context = c;
   }
 
-  jumpToPage(int page) {
+  jumpToPage({int page}) {
     Provider.of<IAmARiderProvider>(context, listen: false).jumpToPage(page);
   }
 
-  animateToPage(int page) {
-    Provider.of<IAmARiderProvider>(context, listen: false).animateToPage(page);
+  animateToPage({int page, int duration}) {
+    Provider.of<IAmARiderProvider>(context, listen: false).animateToPage(
+        page, duration);
   }
 }
