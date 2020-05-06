@@ -231,9 +231,8 @@ class _MyAppState extends State<MyApp> {
             LiquidSwipe(
               pages: pages,
               fullTransitionValue: 200,
-              enableSlideIcon: true,
-              enableLoop: true,
-              positionSlideIcon: 0.5,
+              enableSlideIcon: false,
+              enableLoop: false,
               onPageChangeCallback: pageChangeCallback,
               currentUpdateTypeCallback: updateTypeCallback,
               waveType: WaveType.liquidReveal,
@@ -257,8 +256,7 @@ class _MyAppState extends State<MyApp> {
                 padding: const EdgeInsets.all(25.0),
                 child: FlatButton(
                   onPressed: () {
-                    liquidController.animateToPage(
-                        page: pages.length, duration: 1000);
+                    liquidController.animateToPage(page: 0, duration: 1000);
                   },
                   child: Text("Skip to End"),
                   color: Colors.white.withOpacity(0.1),
@@ -272,7 +270,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   pageChangeCallback(int lpage) {
-    print(lpage);
+    print(liquidController.currentPage);
     setState(() {
       page = lpage;
     });

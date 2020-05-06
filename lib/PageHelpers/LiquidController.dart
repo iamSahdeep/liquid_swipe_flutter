@@ -16,7 +16,12 @@ class LiquidController {
   }
 
   animateToPage({int page, int duration = 1000}) {
-    Provider.of<IAmARiderProvider>(context, listen: false).animateToPage(
-        page, duration);
+    Provider.of<IAmARiderProvider>(context, listen: false)
+        .animateToPage(page, duration);
   }
+
+  int get currentPage =>
+      Provider
+          .of<IAmARiderProvider>(context, listen: false)
+          .activePageIndex;
 }

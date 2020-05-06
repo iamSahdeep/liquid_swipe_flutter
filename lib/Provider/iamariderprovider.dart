@@ -42,11 +42,16 @@ class IAmARiderProvider extends ChangeNotifier {
     _onPageChangeCallback = onPageChangeCallback;
   }
 
+  /// Animating page to the mentioned page
+  /// Known Issue : First we have to jump to the previous screen
   animateToPage(int page, int duration) {
-    if (isInProgress) return;
+    if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
     activePageIndex = page - 2;
     nextPageIndex = page - 1;
+    if (activePageIndex < 0) {
+      activePageIndex = 0;
+    }
     new Timer.periodic(const Duration(milliseconds: 1), (t) {
       if (t.tick < duration / 2) {
         updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
@@ -63,6 +68,7 @@ class IAmARiderProvider extends ChangeNotifier {
     });
   }
 
+  ///If no animation is required.
   jumpToPage(int page) {
     activePageIndex = page - 1;
     nextPageIndex = page;
