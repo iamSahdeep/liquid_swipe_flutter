@@ -47,10 +47,12 @@ class IAmARiderProvider extends ChangeNotifier {
   animateToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
-    activePageIndex = page - 2;
-    nextPageIndex = page - 1;
+    activePageIndex = page - 1;
+    nextPageIndex = page;
     if (activePageIndex < 0) {
       activePageIndex = 0;
+      jumpToPage(page);
+      return;
     }
     new Timer.periodic(const Duration(milliseconds: 1), (t) {
       if (t.tick < duration / 2) {
@@ -70,10 +72,12 @@ class IAmARiderProvider extends ChangeNotifier {
 
   ///If no animation is required.
   jumpToPage(int page) {
+    isInProgress = true;
     activePageIndex = page - 1;
     nextPageIndex = page;
     updateSlide(SlideUpdate(
         SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
+    isInProgress = false;
   }
 
   updateSlide(SlideUpdate slidUpdate) {
