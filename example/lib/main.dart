@@ -235,7 +235,7 @@ class _MyAppState extends State<MyApp> {
               enableLoop: true,
               onPageChangeCallback: pageChangeCallback,
               currentUpdateTypeCallback: updateTypeCallback,
-              waveType: WaveType.circularReveal,
+              waveType: WaveType.liquidReveal,
               liquidController: liquidController,
             ),
             Padding(
@@ -251,14 +251,29 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: FlatButton(
                   onPressed: () {
-                    liquidController.animateToPage(page: 0, duration: 1000);
+                    liquidController.animateToPage(
+                        page: pages.length - 1, duration: 500);
                   },
                   child: Text("Skip to End"),
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: FlatButton(
+                  onPressed: () {
+                    liquidController.animateToPage(
+                        page: liquidController.currentPage + 1, duration: 400);
+                  },
+                  child: Text("Next"),
                   color: Colors.white.withOpacity(0.1),
                 ),
               ),
