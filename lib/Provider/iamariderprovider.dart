@@ -8,9 +8,7 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 
 class IAmARiderProvider extends ChangeNotifier {
   SlideUpdate slideUpdate;
-  AnimatedPageDragger
-  animatedPageDragger; //When user stops dragging then by using this page automatically drags.
-
+  AnimatedPageDragger animatedPageDragger;
   int activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
   SlideDirection slideDirection = SlideDirection.none; //slide direction
@@ -44,7 +42,7 @@ class IAmARiderProvider extends ChangeNotifier {
 
   /// Animating page to the mentioned page
   /// Known Issue : First we have to jump to the previous screen
-  animateToPage(int page, int duration) {
+  animateDirectlyToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
     activePageIndex = page - 1;
@@ -70,8 +68,64 @@ class IAmARiderProvider extends ChangeNotifier {
     });
   }
 
+  animateToPage(int page, int duration) {
+    if (isInProgress || activePageIndex == page) return;
+    isInProgress = true;
+    int diff = 0;
+    if (activePageIndex < page) {
+      diff = page - activePageIndex;
+      int newDuration = duration ~/ diff;
+      new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        new Timer.periodic(const Duration(milliseconds: 1), (t) {
+          if (t.tick < newDuration / 2) {
+            updateSlide(
+                SlideUpdate(SlideDirection.rightToLeft, t.tick / newDuration,
+                    1, UpdateType.dragging));
+          } else if (t.tick < newDuration) {
+            updateSlide(
+                SlideUpdate(SlideDirection.rightToLeft, t.tick / newDuration,
+                    1, UpdateType.animating));
+          } else {
+            updateSlide(SlideUpdate(
+                SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
+            t.cancel();
+          }
+        });
+        if (callback.tick >= diff) {
+          callback.cancel();
+          isInProgress = false;
+        }
+      });
+    } else {
+      diff = activePageIndex - page;
+      int newDuration = duration ~/ diff;
+      new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        new Timer.periodic(const Duration(milliseconds: 1), (t) {
+          if (t.tick < newDuration / 2) {
+            updateSlide(
+                SlideUpdate(SlideDirection.leftToRight, t.tick / newDuration,
+                    1, UpdateType.dragging));
+          } else if (t.tick < newDuration) {
+            updateSlide(
+                SlideUpdate(SlideDirection.leftToRight, t.tick / newDuration,
+                    1, UpdateType.animating));
+          } else {
+            updateSlide(SlideUpdate(
+                SlideDirection.leftToRight, 1, 1, UpdateType.doneAnimating));
+            t.cancel();
+          }
+        });
+        if (callback.tick >= diff) {
+          callback.cancel();
+          isInProgress = false;
+        }
+      });
+    }
+  }
+
   ///If no animation is required.
   jumpToPage(int page) {
+    if (page == activePageIndex || isInProgress) return;
     isInProgress = true;
     activePageIndex = page - 1;
     nextPageIndex = page;

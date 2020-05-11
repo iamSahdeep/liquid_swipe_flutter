@@ -235,7 +235,7 @@ class _MyAppState extends State<MyApp> {
               enableLoop: true,
               onPageChangeCallback: pageChangeCallback,
               currentUpdateTypeCallback: updateTypeCallback,
-              waveType: WaveType.liquidReveal,
+              waveType: WaveType.circularReveal,
               liquidController: liquidController,
             ),
             Padding(
@@ -256,7 +256,7 @@ class _MyAppState extends State<MyApp> {
                 padding: const EdgeInsets.all(25.0),
                 child: FlatButton(
                   onPressed: () {
-                    liquidController.animateToPage(page: 4, duration: 1000);
+                    liquidController.animateToPage(page: 0, duration: 1000);
                   },
                   child: Text("Skip to End"),
                   color: Colors.white.withOpacity(0.1),
