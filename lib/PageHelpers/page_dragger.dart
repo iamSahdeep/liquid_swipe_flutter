@@ -96,9 +96,9 @@ class _PageDraggerState extends State<PageDragger> {
       onHorizontalDragStart: model.isInProgress ? null : onDragStart,
       onHorizontalDragUpdate: model.isInProgress ? null : onDragUpdate,
       onHorizontalDragEnd: model.isInProgress ? null : onDragEnd,
-      onVerticalDragStart: model.isInProgress ? null : onDragStart,
-      onVerticalDragEnd: model.isInProgress ? null : onDragEnd,
-      onVerticalDragUpdate: model.isInProgress ? null : onDragUpdate,
+      //onVerticalDragStart: model.isInProgress ? null : onDragStart,
+      // onVerticalDragEnd: model.isInProgress ? null : onDragEnd,
+      // onVerticalDragUpdate: model.isInProgress ? null : onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
         alignment: Alignment(
