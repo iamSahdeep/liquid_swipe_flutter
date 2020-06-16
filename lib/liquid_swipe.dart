@@ -15,6 +15,8 @@ final key = new GlobalKey<_LiquidSwipe>();
 
 typedef OnPageChangeCallback = void Function(int activePageIndex);
 typedef CurrentUpdateTypeCallback = void Function(UpdateType updateType);
+typedef SlidePercentCallback = void Function(
+    double slidePercentHorizontal, double slidePercetnVertical);
 
 class LiquidSwipe extends StatefulWidget {
   final List<Widget> pages;
@@ -28,9 +30,9 @@ class LiquidSwipe extends StatefulWidget {
   final WaveType waveType;
   final OnPageChangeCallback onPageChangeCallback;
   final CurrentUpdateTypeCallback currentUpdateTypeCallback;
+  final SlidePercentCallback slidePercentCallback;
 
-  const LiquidSwipe({
-    Key key,
+  const LiquidSwipe({Key key,
     @required this.pages,
     this.fullTransitionValue = FULL_TARNSITION_PX,
     this.initialPage = 0,
@@ -42,7 +44,8 @@ class LiquidSwipe extends StatefulWidget {
     this.waveType = WaveType.liquidReveal,
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
-  })  : assert(pages != null),
+    this.slidePercentCallback})
+      : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
@@ -75,7 +78,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             this,
             widget.positionSlideIcon,
             widget.onPageChangeCallback,
-            widget.currentUpdateTypeCallback);
+            widget.currentUpdateTypeCallback,
+            widget.slidePercentCallback);
       },
       child:
       Consumer(builder: (BuildContext context, IAmARiderProvider model, _) {

@@ -20,6 +20,7 @@ class IAmARiderProvider extends ChangeNotifier {
   double positionSlideIcon;
   OnPageChangeCallback _onPageChangeCallback;
   CurrentUpdateTypeCallback _currentUpdateTypeCallback;
+  SlidePercentCallback _slidePercentCallback;
   bool isInProgress = false;
 
   IAmARiderProvider(int initialPage,
@@ -28,7 +29,8 @@ class IAmARiderProvider extends ChangeNotifier {
       TickerProviderStateMixin mixin,
       double slideIcon,
       OnPageChangeCallback onPageChangeCallback,
-      CurrentUpdateTypeCallback currentUpdateTypeCallback) {
+      CurrentUpdateTypeCallback currentUpdateTypeCallback,
+      SlidePercentCallback slidePercentCallback) {
     slidePercentHor = slidePercentVer = 0.5;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
@@ -38,10 +40,12 @@ class IAmARiderProvider extends ChangeNotifier {
     positionSlideIcon = slideIcon;
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _onPageChangeCallback = onPageChangeCallback;
+    _slidePercentCallback = slidePercentCallback;
   }
 
   /// Animating page to the mentioned page
   /// Known Issue : First we have to jump to the previous screen
+  /// Not using for now
   animateDirectlyToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
@@ -78,13 +82,11 @@ class IAmARiderProvider extends ChangeNotifier {
       new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
         new Timer.periodic(const Duration(milliseconds: 1), (t) {
           if (t.tick < newDuration / 2) {
-            updateSlide(
-                SlideUpdate(SlideDirection.rightToLeft, t.tick / newDuration,
-                    1, UpdateType.dragging));
+            updateSlide(SlideUpdate(SlideDirection.rightToLeft,
+                t.tick / newDuration, 1, UpdateType.dragging));
           } else if (t.tick < newDuration) {
-            updateSlide(
-                SlideUpdate(SlideDirection.rightToLeft, t.tick / newDuration,
-                    1, UpdateType.animating));
+            updateSlide(SlideUpdate(SlideDirection.rightToLeft,
+                t.tick / newDuration, 1, UpdateType.animating));
           } else {
             updateSlide(SlideUpdate(
                 SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
@@ -102,13 +104,11 @@ class IAmARiderProvider extends ChangeNotifier {
       new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
         new Timer.periodic(const Duration(milliseconds: 1), (t) {
           if (t.tick < newDuration / 2) {
-            updateSlide(
-                SlideUpdate(SlideDirection.leftToRight, t.tick / newDuration,
-                    1, UpdateType.dragging));
+            updateSlide(SlideUpdate(SlideDirection.leftToRight,
+                t.tick / newDuration, 1, UpdateType.dragging));
           } else if (t.tick < newDuration) {
-            updateSlide(
-                SlideUpdate(SlideDirection.leftToRight, t.tick / newDuration,
-                    1, UpdateType.animating));
+            updateSlide(SlideUpdate(SlideDirection.leftToRight,
+                t.tick / newDuration, 1, UpdateType.animating));
           } else {
             updateSlide(SlideUpdate(
                 SlideDirection.leftToRight, 1, 1, UpdateType.doneAnimating));
@@ -126,9 +126,13 @@ class IAmARiderProvider extends ChangeNotifier {
   ///If no animation is required.
   jumpToPage(int page) {
     if (page == activePageIndex || isInProgress) return;
+    if (activePageIndex == pagesLength - 1 && !enableLoop) {
+      return;
+    }
     isInProgress = true;
     activePageIndex = page - 1;
     nextPageIndex = page;
+    if (nextPageIndex >= pagesLength) nextPageIndex = 0;
     updateSlide(SlideUpdate(
         SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
     isInProgress = false;
@@ -143,6 +147,14 @@ class IAmARiderProvider extends ChangeNotifier {
   updateData(SlideUpdate event) {
     if (prevUpdate != event.updateType && _currentUpdateTypeCallback != null)
       _currentUpdateTypeCallback(event.updateType);
+
+    if (_slidePercentCallback != null &&
+        event.updateType != UpdateType.doneAnimating) {
+      String hor = (event.slidePercentHor * 100).toStringAsExponential(2);
+      String ver = (event.slidePercentVer * 100).toStringAsExponential(2);
+      _slidePercentCallback(
+          double.parse(hor), (((double.parse(ver)) * 100) / 125));
+    }
 
     prevUpdate = event.updateType;
 
