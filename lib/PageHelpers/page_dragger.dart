@@ -60,7 +60,6 @@ class _PageDraggerState extends State<PageDragger> {
         slidePercentVer = (dy / 500).abs().clamp(0.0, 1.25);
       }
 
-      // Adding to slideUpdateStream
       Provider.of<IAmARiderProvider>(context, listen: false)
           .updateSlide(SlideUpdate(
         slideDirection,
@@ -73,7 +72,6 @@ class _PageDraggerState extends State<PageDragger> {
 
   // This method executes when user ends dragging.
   onDragEnd(DragEndDetails details) {
-    // Adding to slideUpdateStream
     Provider.of<IAmARiderProvider>(context, listen: false)
         .updateSlide(SlideUpdate(
       SlideDirection.none,
@@ -91,33 +89,35 @@ class _PageDraggerState extends State<PageDragger> {
   @override
   Widget build(BuildContext context) {
     //Gesture Detector for horizontal drag
+    final model = Provider.of<IAmARiderProvider>(context, listen: false);
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onHorizontalDragStart: onDragStart,
-      onHorizontalDragUpdate: onDragUpdate,
-      onHorizontalDragEnd: onDragEnd,
-      onVerticalDragStart: onDragStart,
-      onVerticalDragEnd: onDragEnd,
-      onVerticalDragUpdate: onDragUpdate,
+      onHorizontalDragStart: model.isInProgress ? null : onDragStart,
+      onHorizontalDragUpdate: model.isInProgress ? null : onDragUpdate,
+      onHorizontalDragEnd: model.isInProgress ? null : onDragEnd,
+      //onVerticalDragStart: model.isInProgress ? null : onDragStart,
+      // onVerticalDragEnd: model.isInProgress ? null : onDragEnd,
+      // onVerticalDragUpdate: model.isInProgress ? null : onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
-              alignment: Alignment(
-                1 - slidePercentHor + 0.005,
-                widget.iconPosition + widget.iconPosition / 10,
-              ),
-              child: Opacity(
-                opacity: 1 - slidePercentHor,
-                child: FloatingActionButton(
-                  onPressed: null,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  child: slideDirection != SlideDirection.leftToRight
-                      ? widget.slideIconWidget
-                      : null,
-                  foregroundColor: Colors.black,
-                ),
-              ),
-            )
+        alignment: Alignment(
+          1 - slidePercentHor + 0.005,
+          widget.iconPosition + widget.iconPosition / 10,
+        ),
+        child: Opacity(
+          opacity: 1 - slidePercentHor,
+          child: FloatingActionButton(
+            onPressed: null,
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            child: slideDirection != SlideDirection.leftToRight
+                ? widget.slideIconWidget
+                : null,
+            foregroundColor: Colors.black,
+          ),
+        ),
+      )
           : null,
     );
   }

@@ -22,8 +22,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int page = 0;
-
+  LiquidController liquidController;
   UpdateType updateType;
+
+  @override
+  void initState() {
+    liquidController = LiquidController();
+    super.initState();
+  }
 
   final pages = [
     Container(
@@ -225,12 +231,12 @@ class _MyAppState extends State<MyApp> {
             LiquidSwipe(
               pages: pages,
               fullTransitionValue: 200,
-              enableSlideIcon: true,
+              enableSlideIcon: false,
               enableLoop: true,
-              positionSlideIcon: 0.5,
               onPageChangeCallback: pageChangeCallback,
-              currentUpdateTypeCallback: updateTypeCallback,
               waveType: WaveType.liquidReveal,
+              liquidController: liquidController,
+              slidePercentCallback: slidePercentCallback,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -239,11 +245,39 @@ class _MyAppState extends State<MyApp> {
                   Expanded(child: SizedBox()),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: List<Widget>.generate(5, _buildDot),
+                    children: List<Widget>.generate(pages.length, _buildDot),
                   ),
                 ],
               ),
             ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: FlatButton(
+                  onPressed: () {
+                    liquidController.animateToPage(
+                        page: pages.length - 1, duration: 500);
+                  },
+                  child: Text("Skip to End"),
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: FlatButton(
+                  onPressed: () {
+                    liquidController.jumpToPage(
+                        page: liquidController.currentPage + 1);
+                  },
+                  child: Text("Next"),
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -251,13 +285,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   pageChangeCallback(int lpage) {
-    print(lpage);
+    print(liquidController.currentPage);
     setState(() {
       page = lpage;
     });
   }
 
-  updateTypeCallback(UpdateType updateType) {
-    print(updateType);
+  slidePercentCallback(double hor, double ver) {
+    print(hor.toInt().toString() + "    " + ver.toString());
   }
 }

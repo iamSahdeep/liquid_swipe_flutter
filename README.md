@@ -37,7 +37,7 @@ Download sample apk as shown in example from releases.
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.4.3
+  liquid_swipe: ^1.5.0-dev.1
   
   ```
 * Get the package from Pub:
@@ -53,7 +53,7 @@ Download sample apk as shown in example from releases.
   
 ## Usage
 
- - *`Liquid Swipe`* just requires the list of [`containers`](https://api.flutter.dev/flutter/widgets/Container-class.html). Just to provide flexibity to the developer to design its own view through it.
+ - *`Liquid Swipe`* just requires the list of [`Widgets like Container`](https://api.flutter.dev/flutter/widgets/Container-class.html). Just to provide flexibity to the developer to design its own view through it.
  ```
  final pages = [
     Container(...),
@@ -92,12 +92,22 @@ Download sample apk as shown in example from releases.
 | waveType                 |`WaveType`  | Select the type of reveal you want.                                      |                                              WaveType.liquidReveal   | You can use circularReveal, more coming soon. Import Helpers.dart file if Autoimport doesn't work.                                              |
 | onPageChangeCallback                 |`CallBack`  | Pass your method as a callback, it will return a pageNo.                                     |                                              None   | see Example                                              |
 | currentUpdateTypeCallback                 |`CallBack`  | same  Callback but returns an UpdateType                                     |                                              None   |  see Example                                            |
+| slidePercentCallback                 |`CallBack`  | returns SlidePercent both horizontal & vertical                  |                                              None   |  see Example                                            |
 
 
+### Additional
+
+From v1.5.0-dev.1 we can use  LiquidController class to create its instance and use it from controlling pages programmatically.
+Features/Methods added but will not be limited to :
+   - jumpToPage({int page}) : It will jump to the mentioned page but without animation or swipe.
+   - animateToPage({int page, int duration = 600}) : It will animate to the mentioned page in given time with animation of swipes.
+   - currentPage : This getter will return the current Page which is being displayed.
+
+Please look at the Example in this project for detailed usage.
 
 # Contributors
 
-Thanks to all these wonderful people and everyone that created issues.
+Thanks to all these wonderful people and everyone that created issues or contributed in any way possible.
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <table>

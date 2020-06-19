@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/slide_update.dart';
@@ -6,9 +8,7 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 
 class IAmARiderProvider extends ChangeNotifier {
   SlideUpdate slideUpdate;
-  AnimatedPageDragger
-      animatedPageDragger; //When user stops dragging then by using this page automatically drags.
-
+  AnimatedPageDragger animatedPageDragger;
   int activePageIndex = 0; //active page index
   int nextPageIndex = 0; //next page index
   SlideDirection slideDirection = SlideDirection.none; //slide direction
@@ -20,16 +20,18 @@ class IAmARiderProvider extends ChangeNotifier {
   double positionSlideIcon;
   OnPageChangeCallback _onPageChangeCallback;
   CurrentUpdateTypeCallback _currentUpdateTypeCallback;
+  SlidePercentCallback _slidePercentCallback;
+  bool isInProgress = false;
 
-  IAmARiderProvider(
-      int initialPage,
+  IAmARiderProvider(int initialPage,
       bool loop,
       int length,
       TickerProviderStateMixin mixin,
       double slideIcon,
       OnPageChangeCallback onPageChangeCallback,
-      CurrentUpdateTypeCallback currentUpdateTypeCallback) {
-    slidePercentHor = slidePercentVer = 0;
+      CurrentUpdateTypeCallback currentUpdateTypeCallback,
+      SlidePercentCallback slidePercentCallback) {
+    slidePercentHor = slidePercentVer = 0.5;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
     enableLoop = loop;
@@ -38,6 +40,102 @@ class IAmARiderProvider extends ChangeNotifier {
     positionSlideIcon = slideIcon;
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _onPageChangeCallback = onPageChangeCallback;
+    _slidePercentCallback = slidePercentCallback;
+  }
+
+  /// Animating page to the mentioned page
+  /// Known Issue : First we have to jump to the previous screen
+  /// Not using for now
+  animateDirectlyToPage(int page, int duration) {
+    if (isInProgress || activePageIndex == page) return;
+    isInProgress = true;
+    activePageIndex = page - 1;
+    nextPageIndex = page;
+    if (activePageIndex < 0) {
+      activePageIndex = 0;
+      jumpToPage(page);
+      return;
+    }
+    new Timer.periodic(const Duration(milliseconds: 1), (t) {
+      if (t.tick < duration / 2) {
+        updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
+            1, UpdateType.dragging));
+      } else if (t.tick < duration) {
+        updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
+            1, UpdateType.animating));
+      } else {
+        updateSlide(SlideUpdate(
+            SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
+        t.cancel();
+        isInProgress = false;
+      }
+    });
+  }
+
+  animateToPage(int page, int duration) {
+    if (isInProgress || activePageIndex == page) return;
+    isInProgress = true;
+    int diff = 0;
+    if (activePageIndex < page) {
+      diff = page - activePageIndex;
+      int newDuration = duration ~/ diff;
+      new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        new Timer.periodic(const Duration(milliseconds: 1), (t) {
+          if (t.tick < newDuration / 2) {
+            updateSlide(SlideUpdate(SlideDirection.rightToLeft,
+                t.tick / newDuration, 1, UpdateType.dragging));
+          } else if (t.tick < newDuration) {
+            updateSlide(SlideUpdate(SlideDirection.rightToLeft,
+                t.tick / newDuration, 1, UpdateType.animating));
+          } else {
+            updateSlide(SlideUpdate(
+                SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
+            t.cancel();
+          }
+        });
+        if (callback.tick >= diff) {
+          callback.cancel();
+          isInProgress = false;
+        }
+      });
+    } else {
+      diff = activePageIndex - page;
+      int newDuration = duration ~/ diff;
+      new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        new Timer.periodic(const Duration(milliseconds: 1), (t) {
+          if (t.tick < newDuration / 2) {
+            updateSlide(SlideUpdate(SlideDirection.leftToRight,
+                t.tick / newDuration, 1, UpdateType.dragging));
+          } else if (t.tick < newDuration) {
+            updateSlide(SlideUpdate(SlideDirection.leftToRight,
+                t.tick / newDuration, 1, UpdateType.animating));
+          } else {
+            updateSlide(SlideUpdate(
+                SlideDirection.leftToRight, 1, 1, UpdateType.doneAnimating));
+            t.cancel();
+          }
+        });
+        if (callback.tick >= diff) {
+          callback.cancel();
+          isInProgress = false;
+        }
+      });
+    }
+  }
+
+  ///If no animation is required.
+  jumpToPage(int page) {
+    if (page == activePageIndex || isInProgress) return;
+    if (activePageIndex == pagesLength - 1 && !enableLoop) {
+      return;
+    }
+    isInProgress = true;
+    activePageIndex = page - 1;
+    nextPageIndex = page;
+    if (nextPageIndex >= pagesLength) nextPageIndex = 0;
+    updateSlide(SlideUpdate(
+        SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
+    isInProgress = false;
   }
 
   updateSlide(SlideUpdate slidUpdate) {
@@ -49,6 +147,14 @@ class IAmARiderProvider extends ChangeNotifier {
   updateData(SlideUpdate event) {
     if (prevUpdate != event.updateType && _currentUpdateTypeCallback != null)
       _currentUpdateTypeCallback(event.updateType);
+
+    if (_slidePercentCallback != null &&
+        event.updateType != UpdateType.doneAnimating) {
+      String hor = (event.slidePercentHor * 100).toStringAsExponential(2);
+      String ver = (event.slidePercentVer * 100).toStringAsExponential(2);
+      _slidePercentCallback(
+          double.parse(hor), (((double.parse(ver)) * 100) / 125));
+    }
 
     prevUpdate = event.updateType;
 
@@ -128,7 +234,7 @@ class IAmARiderProvider extends ChangeNotifier {
       _onPageChangeCallback(activePageIndex);
     }
     slideDirection = SlideDirection.none;
-    slidePercentHor = 0.5;
+    slidePercentHor = 0.0;
     slidePercentVer = positionSlideIcon;
     return;
   }
