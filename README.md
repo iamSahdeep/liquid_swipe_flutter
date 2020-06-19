@@ -99,9 +99,9 @@ Download sample apk as shown in example from releases.
 
 From v1.5.0-dev.1 we can use  LiquidController class to create its instance and use it from controlling pages programmatically.
 Features/Methods added but will not be limited to :
-    - jumpToPage({int page}) : It will jump to the mentioned page but without animation or swipe.
-    - animateToPage({int page, int duration = 600}) : It will animate to the mentioned page in given time with animation of swipes.
-    - currentPage : This getter will return the current Page which is being displayed.
+   - jumpToPage({int page}) : It will jump to the mentioned page but without animation or swipe.
+   - animateToPage({int page, int duration = 600}) : It will animate to the mentioned page in given time with animation of swipes.
+   - currentPage : This getter will return the current Page which is being displayed.
 
 Please look at the Example in this project for detailed usage.
 
