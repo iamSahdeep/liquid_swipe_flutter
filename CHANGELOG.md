@@ -1,5 +1,16 @@
 #ChangeLog
 
+## 1.5.0-dev.1
+* Making Pages of Type Widget [724dc31b687319f66db362b55e2b7c6c2cabbcd7](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/724dc31b687319f66db362b55e2b7c6c2cabbcd7)
+* LiquidController & jump to page
+  [ed3328ae734b2528f1e02a20b134f7bbcca274ef](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/ed3328ae734b2528f1e02a20b134f7bbcca274ef)
+* Animating the Page with Controller
+  [354825e952186bc84117cba403a33e096fbdf331](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/354825e952186bc84117cba403a33e096fbdf331)
+* Get Current Page from Controller [9d9f585ebf6899354ba10eadd88daa35d232f9cf](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/9d9f585ebf6899354ba10eadd88daa35d232f9cf)
+* Add support for vertically scrollable childs
+  [df22e79e525e6b4fb9fdd95e3a61e6c4c394ac25](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/df22e79e525e6b4fb9fdd95e3a61e6c4c394ac25)
+* Additional Callback for sliding percentage
+  [6d5da5d7f52815199bd5263047c252494ed1675f](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/6d5da5d7f52815199bd5263047c252494ed1675f)
 
 ## 1.4.3
 * Might Fix : https://github.com/iamSahdeep/liquid_swipe_flutter/issues/32
