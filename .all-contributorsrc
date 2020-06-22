@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "iamSahdeep",
+      "name": "Sahdeep Singh",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/26563213?v=4",
+      "profile": "http://sahdeepsingh.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "liquid_swipe_flutter",
+  "projectOwner": "iamSahdeep",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
