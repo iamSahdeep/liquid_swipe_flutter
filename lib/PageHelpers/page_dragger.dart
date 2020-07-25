@@ -38,10 +38,10 @@ class _PageDraggerState extends State<PageDragger> {
   onDragStart(DragStartDetails details) {
     // Ignoring user gesture if the animation is running (optional)
     final model = Provider.of<IAmARiderProvider>(context, listen: false);
-    if(model.isAnimating && widget.ignoreUserGestureWhileAnimating) {
+    if (model.isAnimating && widget.ignoreUserGestureWhileAnimating) {
       return;
     }
-    
+
     dragStart = details.globalPosition;
   }
 

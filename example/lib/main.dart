@@ -230,13 +230,12 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             LiquidSwipe(
               pages: pages,
-              fullTransitionValue: 200,
               enableSlideIcon: false,
               enableLoop: true,
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
               liquidController: liquidController,
-              slidePercentCallback: slidePercentCallback,
+              ignoreUserGestureWhileAnimating: false,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -285,13 +284,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   pageChangeCallback(int lpage) {
-    print(liquidController.currentPage);
     setState(() {
       page = lpage;
     });
-  }
-
-  slidePercentCallback(double hor, double ver) {
-    print(hor.toInt().toString() + "    " + ver.toString());
   }
 }
