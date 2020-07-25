@@ -23,6 +23,8 @@ class IAmARiderProvider extends ChangeNotifier {
   SlidePercentCallback _slidePercentCallback;
   bool isInProgress = false;
 
+  bool _isAnimating = false; // true when animation is running
+
   IAmARiderProvider(int initialPage,
       bool loop,
       int length,
@@ -196,6 +198,8 @@ class IAmARiderProvider extends ChangeNotifier {
     else if (event.updateType == UpdateType.doneDragging) {
       // slidepercent > 0.2 so that it wont reveal itself unless this condition is true
       if (slidePercentHor > 0.2) {
+        isAnimating = true; // Page started to animate
+
         animatedPageDragger = AnimatedPageDragger(
           slideUpdateStream: this,
           slideDirection: slideDirection,
@@ -236,6 +240,16 @@ class IAmARiderProvider extends ChangeNotifier {
     slideDirection = SlideDirection.none;
     slidePercentHor = 0.0;
     slidePercentVer = positionSlideIcon;
+
+    isAnimating = false; // Page stopped animating
     return;
   }
+
+  // Getter and setter for isAnimating
+  set isAnimating(bool newValue) {
+    this._isAnimating = newValue;
+    notifyListeners();
+  }
+
+  get isAnimating => _isAnimating;
 }

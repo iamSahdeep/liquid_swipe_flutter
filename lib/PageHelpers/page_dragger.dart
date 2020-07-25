@@ -12,12 +12,15 @@ class PageDragger extends StatefulWidget {
   final Widget slideIconWidget;
   final double iconPosition;
 
+  final bool ignoreUserGestureWhileAnimating;
+
   //Constructor
   PageDragger({
     this.fullTransitionPX = FULL_TARNSITION_PX,
     this.enableSlideIcon = false,
     this.slideIconWidget,
     this.iconPosition,
+    this.ignoreUserGestureWhileAnimating = false,
   }) : assert(fullTransitionPX != null);
 
   @override
@@ -33,6 +36,12 @@ class _PageDraggerState extends State<PageDragger> {
 
   // This methods executes when user starts dragging.
   onDragStart(DragStartDetails details) {
+    // Ignoring user gesture if the animation is running (optional)
+    final model = Provider.of<IAmARiderProvider>(context, listen: false);
+    if (model.isAnimating && widget.ignoreUserGestureWhileAnimating) {
+      return;
+    }
+
     dragStart = details.globalPosition;
   }
 

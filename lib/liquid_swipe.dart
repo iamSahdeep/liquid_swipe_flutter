@@ -32,7 +32,10 @@ class LiquidSwipe extends StatefulWidget {
   final CurrentUpdateTypeCallback currentUpdateTypeCallback;
   final SlidePercentCallback slidePercentCallback;
 
-  const LiquidSwipe({Key key,
+  final bool ignoreUserGestureWhileAnimating;
+
+  const LiquidSwipe({
+    Key key,
     @required this.pages,
     this.fullTransitionValue = FULL_TARNSITION_PX,
     this.initialPage = 0,
@@ -44,7 +47,9 @@ class LiquidSwipe extends StatefulWidget {
     this.waveType = WaveType.liquidReveal,
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
-    this.slidePercentCallback})
+    this.slidePercentCallback,
+    this.ignoreUserGestureWhileAnimating = false,
+  })
       : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
@@ -111,6 +116,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               enableSlideIcon: widget.enableSlideIcon,
               slideIconWidget: widget.slideIconWidget,
               iconPosition: widget.positionSlideIcon,
+              ignoreUserGestureWhileAnimating:
+              widget.ignoreUserGestureWhileAnimating,
             ), //PageDragger
           ], //Widget//Stack
         );
