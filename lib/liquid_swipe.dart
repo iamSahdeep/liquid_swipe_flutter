@@ -33,6 +33,7 @@ class LiquidSwipe extends StatefulWidget {
   final SlidePercentCallback slidePercentCallback;
 
   final bool ignoreUserGestureWhileAnimating;
+  final bool disableUserGesture;
 
   const LiquidSwipe({
     Key key,
@@ -49,8 +50,8 @@ class LiquidSwipe extends StatefulWidget {
     this.currentUpdateTypeCallback,
     this.slidePercentCallback,
     this.ignoreUserGestureWhileAnimating = false,
-  })
-      : assert(pages != null),
+    this.disableUserGesture = false,
+  })  : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
@@ -84,10 +85,11 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             widget.positionSlideIcon,
             widget.onPageChangeCallback,
             widget.currentUpdateTypeCallback,
-            widget.slidePercentCallback);
+            widget.slidePercentCallback,
+            widget.disableUserGesture);
       },
       child:
-      Consumer(builder: (BuildContext context, IAmARiderProvider model, _) {
+          Consumer(builder: (BuildContext context, IAmARiderProvider model, _) {
         liquidController.setContext(context);
         return Stack(
           children: <Widget>[
@@ -117,7 +119,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               slideIconWidget: widget.slideIconWidget,
               iconPosition: widget.positionSlideIcon,
               ignoreUserGestureWhileAnimating:
-              widget.ignoreUserGestureWhileAnimating,
+                  widget.ignoreUserGestureWhileAnimating,
             ), //PageDragger
           ], //Widget//Stack
         );

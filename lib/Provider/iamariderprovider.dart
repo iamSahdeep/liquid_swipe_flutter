@@ -24,6 +24,7 @@ class IAmARiderProvider extends ChangeNotifier {
   bool isInProgress = false;
 
   bool _isAnimating = false; // true when animation is running
+  bool shouldDisableUserGesture = false;
 
   IAmARiderProvider(
       int initialPage,
@@ -33,7 +34,8 @@ class IAmARiderProvider extends ChangeNotifier {
       double slideIcon,
       OnPageChangeCallback onPageChangeCallback,
       CurrentUpdateTypeCallback currentUpdateTypeCallback,
-      SlidePercentCallback slidePercentCallback) {
+      SlidePercentCallback slidePercentCallback,
+      bool disableGesture) {
     slidePercentHor = slidePercentVer = 0.0;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
@@ -44,6 +46,7 @@ class IAmARiderProvider extends ChangeNotifier {
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _onPageChangeCallback = onPageChangeCallback;
     _slidePercentCallback = slidePercentCallback;
+    shouldDisableUserGesture = disableGesture;
   }
 
   /// Animating page to the mentioned page
@@ -252,5 +255,12 @@ class IAmARiderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  get isAnimating => _isAnimating;
+  bool get isAnimating => _isAnimating;
+
+  set setUserGesture(bool disable) {
+    this.shouldDisableUserGesture = disable;
+    notifyListeners();
+  }
+
+  bool get isUserGestureDisabled => shouldDisableUserGesture;
 }

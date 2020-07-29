@@ -38,7 +38,8 @@ class _PageDraggerState extends State<PageDragger> {
   onDragStart(DragStartDetails details) {
     // Ignoring user gesture if the animation is running (optional)
     final model = Provider.of<IAmARiderProvider>(context, listen: false);
-    if (model.isAnimating && widget.ignoreUserGestureWhileAnimating) {
+    if (model.isAnimating && widget.ignoreUserGestureWhileAnimating ||
+        model.isUserGestureDisabled) {
       return;
     }
 
@@ -110,23 +111,23 @@ class _PageDraggerState extends State<PageDragger> {
       // onVerticalDragUpdate: model.isInProgress ? null : onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
-        alignment: Alignment(
-          1 - slidePercentHor + 0.005,
-          widget.iconPosition + widget.iconPosition / 10,
-        ),
-        child: Opacity(
-          opacity: 1 - slidePercentHor,
-          child: FloatingActionButton(
-            onPressed: null,
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            child: slideDirection != SlideDirection.leftToRight
-                ? widget.slideIconWidget
-                : null,
-            foregroundColor: Colors.black,
-          ),
-        ),
-      )
+              alignment: Alignment(
+                1 - slidePercentHor + 0.005,
+                widget.iconPosition + widget.iconPosition / 10,
+              ),
+              child: Opacity(
+                opacity: 1 - slidePercentHor,
+                child: FloatingActionButton(
+                  onPressed: null,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                  child: slideDirection != SlideDirection.leftToRight
+                      ? widget.slideIconWidget
+                      : null,
+                  foregroundColor: Colors.black,
+                ),
+              ),
+            )
           : null,
     );
   }

@@ -3,25 +3,27 @@ import 'package:liquid_swipe/Provider/iamariderprovider.dart';
 import 'package:provider/provider.dart';
 
 class LiquidController {
-  BuildContext context;
+  IAmARiderProvider provider;
 
   LiquidController();
 
-  setContext(BuildContext c) {
-    context = c;
+  setContext(BuildContext context) {
+    provider = Provider.of<IAmARiderProvider>(context, listen: false);
   }
 
   jumpToPage({int page}) {
-    Provider.of<IAmARiderProvider>(context, listen: false).jumpToPage(page);
+    provider.jumpToPage(page);
   }
 
   animateToPage({int page, int duration = 600}) {
-    Provider.of<IAmARiderProvider>(context, listen: false)
-        .animateToPage(page, duration);
+    provider.animateToPage(page, duration);
   }
 
-  int get currentPage =>
-      Provider
-          .of<IAmARiderProvider>(context, listen: false)
-          .activePageIndex;
+  int get currentPage => provider.activePageIndex;
+
+  shouldDisableGestures({bool disable}) {
+    provider.setUserGesture = disable;
+  }
+
+  bool get isUserGestureDisabled => provider.isUserGestureDisabled;
 }
