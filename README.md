@@ -94,6 +94,7 @@ Download sample apk as shown in example from releases.
 | currentUpdateTypeCallback                 |`CallBack`  | same  Callback but returns an UpdateType                                     |                                              None   |  see Example                                            |
 | slidePercentCallback                 |`CallBack`  | returns SlidePercent both horizontal & vertical                  |                                              None   |  see Example                                            |
 | ignoreUserGestureWhileAnimating                |`bool`  | Optional Value, if you want to block gestures while swipe is still animating         |                                              false   |  Please look #5 for reason of implementation                                            |
+| disableUserGesture                |`bool`  | Optional Value, if you want to block gestures always        |                                              false   |  You can even Disable or Enable Gestures using LiquidController                                           |
 
 
 ### Additional
