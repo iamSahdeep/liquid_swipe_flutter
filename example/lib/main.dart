@@ -235,7 +235,7 @@ class _MyAppState extends State<MyApp> {
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
               liquidController: liquidController,
-              ignoreUserGestureWhileAnimating: false,
+              ignoreUserGestureWhileAnimating: true,
             ),
             Padding(
               padding: EdgeInsets.all(20),

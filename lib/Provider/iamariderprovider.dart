@@ -25,7 +25,8 @@ class IAmARiderProvider extends ChangeNotifier {
 
   bool _isAnimating = false; // true when animation is running
 
-  IAmARiderProvider(int initialPage,
+  IAmARiderProvider(
+      int initialPage,
       bool loop,
       int length,
       TickerProviderStateMixin mixin,
@@ -33,7 +34,7 @@ class IAmARiderProvider extends ChangeNotifier {
       OnPageChangeCallback onPageChangeCallback,
       CurrentUpdateTypeCallback currentUpdateTypeCallback,
       SlidePercentCallback slidePercentCallback) {
-    slidePercentHor = slidePercentVer = 0.5;
+    slidePercentHor = slidePercentVer = 0.0;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
     enableLoop = loop;

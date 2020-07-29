@@ -141,14 +141,14 @@ class WaveLayer extends CustomClipper<Path> {
     var p2 = 0.8;
 
     if (revealPercent <= p1) {
-      return 15.0;
+      return 0.0;
     }
 
     if (revealPercent >= p2) {
       return size.width;
     }
 
-    return 15.0 + (size.width - 15.0) * (revealPercent - p1) / (p2 - p1);
+    return (size.width - 15.0) * (revealPercent - p1) / (p2 - p1);
   }
 
   @override
@@ -172,7 +172,7 @@ class WaveLayer extends CustomClipper<Path> {
 
   double waveHorRadiusF(Size size) {
     if (revealPercent <= 0) {
-      return 48;
+      return 0;
     }
 
     if (revealPercent >= 1) {
