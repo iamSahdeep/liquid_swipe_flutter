@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
-import 'package:liquid_swipe/PageHelpers/page.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
 import 'package:liquid_swipe/PageHelpers/page_reveal.dart';
 import 'package:liquid_swipe/Provider/iamariderprovider.dart';
@@ -93,20 +92,16 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
         liquidController.setContext(context);
         return Stack(
           children: <Widget>[
-            CustomPage(
-              pageView: model.slideDirection == SlideDirection.leftToRight
-                  ? pages[model.activePageIndex]
-                  : pages[model.nextPageIndex],
-            ),
+            model.slideDirection == SlideDirection.leftToRight
+                ? pages[model.activePageIndex]
+                : pages[model.nextPageIndex],
             //Pages
             PageReveal(
               //next page reveal
               revealPercent: model.slidePercentHor,
-              child: CustomPage(
-                pageView: model.slideDirection == SlideDirection.leftToRight
-                    ? pages[model.nextPageIndex]
-                    : pages[model.activePageIndex],
-              ),
+              child: model.slideDirection == SlideDirection.leftToRight
+                  ? pages[model.nextPageIndex]
+                  : pages[model.activePageIndex],
               slideDirection: model.slideDirection,
               iconPosition: widget.positionSlideIcon,
               waveType: widget.waveType,

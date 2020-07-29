@@ -230,7 +230,7 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             LiquidSwipe(
               pages: pages,
-              enableSlideIcon: false,
+              enableSlideIcon: true,
               enableLoop: true,
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
@@ -259,7 +259,7 @@ class _MyAppState extends State<MyApp> {
                         page: pages.length - 1, duration: 500);
                   },
                   child: Text("Skip to End"),
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withOpacity(0.01),
                 ),
               ),
             ),
@@ -273,7 +273,7 @@ class _MyAppState extends State<MyApp> {
                         page: liquidController.currentPage + 1);
                   },
                   child: Text("Next"),
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withOpacity(0.01),
                 ),
               ),
             )
