@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 1.5.0
+* Includes all Prereleases.
+
 ## 1.5.0-dev.3
 * Fixed right additional space, Fixes #28 & #49  [cfc5ae9e7a406da0952477038b21fade081e6baa](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/cfc5ae9e7a406da0952477038b21fade081e6baa)
 * option to disable Gesture  [64e32c0e08cfc6edfe1f7e853934366baacb6fac](https://github.com/iamSahdeep/liquid_swipe_flutter/commit/64e32c0e08cfc6edfe1f7e853934366baacb6fac)

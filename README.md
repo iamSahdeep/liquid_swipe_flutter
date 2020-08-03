@@ -1,6 +1,6 @@
 <h1 align="center" xmlns="http://www.w3.org/1999/html">
   <br>
-   <img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/page1.png" alt="Logo Liquid Swipe" title="Logo by  FotoJet ( https://www.fotojet.com/ )" />
+   <img src="https://raw.githubusercontent.com/iamSahdeep/liquid_swipe_flutter/master/assets/page1.png" alt="Liquid Swipe" title="Logo by  FotoJet ( https://www.fotojet.com/ )" />
   <br>
 </h1>
 <p align="center">  
@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/example.gif" width="310" height="640">
-<img src="https://github.com/iamSahdeep/liquid_swipe_flutter/blob/master/assets/another.gif" width="310" height="640">
+<img src="https://raw.githubusercontent.com/iamSahdeep/liquid_swipe_flutter/master/assets/example.gif" width="310" height="640">
+<img src="https://raw.githubusercontent.com/iamSahdeep/liquid_swipe_flutter/master/assets/another.gif" width="310" height="640">
 </p>
 
 ### Sample APK
@@ -37,7 +37,7 @@ Download sample apk as shown in example from releases.
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^1.5.0-dev.1
+  liquid_swipe: ^1.5.0
   
   ```
 * Get the package from Pub:
@@ -82,7 +82,7 @@ Download sample apk as shown in example from releases.
   
 | Attribute        | Datatype       |     Description                                                                                   |                                          Default Value                                          |                                          Comments                                          |
 | :-------------------- | :------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------: |:---------------------------------------------------------------------------------------------: |
-| pages             | `List<Container>`         | Set the Pages/ views/ Containers                   |                                              Null                                               | A Page can contain anything, look for an example|
+| pages             | `List<Widget>`         | Set the Pages/ views/ Containers                   |                                              Null                                               | A Page can contain anything, look for an example|
 | fullTransitionValue             | `double` | Sets the scroll distance or sensitivity for a complete swipe.                                       |                                              400.0 | This transition value can be used to increase or decrease the sensitivity of the swipe. 100.0 would make swipe really fast with even a bit of drag                                               |
 | initialPage                 | `int`  | Set the initial Page                                       |                                              0   | Should not be >= no.of pages or smaller than 0                                               |
 | enableSlideIcon                  |`bool`  | Used to enable Slide icon to the right for where the wave would originate                                       |                                              false   | Gives a ios style arrow to right side of the screen. Might include modification to it soon.                                               |
