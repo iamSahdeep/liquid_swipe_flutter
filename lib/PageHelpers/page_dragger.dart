@@ -106,9 +106,6 @@ class _PageDraggerState extends State<PageDragger> {
       onHorizontalDragStart: model.isInProgress ? null : onDragStart,
       onHorizontalDragUpdate: model.isInProgress ? null : onDragUpdate,
       onHorizontalDragEnd: model.isInProgress ? null : onDragEnd,
-      //onVerticalDragStart: model.isInProgress ? null : onDragStart,
-      // onVerticalDragEnd: model.isInProgress ? null : onDragEnd,
-      // onVerticalDragUpdate: model.isInProgress ? null : onDragUpdate,
       child: widget.enableSlideIcon
           ? Align(
               alignment: Alignment(
@@ -117,15 +114,9 @@ class _PageDraggerState extends State<PageDragger> {
               ),
               child: Opacity(
                 opacity: 1 - slidePercentHor,
-                child: FloatingActionButton(
-                  onPressed: null,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  child: slideDirection != SlideDirection.leftToRight
-                      ? widget.slideIconWidget
-                      : null,
-                  foregroundColor: Colors.black,
-                ),
+                child: slideDirection != SlideDirection.leftToRight
+                    ? widget.slideIconWidget
+                    : null,
               ),
             )
           : null,

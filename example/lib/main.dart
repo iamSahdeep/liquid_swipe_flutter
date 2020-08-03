@@ -230,8 +230,6 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             LiquidSwipe(
               pages: pages,
-              enableSlideIcon: true,
-              enableLoop: true,
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
               liquidController: liquidController,
