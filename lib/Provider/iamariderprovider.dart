@@ -23,15 +23,20 @@ class IAmARiderProvider extends ChangeNotifier {
   SlidePercentCallback _slidePercentCallback;
   bool isInProgress = false;
 
-  IAmARiderProvider(int initialPage,
+  bool _isAnimating = false; // true when animation is running
+  bool shouldDisableUserGesture = false;
+
+  IAmARiderProvider(
+      int initialPage,
       bool loop,
       int length,
       TickerProviderStateMixin mixin,
       double slideIcon,
       OnPageChangeCallback onPageChangeCallback,
       CurrentUpdateTypeCallback currentUpdateTypeCallback,
-      SlidePercentCallback slidePercentCallback) {
-    slidePercentHor = slidePercentVer = 0.5;
+      SlidePercentCallback slidePercentCallback,
+      bool disableGesture) {
+    slidePercentHor = slidePercentVer = 0.0;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
     enableLoop = loop;
@@ -41,6 +46,7 @@ class IAmARiderProvider extends ChangeNotifier {
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _onPageChangeCallback = onPageChangeCallback;
     _slidePercentCallback = slidePercentCallback;
+    shouldDisableUserGesture = disableGesture;
   }
 
   /// Animating page to the mentioned page
@@ -196,6 +202,8 @@ class IAmARiderProvider extends ChangeNotifier {
     else if (event.updateType == UpdateType.doneDragging) {
       // slidepercent > 0.2 so that it wont reveal itself unless this condition is true
       if (slidePercentHor > 0.2) {
+        isAnimating = true; // Page started to animate
+
         animatedPageDragger = AnimatedPageDragger(
           slideUpdateStream: this,
           slideDirection: slideDirection,
@@ -236,6 +244,23 @@ class IAmARiderProvider extends ChangeNotifier {
     slideDirection = SlideDirection.none;
     slidePercentHor = 0.0;
     slidePercentVer = positionSlideIcon;
+
+    isAnimating = false; // Page stopped animating
     return;
   }
+
+  // Getter and setter for isAnimating
+  set isAnimating(bool newValue) {
+    this._isAnimating = newValue;
+    notifyListeners();
+  }
+
+  bool get isAnimating => _isAnimating;
+
+  set setUserGesture(bool disable) {
+    this.shouldDisableUserGesture = disable;
+    notifyListeners();
+  }
+
+  bool get isUserGestureDisabled => shouldDisableUserGesture;
 }

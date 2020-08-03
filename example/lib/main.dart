@@ -230,13 +230,10 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             LiquidSwipe(
               pages: pages,
-              fullTransitionValue: 200,
-              enableSlideIcon: false,
-              enableLoop: true,
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
               liquidController: liquidController,
-              slidePercentCallback: slidePercentCallback,
+              ignoreUserGestureWhileAnimating: true,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -260,7 +257,7 @@ class _MyAppState extends State<MyApp> {
                         page: pages.length - 1, duration: 500);
                   },
                   child: Text("Skip to End"),
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withOpacity(0.01),
                 ),
               ),
             ),
@@ -274,7 +271,7 @@ class _MyAppState extends State<MyApp> {
                         page: liquidController.currentPage + 1);
                   },
                   child: Text("Next"),
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withOpacity(0.01),
                 ),
               ),
             )
@@ -285,13 +282,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   pageChangeCallback(int lpage) {
-    print(liquidController.currentPage);
     setState(() {
       page = lpage;
     });
-  }
-
-  slidePercentCallback(double hor, double ver) {
-    print(hor.toInt().toString() + "    " + ver.toString());
   }
 }

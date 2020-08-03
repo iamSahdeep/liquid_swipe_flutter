@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
-import 'package:liquid_swipe/PageHelpers/page.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
 import 'package:liquid_swipe/PageHelpers/page_reveal.dart';
 import 'package:liquid_swipe/Provider/iamariderprovider.dart';
@@ -32,7 +31,11 @@ class LiquidSwipe extends StatefulWidget {
   final CurrentUpdateTypeCallback currentUpdateTypeCallback;
   final SlidePercentCallback slidePercentCallback;
 
-  const LiquidSwipe({Key key,
+  final bool ignoreUserGestureWhileAnimating;
+  final bool disableUserGesture;
+
+  const LiquidSwipe({
+    Key key,
     @required this.pages,
     this.fullTransitionValue = FULL_TARNSITION_PX,
     this.initialPage = 0,
@@ -44,8 +47,10 @@ class LiquidSwipe extends StatefulWidget {
     this.waveType = WaveType.liquidReveal,
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
-    this.slidePercentCallback})
-      : assert(pages != null),
+    this.slidePercentCallback,
+    this.ignoreUserGestureWhileAnimating = false,
+    this.disableUserGesture = false,
+  })  : assert(pages != null),
         assert(fullTransitionValue != null),
         assert(initialPage != null &&
             initialPage >= 0 &&
@@ -79,27 +84,24 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             widget.positionSlideIcon,
             widget.onPageChangeCallback,
             widget.currentUpdateTypeCallback,
-            widget.slidePercentCallback);
+            widget.slidePercentCallback,
+            widget.disableUserGesture);
       },
       child:
-      Consumer(builder: (BuildContext context, IAmARiderProvider model, _) {
+          Consumer(builder: (BuildContext context, IAmARiderProvider model, _) {
         liquidController.setContext(context);
         return Stack(
           children: <Widget>[
-            CustomPage(
-              pageView: model.slideDirection == SlideDirection.leftToRight
-                  ? pages[model.activePageIndex]
-                  : pages[model.nextPageIndex],
-            ),
+            model.slideDirection == SlideDirection.leftToRight
+                ? pages[model.activePageIndex]
+                : pages[model.nextPageIndex],
             //Pages
             PageReveal(
               //next page reveal
               revealPercent: model.slidePercentHor,
-              child: CustomPage(
-                pageView: model.slideDirection == SlideDirection.leftToRight
-                    ? pages[model.nextPageIndex]
-                    : pages[model.activePageIndex],
-              ),
+              child: model.slideDirection == SlideDirection.leftToRight
+                  ? pages[model.nextPageIndex]
+                  : pages[model.activePageIndex],
               slideDirection: model.slideDirection,
               iconPosition: widget.positionSlideIcon,
               waveType: widget.waveType,
@@ -111,6 +113,8 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               enableSlideIcon: widget.enableSlideIcon,
               slideIconWidget: widget.slideIconWidget,
               iconPosition: widget.positionSlideIcon,
+              ignoreUserGestureWhileAnimating:
+                  widget.ignoreUserGestureWhileAnimating,
             ), //PageDragger
           ], //Widget//Stack
         );
