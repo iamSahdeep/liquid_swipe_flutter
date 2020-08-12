@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 
+///Liquid Type PathClipper
 class WaveLayer extends CustomClipper<Path> {
   double revealPercent;
   double verReveal;

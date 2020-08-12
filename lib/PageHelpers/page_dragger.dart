@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/slide_update.dart';
-import 'package:liquid_swipe/Provider/iamariderprovider.dart';
+import 'package:liquid_swipe/Provider/LiquidProvider.dart';
 import 'package:provider/provider.dart';
 
-/// This class is used to get user gesture and work according to it.
-
+/// Internal Widget
+///
+/// PageDragger is a Widget that handles user gestures and provide the data to the [LiquidProvider]
+/// from where we perform animations various other methods.
 class PageDragger extends StatefulWidget {
+  /// Used to make animation faster or slower through it corresponding value
+  /// default : [FULL_TRANSITION_PX]
   final double fullTransitionPX;
+
+  ///Should enable the slide icon
   final bool enableSlideIcon;
+
+  ///if [enableSlideIcon] is true then we will make this widget visible
   final Widget slideIconWidget;
+
+  /// double value should range from 0.0 - 1.0
   final double iconPosition;
 
+  /// boolean parameter to make user gesture disabled which LiquidSwipe is still Animating
   final bool ignoreUserGestureWhileAnimating;
 
-  //Constructor
+  ///Constructor with some default values
   PageDragger({
-    this.fullTransitionPX = FULL_TARNSITION_PX,
+    this.fullTransitionPX = FULL_TRANSITION_PX,
     this.enableSlideIcon = false,
     this.slideIconWidget,
     this.iconPosition,
@@ -27,26 +38,35 @@ class PageDragger extends StatefulWidget {
   _PageDraggerState createState() => _PageDraggerState();
 }
 
+///State for PageDragger
 class _PageDraggerState extends State<PageDragger> {
-  //Variables
+  ///Current [Offset] of the User Touch
   Offset dragStart;
+
+  ///Calculated Slide Direction of the Gesture/Swipe
   SlideDirection slideDirection;
+
+  ///Horizontally calculated slide percentage, ranges from 0.0 - 1.0
   double slidePercentHor = 0.0;
+
+  ///Same as [slidePercentHor] but for Vertical Swipe and ranges from 0.0 - 1.25
   double slidePercentVer = 0.0;
 
-  // This methods executes when user starts dragging.
+  /// Method invoked when ever user touch the screen and drag starts
+  /// called at [GestureDetector.onHorizontalDragStart]
   onDragStart(DragStartDetails details) {
-    // Ignoring user gesture if the animation is running (optional)
-    final model = Provider.of<IAmARiderProvider>(context, listen: false);
+    final model = Provider.of<LiquidProvider>(context, listen: false);
+
+    ///Ignoring user gesture if the animation is running (optional)
     if (model.isAnimating && widget.ignoreUserGestureWhileAnimating ||
         model.isUserGestureDisabled) {
       return;
     }
-
     dragStart = details.globalPosition;
   }
 
-  // This methods executes while user is dragging.
+  ///Updating data while user drags and touch offset changes
+  ///called at [GestureDetector.onHorizontalDragUpdate]
   onDragUpdate(DragUpdateDetails details) {
     if (dragStart != null) {
       //Getting new position details
@@ -70,7 +90,7 @@ class _PageDraggerState extends State<PageDragger> {
         slidePercentVer = (dy / 500).abs().clamp(0.0, 1.25);
       }
 
-      Provider.of<IAmARiderProvider>(context, listen: false)
+      Provider.of<LiquidProvider>(context, listen: false)
           .updateSlide(SlideUpdate(
         slideDirection,
         slidePercentHor,
@@ -80,10 +100,10 @@ class _PageDraggerState extends State<PageDragger> {
     }
   }
 
-  // This method executes when user ends dragging.
+  ///This method executes when user ends dragging and leaves the screen
+  ///called at [GestureDetector.onHorizontalDragEnd]
   onDragEnd(DragEndDetails details) {
-    Provider.of<IAmARiderProvider>(context, listen: false)
-        .updateSlide(SlideUpdate(
+    Provider.of<LiquidProvider>(context, listen: false).updateSlide(SlideUpdate(
       SlideDirection.none,
       slidePercentHor,
       slidePercentVer,
@@ -99,7 +119,7 @@ class _PageDraggerState extends State<PageDragger> {
   @override
   Widget build(BuildContext context) {
     //Gesture Detector for horizontal drag
-    final model = Provider.of<IAmARiderProvider>(context, listen: false);
+    final model = Provider.of<LiquidProvider>(context, listen: false);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,

@@ -4,44 +4,96 @@ import 'package:flutter/cupertino.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/slide_update.dart';
 import 'package:liquid_swipe/PageHelpers/animated_page_dragger.dart';
+import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+import 'package:provider/provider.dart';
 
-class IAmARiderProvider extends ChangeNotifier {
+/// Internal Class
+///
+/// A [ChangeNotifierProvider] to manage [LiquidSwipe] State.
+/// Every Change is notified from it.
+/// Methods Included :
+///  -  [animateToPage]
+///  -  [animateDirectlyToPage]
+///  -  [jumpToPage]
+///  -  [updateData]
+///  -  some more.
+class LiquidProvider extends ChangeNotifier {
+  /// A [SlideUpdate] type for storing the current Slide Update.
   SlideUpdate slideUpdate;
+
+  /// [AnimatedPageDragger] required for completing the animation when [UpdateType] is [UpdateType.doneAnimating]
   AnimatedPageDragger animatedPageDragger;
-  int activePageIndex = 0; //active page index
-  int nextPageIndex = 0; //next page index
-  SlideDirection slideDirection = SlideDirection.none; //slide direction
-  double slidePercentHor, slidePercentVer = 0.0; //slide percentage (0.0 to 1.0)
+
+  /// Storing ActivePage Index
+  /// default = 0
+  int activePageIndex = 0;
+
+  ///Storing next Page Index
+  ///default = 0
+  int nextPageIndex = 0;
+
+  ///Storing the Swipe Direction using [SlideDirection]
+  SlideDirection slideDirection = SlideDirection.none;
+
+  /// percentage of slide both Horizontal and Vertical, during touch
+  double slidePercentHor, slidePercentVer = 0.0;
+
+  ///Storing Previous [UpdateType]
   UpdateType prevUpdate;
+
+  ///user manageable bool to make Enable and Disable loop within the Pages
   bool enableLoop = true;
+
+  ///Number of Page.
   int pagesLength = 0;
+
+  ///Ticker Provider from [LiquidSwipe], cause need to use it in [AnimatedPageDragger]
   TickerProviderStateMixin singleTickerProviderStateMixin;
+
+  ///SlideIcon position, always Horizontal, used in [PageDragger]
   double positionSlideIcon;
+
+  ///see [OnPageChangeCallback]
   OnPageChangeCallback _onPageChangeCallback;
+
+  ///see [CurrentUpdateTypeCallback]
   CurrentUpdateTypeCallback _currentUpdateTypeCallback;
+
+  ///see [SlidePercentCallback]
   SlidePercentCallback _slidePercentCallback;
+
+  ///bool variable to set if Liquid Swipe is currently in Progress
   bool isInProgress = false;
 
-  bool _isAnimating = false; // true when animation is running
+  ///bool to store is its still animating
+  bool _isAnimating = false;
+
+  ///A user handled value if user want, just only to use programmatic pages changes
+  ///default = false
   bool shouldDisableUserGesture = false;
 
-  IAmARiderProvider(
-      int initialPage,
+  ///Constructor
+  ///Contains Default value or Developer desired Values
+  /// [initialPage] - Initial Page of the LiquidSwipe (0 - n)
+  /// [loop]  - Should Enable Loop between Pages
+  /// [length]  - Total Number of Pages
+  LiquidProvider(
+      {int initialPage,
       bool loop,
       int length,
-      TickerProviderStateMixin mixin,
+      TickerProviderStateMixin vsync,
       double slideIcon,
       OnPageChangeCallback onPageChangeCallback,
       CurrentUpdateTypeCallback currentUpdateTypeCallback,
       SlidePercentCallback slidePercentCallback,
-      bool disableGesture) {
+      bool disableGesture}) {
     slidePercentHor = slidePercentVer = 0.0;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
     enableLoop = loop;
     pagesLength = length;
-    singleTickerProviderStateMixin = mixin;
+    singleTickerProviderStateMixin = vsync;
     positionSlideIcon = slideIcon;
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _onPageChangeCallback = onPageChangeCallback;
@@ -49,9 +101,21 @@ class IAmARiderProvider extends ChangeNotifier {
     shouldDisableUserGesture = disableGesture;
   }
 
-  /// Animating page to the mentioned page
-  /// Known Issue : First we have to jump to the previous screen
-  /// Not using for now
+  ///Animating page to the mentioned page
+  ///
+  ///Known Issue : First we have to jump to the previous screen.
+  ///
+  ///Current Behaviour : Lets say there are 3 pages,
+  ///current page is Red and next is Blue and and last is Green.
+  ///if [page] in this method came to ne 2 i.e., we need to animate directly to Green Page
+  ///but currently I have to jump to page 1 i.e., Blue and than perform Animation using [updateSlide]
+  ///
+  ///Required Behaviour : I Don't want Blue to be there in between the transition of Red and Green i.e.,
+  ///If we are animating [activePageIndex] should be 0 and [nextPageIndex] should be 2, which is not possible through current implementation.
+  ///
+  /// If you encounter this and have suggestions don't forget to raise an Issue.
+  ///
+  ///Not making it for Public usage for now due to the mentioned Issue
   animateDirectlyToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
@@ -78,6 +142,10 @@ class IAmARiderProvider extends ChangeNotifier {
     });
   }
 
+  ///Animating to the Page in One-by-One manner
+  ///Required parameters :
+  /// - [page], the page index you want to animate to.
+  /// - [duration], of [Duration] type, for complete animation
   animateToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
@@ -129,7 +197,7 @@ class IAmARiderProvider extends ChangeNotifier {
     }
   }
 
-  ///If no animation is required.
+  ///Directly Jump to the mentioned [page] without any animation
   jumpToPage(int page) {
     if (page == activePageIndex || isInProgress) return;
     if (activePageIndex == pagesLength - 1 && !enableLoop) {
@@ -144,12 +212,16 @@ class IAmARiderProvider extends ChangeNotifier {
     isInProgress = false;
   }
 
+  ///Method to update the [slideUpdate] and it directly calls [updateData]
   updateSlide(SlideUpdate slidUpdate) {
     slideUpdate = slidUpdate;
     updateData(slidUpdate);
     notifyListeners();
   }
 
+  ///updating data using [SlideUpdate], generally we are handling and managing the Animation [UpdateType]
+  ///in this methods,
+  ///All callbacks and factors are also managed by this method.
   updateData(SlideUpdate event) {
     if (prevUpdate != event.updateType && _currentUpdateTypeCallback != null)
       _currentUpdateTypeCallback(event.updateType);
@@ -249,18 +321,21 @@ class IAmARiderProvider extends ChangeNotifier {
     return;
   }
 
-  // Getter and setter for isAnimating
+  ///Setter for [_isAnimating]
   set isAnimating(bool newValue) {
     this._isAnimating = newValue;
     notifyListeners();
   }
 
+  ///Getter for [_isAnimating]
   bool get isAnimating => _isAnimating;
 
+  ///Setter for [isUserGestureDisabled]
   set setUserGesture(bool disable) {
     this.shouldDisableUserGesture = disable;
     notifyListeners();
   }
 
+  ///Setter for [isUserGestureDisabled]
   bool get isUserGestureDisabled => shouldDisableUserGesture;
 }

@@ -3,28 +3,30 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/slide_update.dart';
-import 'package:liquid_swipe/Provider/iamariderprovider.dart';
+import 'package:liquid_swipe/Provider/LiquidProvider.dart';
 
+/// Internal Class
+///
 /// This class provides the animation controller
 /// used when then user stops dragging and page
 /// reveal is not completed.
-
 class AnimatedPageDragger {
+  ///SlideDirection LTR, RTL or none
   final SlideDirection slideDirection;
 
-  //This variable tells that whether we have to open or close the page reveal.
+  ///Current transition goal, either close the page or reveal it
   final TransitionGoal transitionGoal;
 
-  //Animation controller
+  ///Animation controller for Completing the Animation when user is Done with dragging
   AnimationController completionAnimationController;
 
-  //Constructor
+  ///Constructor
   AnimatedPageDragger({
     this.slideDirection,
     this.transitionGoal,
     double slidePercentVer,
     double slidePercentHor,
-    @required IAmARiderProvider slideUpdateStream,
+    @required LiquidProvider slideUpdateStream,
     TickerProvider vsync,
   }) {
     final startSlidePercentHor = slidePercentHor;
@@ -90,12 +92,12 @@ class AnimatedPageDragger {
       });
   }
 
-  //This method is used to run animation Controller
+  ///This method is used to run animation Controller in forward
   void run() {
     completionAnimationController.forward(from: 0.0);
   }
 
-  //This method is used to dispose animation controller
+  ///This method is used to dispose animation controller
   void dispose() {
     completionAnimationController.dispose();
   }
