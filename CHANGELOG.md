@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.0.0-dev.1
+* Api Documentation
+
 ## 1.5.0
 * Includes all Prereleases.
 
