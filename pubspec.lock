@@ -94,7 +94,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.1"
+    version: "4.3.2"
   sky_engine:
     dependency: transitive
     description: flutter

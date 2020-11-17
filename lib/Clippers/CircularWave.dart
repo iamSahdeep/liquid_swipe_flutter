@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 /// Custom clipper for circular page reveal.
 class CircularWave extends CustomClipper<Path> {
   final double revealPercent;
-  final double iconPosition;
+  final Size iconSize;
   final double verReveal;
 
   CircularWave(
-    this.iconPosition,
+    this.iconSize,
     this.revealPercent,
     this.verReveal,
   );

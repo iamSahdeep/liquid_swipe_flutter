@@ -40,6 +40,8 @@ class PageDragger extends StatefulWidget {
 
 ///State for PageDragger
 class _PageDraggerState extends State<PageDragger> {
+  GlobalKey _keyIcon = GlobalKey();
+
   ///Current [Offset] of the User Touch
   Offset dragStart;
 
@@ -87,7 +89,7 @@ class _PageDraggerState extends State<PageDragger> {
       if (slideDirection != SlideDirection.none) {
         //clamp method is used to clamp the value of slidePercent from 0.0 to 1.0, after 1.0 it set to 1.0
         slidePercentHor = (dx / widget.fullTransitionPX).abs().clamp(0.0, 1.0);
-        slidePercentVer = (dy / 500).abs().clamp(0.0, 1.25);
+        slidePercentVer = (dy / MediaQuery.of(context).size.height).abs().clamp(0.0, 1.0);
       }
 
       Provider.of<LiquidProvider>(context, listen: false)
@@ -117,6 +119,15 @@ class _PageDraggerState extends State<PageDragger> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<LiquidProvider>(context, listen: false).iconSize =
+          _keyIcon.currentContext.size;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     //Gesture Detector for horizontal drag
     final model = Provider.of<LiquidProvider>(context, listen: false);
@@ -129,13 +140,16 @@ class _PageDraggerState extends State<PageDragger> {
       child: widget.enableSlideIcon
           ? Align(
               alignment: Alignment(
-                1 - slidePercentHor + 0.005,
-                widget.iconPosition + widget.iconPosition / 10,
+                1 - slidePercentHor,
+                -1.0 + Utils.handleIconAlignment(widget.iconPosition) * 2,
               ),
               child: Opacity(
                 opacity: 1 - slidePercentHor,
                 child: slideDirection != SlideDirection.leftToRight
-                    ? widget.slideIconWidget
+                    ? SizedBox(
+                        key: _keyIcon,
+                        child: widget.slideIconWidget,
+                      )
                     : null,
               ),
             )

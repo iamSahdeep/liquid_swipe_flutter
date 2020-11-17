@@ -44,3 +44,17 @@ enum WaveType {
   circularReveal,
   liquidReveal,
 }
+
+///Utils Methods
+mixin Utils {
+
+  ///Temporary fix to the misalignment of the icon.
+  static double handleIconAlignment(double ver) {
+    if (ver > 0.5) {
+      ver += (0.5 - ver).abs() / 20;
+    } else {
+      ver -= (0.5 - ver).abs() / 15;
+    }
+    return ver;
+  }
+}

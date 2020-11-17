@@ -167,13 +167,15 @@ class LiquidSwipe extends StatefulWidget {
 
   /// If you want to change the initial page
   ///
-  /// Required a int value which should be greater than 0 and less then the pages length other wise exception will be thrown.
+  /// Required a int value which should be greater than or equals to 0 and less then the pages length other wise exception will be thrown.
   final int initialPage;
 
   /// Required a bool value, whether to enable or disable the [slideIconWidget]
   final bool enableSlideIcon;
 
   /// Required a Widget that will be visible only if [enableSlideIcon] is set to true
+  ///
+  /// If not provided and [enableSlideIcon] is set [true], `Icon(Icons.arrow_back_ios)` this will be used by default
   final Widget slideIconWidget;
 
   /// Required a double value ranges from 0.0 - 1.0
@@ -277,7 +279,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
                   ? pages[model.nextPageIndex]
                   : pages[model.activePageIndex],
               slideDirection: model.slideDirection,
-              iconPosition: widget.positionSlideIcon,
+              iconSize: model.iconSize,
               waveType: widget.waveType,
               verticalReveal: model.slidePercentVer,
             ),

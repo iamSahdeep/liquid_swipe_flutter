@@ -8,7 +8,7 @@ import 'package:liquid_swipe/Provider/LiquidProvider.dart';
 /// Internal Class
 ///
 /// This class provides the animation controller
-/// used when then user stops dragging and page
+/// used when user stops dragging and page
 /// reveal is not completed.
 class AnimatedPageDragger {
   ///SlideDirection LTR, RTL or none
@@ -36,7 +36,9 @@ class AnimatedPageDragger {
 
     //We have to complete the page reveal
     if (transitionGoal == TransitionGoal.open) {
-      endSlidePercentHor = endSlidePercentVer = 1.0;
+      endSlidePercentHor = 1.0;
+
+      endSlidePercentVer = slideUpdateStream.positionSlideIcon;
 
       final slideRemaining = 1.0 - slidePercentHor;
       //Standard value take for drag velocity to avoid complex calculations.

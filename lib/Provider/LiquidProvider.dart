@@ -37,7 +37,8 @@ class LiquidProvider extends ChangeNotifier {
   SlideDirection slideDirection = SlideDirection.none;
 
   /// percentage of slide both Horizontal and Vertical, during touch
-  double slidePercentHor, slidePercentVer = 0.0;
+  double slidePercentHor = 0.01;
+  double slidePercentVer = 0.00;
 
   ///Storing Previous [UpdateType]
   UpdateType prevUpdate;
@@ -73,6 +74,8 @@ class LiquidProvider extends ChangeNotifier {
   ///default = false
   bool shouldDisableUserGesture = false;
 
+  Size iconSize = Size.zero;
+
   ///Constructor
   ///Contains Default value or Developer desired Values
   /// [initialPage] - Initial Page of the LiquidSwipe (0 - n)
@@ -88,7 +91,8 @@ class LiquidProvider extends ChangeNotifier {
       CurrentUpdateTypeCallback currentUpdateTypeCallback,
       SlidePercentCallback slidePercentCallback,
       bool disableGesture}) {
-    slidePercentHor = slidePercentVer = 0.0;
+    slidePercentHor = 0.01;
+    slidePercentVer = 0.00;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
     enableLoop = loop;
@@ -208,7 +212,7 @@ class LiquidProvider extends ChangeNotifier {
     nextPageIndex = page;
     if (nextPageIndex >= pagesLength) nextPageIndex = 0;
     updateSlide(SlideUpdate(
-        SlideDirection.rightToLeft, 1, 0.5, UpdateType.doneAnimating));
+        SlideDirection.rightToLeft, 1, positionSlideIcon, UpdateType.doneAnimating));
     isInProgress = false;
   }
 
@@ -231,7 +235,7 @@ class LiquidProvider extends ChangeNotifier {
       String hor = (event.slidePercentHor * 100).toStringAsExponential(2);
       String ver = (event.slidePercentVer * 100).toStringAsExponential(2);
       _slidePercentCallback(
-          double.parse(hor), (((double.parse(ver)) * 100) / 125));
+          double.parse(hor), (((double.parse(ver)) * 100) / 100));
     }
 
     prevUpdate = event.updateType;
@@ -310,12 +314,33 @@ class LiquidProvider extends ChangeNotifier {
 
     //done animating
     activePageIndex = nextPageIndex;
-    if (_onPageChangeCallback != null) {
-      _onPageChangeCallback(activePageIndex);
-    }
-    slideDirection = SlideDirection.none;
-    slidePercentHor = 0.0;
+    slideDirection = SlideDirection.rightToLeft;
+    slidePercentHor = 0.01;
     slidePercentVer = positionSlideIcon;
+    nextPageIndex = activePageIndex;
+
+    if (enableLoop) {
+      //conditions on slide direction
+      if (slideDirection == SlideDirection.leftToRight) {
+        nextPageIndex = activePageIndex - 1;
+      } else if (slideDirection == SlideDirection.rightToLeft) {
+        nextPageIndex = activePageIndex + 1;
+      }
+
+      if (nextPageIndex > pagesLength - 1) {
+        nextPageIndex = 0;
+      } else if (nextPageIndex < 0) {
+        nextPageIndex = pagesLength - 1;
+      }
+    } else {
+      if (slideDirection == SlideDirection.leftToRight &&
+          activePageIndex != 0) {
+        nextPageIndex = activePageIndex - 1;
+      } else if (slideDirection == SlideDirection.rightToLeft &&
+          activePageIndex != pagesLength - 1) {
+        nextPageIndex = activePageIndex + 1;
+      }
+    }
 
     isAnimating = false; // Page stopped animating
     return;
