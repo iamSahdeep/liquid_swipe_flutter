@@ -89,7 +89,8 @@ class _PageDraggerState extends State<PageDragger> {
       if (slideDirection != SlideDirection.none) {
         //clamp method is used to clamp the value of slidePercent from 0.0 to 1.0, after 1.0 it set to 1.0
         slidePercentHor = (dx / widget.fullTransitionPX).abs().clamp(0.0, 1.0);
-        slidePercentVer = (dy / MediaQuery.of(context).size.height).abs().clamp(0.0, 1.0);
+        slidePercentVer =
+            (dy / MediaQuery.of(context).size.height).abs().clamp(0.0, 1.0);
       }
 
       Provider.of<LiquidProvider>(context, listen: false)
@@ -122,7 +123,8 @@ class _PageDraggerState extends State<PageDragger> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<LiquidProvider>(context, listen: false).setIconSize(_keyIcon.currentContext.size);
+      Provider.of<LiquidProvider>(context, listen: false)
+          .setIconSize(_keyIcon.currentContext.size);
     });
   }
 

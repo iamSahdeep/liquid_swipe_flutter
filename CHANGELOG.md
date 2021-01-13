@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.0-dev.2
+* Added Next Page minor reveal support, same as Original LiquidSwipe. Please don't use this version if you don't want it. Should be making it optional in next release.
+* Minor Bugs Fixes
+
 ## 2.0.0-dev.1
 * Api Documentation
 

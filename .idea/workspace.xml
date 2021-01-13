@@ -29,9 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04d5b3a-dc41-4077-ba5e-a292d819e0ae" name="Default Changelist" comment="minor fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/PageHelpers/page_dragger.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/PageHelpers/page_dragger.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Provider/LiquidProvider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Provider/LiquidProvider.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
@@ -348,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610532223528</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="icon size fix">
+      <created>1610534065018</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1610534065018</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -389,7 +394,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="thumb leading in circularReveal" />
     <MESSAGE value="minor bug fixes" />
     <MESSAGE value="Fixed: Make Pages Widget" />
     <MESSAGE value="Jump to Page with Controller" />
@@ -414,37 +418,38 @@
     <MESSAGE value="Side Line for next page" />
     <MESSAGE value="Added next reveal support" />
     <MESSAGE value="jump to page without loop" />
-    <option name="LAST_COMMIT_MESSAGE" value="jump to page without loop" />
+    <MESSAGE value="icon size fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="icon size fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605606564074">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605606564074" />
-    <state x="214" y="0" key="CommitChangelistDialog2" timestamp="1610532222424">
+    <state x="214" y="0" key="CommitChangelistDialog2" timestamp="1610534064475">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="214" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1610532222424" />
+    <state x="214" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1610534064475" />
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog" timestamp="1610529898669">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1610529898669" />
-    <state width="1236" height="147" key="GridCell.Tab.0.bottom" timestamp="1610533856194">
+    <state width="1236" height="147" key="GridCell.Tab.0.bottom" timestamp="1610534172484">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="147" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1610533856194" />
-    <state width="1236" height="147" key="GridCell.Tab.0.center" timestamp="1610533856194">
+    <state width="1236" height="147" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1610534172484" />
+    <state width="1236" height="147" key="GridCell.Tab.0.center" timestamp="1610534172483">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="147" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1610533856194" />
-    <state width="1236" height="147" key="GridCell.Tab.0.left" timestamp="1610533856194">
+    <state width="1236" height="147" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1610534172483" />
+    <state width="1236" height="147" key="GridCell.Tab.0.left" timestamp="1610534172483">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="147" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1610533856194" />
-    <state width="1236" height="147" key="GridCell.Tab.0.right" timestamp="1610533856194">
+    <state width="1236" height="147" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1610534172483" />
+    <state width="1236" height="147" key="GridCell.Tab.0.right" timestamp="1610534172484">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1236" height="147" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1610533856194" />
+    <state width="1236" height="147" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1610534172484" />
     <state x="324" y="43" key="RollbackChangesDialog" timestamp="1610527289091">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

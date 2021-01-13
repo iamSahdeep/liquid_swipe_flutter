@@ -373,7 +373,7 @@ class LiquidProvider extends ChangeNotifier {
   bool get isUserGestureDisabled => shouldDisableUserGesture;
 
   ///Method to set [iconSize]
-  setIconSize(Size size){
+  setIconSize(Size size) {
     iconSize = size;
     notifyListeners();
   }
