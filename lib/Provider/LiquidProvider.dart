@@ -103,6 +103,13 @@ class LiquidProvider extends ChangeNotifier {
     _onPageChangeCallback = onPageChangeCallback;
     _slidePercentCallback = slidePercentCallback;
     shouldDisableUserGesture = disableGesture;
+
+    updateSlide(SlideUpdate(
+      SlideDirection.rightToLeft,
+      0.01,
+      positionSlideIcon,
+      UpdateType.dragging,
+    ));
   }
 
   ///Animating page to the mentioned page
@@ -211,8 +218,8 @@ class LiquidProvider extends ChangeNotifier {
     activePageIndex = page - 1;
     nextPageIndex = page;
     if (nextPageIndex >= pagesLength) nextPageIndex = 0;
-    updateSlide(SlideUpdate(
-        SlideDirection.rightToLeft, 1, positionSlideIcon, UpdateType.doneAnimating));
+    updateSlide(SlideUpdate(SlideDirection.rightToLeft, 1, positionSlideIcon,
+        UpdateType.doneAnimating));
     isInProgress = false;
   }
 

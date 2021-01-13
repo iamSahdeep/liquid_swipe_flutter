@@ -32,9 +32,7 @@ class PageReveal extends StatelessWidget {
     this.iconSize,
     this.waveType,
     this.verticalReveal,
-  }) {
-    print(verticalReveal);
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class PageReveal extends StatelessWidget {
           child: child,
         );
         break;
-      case WaveType.liquidReveal:
+      default:
         return ClipPath(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           clipper: WaveLayer(

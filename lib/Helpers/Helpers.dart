@@ -47,7 +47,6 @@ enum WaveType {
 
 ///Utils Methods
 mixin Utils {
-
   ///Temporary fix to the misalignment of the icon.
   static double handleIconAlignment(double ver) {
     if (ver > 0.5) {

@@ -231,9 +231,10 @@ class _MyAppState extends State<MyApp> {
             LiquidSwipe(
               pages: pages,
               enableSlideIcon: true,
-              positionSlideIcon: 0.2,
+              positionSlideIcon: 0.8,
               slideIconWidget: Padding(
-                padding: const EdgeInsets.symmetric(horizontal : 5.0, vertical: 10.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 1.0, vertical: 10.0),
                 child: Icon(Icons.arrow_back_ios),
               ),
               onPageChangeCallback: pageChangeCallback,
