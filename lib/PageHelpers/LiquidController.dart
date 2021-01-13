@@ -50,7 +50,7 @@ class LiquidController {
 
   ///Jump Directly to mentioned Page index but without Animation
   ///see also : [LiquidProvider.jumpToPage]
-  jumpToPage({int page}) {
+  jumpToPage({@required int page}) {
     provider.jumpToPage(page);
   }
 

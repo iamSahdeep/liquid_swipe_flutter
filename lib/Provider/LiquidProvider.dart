@@ -127,6 +127,7 @@ class LiquidProvider extends ChangeNotifier {
   /// If you encounter this and have suggestions don't forget to raise an Issue.
   ///
   ///Not making it for Public usage for now due to the mentioned Issue
+  @deprecated
   animateDirectlyToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
@@ -211,8 +212,8 @@ class LiquidProvider extends ChangeNotifier {
   ///Directly Jump to the mentioned [page] without any animation
   jumpToPage(int page) {
     if (page == activePageIndex || isInProgress) return;
-    if (activePageIndex == pagesLength - 1 && !enableLoop) {
-      return;
+    if (page > pagesLength - 1 || page < 0) {
+      throw ("Index $page not found in the Pages list");
     }
     isInProgress = true;
     activePageIndex = page - 1;
