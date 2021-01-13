@@ -122,8 +122,7 @@ class _PageDraggerState extends State<PageDragger> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<LiquidProvider>(context, listen: false).iconSize =
-          _keyIcon.currentContext.size;
+      Provider.of<LiquidProvider>(context, listen: false).setIconSize(_keyIcon.currentContext.size);
     });
   }
 
