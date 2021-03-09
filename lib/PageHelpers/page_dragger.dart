@@ -14,10 +14,10 @@ class PageDragger extends StatefulWidget {
   final double fullTransitionPX;
 
   /// Slide Icon whichever provided
-  final Widget slideIconWidget;
+  final Widget? slideIconWidget;
 
   /// double value should range from 0.0 - 1.0
-  final double iconPosition;
+  final double? iconPosition;
 
   /// boolean parameter to make user gesture disabled which LiquidSwipe is still Animating
   final bool ignoreUserGestureWhileAnimating;
@@ -28,7 +28,7 @@ class PageDragger extends StatefulWidget {
     this.slideIconWidget,
     this.iconPosition,
     this.ignoreUserGestureWhileAnimating = false,
-  }) : assert(fullTransitionPX != null);
+  });
 
   @override
   _PageDraggerState createState() => _PageDraggerState();
@@ -39,10 +39,10 @@ class _PageDraggerState extends State<PageDragger> {
   GlobalKey _keyIcon = GlobalKey();
 
   ///Current [Offset] of the User Touch
-  Offset dragStart;
+  Offset? dragStart;
 
   ///Calculated Slide Direction of the Gesture/Swipe
-  SlideDirection slideDirection;
+  SlideDirection slideDirection = SlideDirection.none;
 
   ///Horizontally calculated slide percentage, ranges from 0.0 - 1.0
   double slidePercentHor = 0.0;
@@ -70,7 +70,7 @@ class _PageDraggerState extends State<PageDragger> {
       //Getting new position details
       final newPosition = details.globalPosition;
       //Change in position in x
-      final dx = dragStart.dx - newPosition.dx;
+      final dx = dragStart!.dx - newPosition.dx;
       final dy = newPosition.dy;
 
       slideDirection = SlideDirection.none;
@@ -118,9 +118,10 @@ class _PageDraggerState extends State<PageDragger> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<LiquidProvider>(context, listen: false)
-          .setIconSize(_keyIcon.currentContext.size);
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if (widget.slideIconWidget != null)
+        Provider.of<LiquidProvider>(context, listen: false)
+            .setIconSize(_keyIcon.currentContext!.size!);
     });
   }
 
@@ -137,19 +138,20 @@ class _PageDraggerState extends State<PageDragger> {
         child: Align(
           alignment: Alignment(
             1 - slidePercentHor,
-            -1.0 + Utils.handleIconAlignment(widget.iconPosition) * 2,
+            -1.0 + Utils.handleIconAlignment(widget.iconPosition!) * 2,
           ),
           child: Opacity(
             opacity: 1 - slidePercentHor,
-            child: slideDirection != SlideDirection.leftToRight && widget.slideIconWidget != null
+            child: slideDirection != SlideDirection.leftToRight &&
+                    widget.slideIconWidget != null
                 ? SizedBox(
-                  key: _keyIcon,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                    key: _keyIcon,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 2.0, vertical: 10.0),
-                    child: widget.slideIconWidget,
-                  ),
-                )
+                      child: widget.slideIconWidget,
+                    ),
+                  )
                 : null,
           ),
         ));

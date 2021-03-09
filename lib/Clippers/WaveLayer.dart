@@ -7,18 +7,18 @@ import 'package:liquid_swipe/Helpers/Helpers.dart';
 class WaveLayer extends CustomClipper<Path> {
   double revealPercent;
   double verReveal;
-  double waveCenterY;
-  double waveHorRadius;
-  double waveVertRadius;
-  double sideWidth;
+  late double waveCenterY;
+  late double waveHorRadius;
+  late double waveVertRadius;
+  late double sideWidth;
   Size iconSize;
-  SlideDirection slideDirection;
+  SlideDirection? slideDirection;
 
   WaveLayer({
-    @required this.revealPercent,
-    @required this.slideDirection,
-    @required this.iconSize,
-    @required this.verReveal,
+    required this.revealPercent,
+    required this.slideDirection,
+    required this.iconSize,
+    required this.verReveal,
   });
 
   @override
@@ -27,7 +27,7 @@ class WaveLayer extends CustomClipper<Path> {
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
 
-    waveCenterY = size.height * (verReveal);
+    waveCenterY = size.height * verReveal;
     waveHorRadius = slideDirection == SlideDirection.leftToRight
         ? waveHorRadiusFBack(size)
         : waveHorRadiusF(size);

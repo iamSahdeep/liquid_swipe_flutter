@@ -16,9 +16,9 @@ class CircularWave extends CustomClipper<Path> {
   Path getClip(Size size) {
     final center = Offset(
       size.width,
-      size.height * (2 * verReveal / 3),
+      size.height * verReveal,
     );
-    final radius = 1000 * revealPercent;
+    final radius = 1000 * revealPercent + iconSize.width * 2;
     final diameter = 2 * radius;
     final path = Path();
 

@@ -20,10 +20,10 @@ import 'package:provider/provider.dart';
 ///  -  some more, soon.
 class LiquidProvider extends ChangeNotifier {
   /// A [SlideUpdate] type for storing the current Slide Update.
-  SlideUpdate slideUpdate;
+  SlideUpdate? slideUpdate;
 
   /// [AnimatedPageDragger] required for completing the animation when [UpdateType] is [UpdateType.doneAnimating]
-  AnimatedPageDragger animatedPageDragger;
+  late AnimatedPageDragger animatedPageDragger;
 
   /// Storing ActivePage Index
   /// default = 0
@@ -41,7 +41,7 @@ class LiquidProvider extends ChangeNotifier {
   double slidePercentVer = 0.00;
 
   ///Storing Previous [UpdateType]
-  UpdateType prevUpdate;
+  UpdateType? prevUpdate;
 
   ///user manageable bool to make Enable and Disable loop within the Pages
   bool enableLoop = true;
@@ -50,16 +50,19 @@ class LiquidProvider extends ChangeNotifier {
   int pagesLength = 0;
 
   ///Ticker Provider from [LiquidSwipe], cause need to use it in [AnimatedPageDragger]
-  TickerProviderStateMixin singleTickerProviderStateMixin;
+  late TickerProviderStateMixin singleTickerProviderStateMixin;
 
   ///SlideIcon position, always Horizontal, used in [PageDragger]
-  double positionSlideIcon;
+  late double positionSlideIcon;
 
   ///see [CurrentUpdateTypeCallback]
-  CurrentUpdateTypeCallback _currentUpdateTypeCallback;
+  CurrentUpdateTypeCallback? _currentUpdateTypeCallback;
+
+  ///see [OnPageChangeCallback]
+  OnPageChangeCallback? _onPageChangeCallback;
 
   ///see [SlidePercentCallback]
-  SlidePercentCallback _slidePercentCallback;
+  SlidePercentCallback? _slidePercentCallback;
 
   ///bool variable to set if Liquid Swipe is currently in Progress
   bool isInProgress = false;
@@ -79,15 +82,15 @@ class LiquidProvider extends ChangeNotifier {
   /// [loop]  - Should Enable Loop between Pages
   /// [length]  - Total Number of Pages
   LiquidProvider(
-      {int initialPage,
-      bool loop,
-      int length,
-      TickerProviderStateMixin vsync,
-      double slideIcon,
-      OnPageChangeCallback onPageChangeCallback,
-      CurrentUpdateTypeCallback currentUpdateTypeCallback,
-      SlidePercentCallback slidePercentCallback,
-      bool disableGesture}) {
+      {required int initialPage,
+      required bool loop,
+      required int length,
+      required TickerProviderStateMixin vsync,
+      required double slideIcon,
+      required OnPageChangeCallback? onPageChangeCallback,
+      required CurrentUpdateTypeCallback? currentUpdateTypeCallback,
+      required SlidePercentCallback? slidePercentCallback,
+      required bool disableGesture}) {
     slidePercentHor = 0.00;
     slidePercentVer = 0.00;
     activePageIndex = initialPage;
@@ -98,6 +101,7 @@ class LiquidProvider extends ChangeNotifier {
     positionSlideIcon = slideIcon;
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
     _slidePercentCallback = slidePercentCallback;
+    _onPageChangeCallback = onPageChangeCallback;
     shouldDisableUserGesture = disableGesture;
 
     updateSlide(SlideUpdate(
@@ -170,8 +174,8 @@ class LiquidProvider extends ChangeNotifier {
             updateSlide(SlideUpdate(SlideDirection.rightToLeft,
                 t.tick / newDuration, positionSlideIcon, UpdateType.animating));
           } else {
-            updateSlide(SlideUpdate(
-                SlideDirection.rightToLeft, 1, positionSlideIcon, UpdateType.doneAnimating));
+            updateSlide(SlideUpdate(SlideDirection.rightToLeft, 1,
+                positionSlideIcon, UpdateType.doneAnimating));
             t.cancel();
           }
         });
@@ -192,8 +196,8 @@ class LiquidProvider extends ChangeNotifier {
             updateSlide(SlideUpdate(SlideDirection.leftToRight,
                 t.tick / newDuration, positionSlideIcon, UpdateType.animating));
           } else {
-            updateSlide(SlideUpdate(
-                SlideDirection.leftToRight, 1, positionSlideIcon, UpdateType.doneAnimating));
+            updateSlide(SlideUpdate(SlideDirection.leftToRight, 1,
+                positionSlideIcon, UpdateType.doneAnimating));
             t.cancel();
           }
         });
@@ -232,13 +236,13 @@ class LiquidProvider extends ChangeNotifier {
   ///All callbacks and factors are also managed by this method.
   updateData(SlideUpdate event) {
     if (prevUpdate != event.updateType && _currentUpdateTypeCallback != null)
-      _currentUpdateTypeCallback(event.updateType);
+      _currentUpdateTypeCallback!(event.updateType);
 
     if (_slidePercentCallback != null &&
         event.updateType != UpdateType.doneAnimating) {
       String hor = (event.slidePercentHor * 100).toStringAsExponential(2);
       String ver = (event.slidePercentVer * 100).toStringAsExponential(2);
-      _slidePercentCallback(
+      _slidePercentCallback!(
           double.parse(hor), (((double.parse(ver)) * 100) / 100));
     }
 
@@ -317,6 +321,9 @@ class LiquidProvider extends ChangeNotifier {
     }
 
     //done animating
+    if (_onPageChangeCallback != null) {
+      _onPageChangeCallback!(nextPageIndex);
+    }
     activePageIndex = nextPageIndex;
     slideDirection = SlideDirection.rightToLeft;
     slidePercentHor = 0.00;

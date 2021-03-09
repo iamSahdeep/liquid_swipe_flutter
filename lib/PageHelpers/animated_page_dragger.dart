@@ -18,20 +18,20 @@ class AnimatedPageDragger {
   final TransitionGoal transitionGoal;
 
   ///Animation controller for Completing the Animation when user is Done with dragging
-  AnimationController completionAnimationController;
+  late AnimationController completionAnimationController;
 
   ///Constructor
   AnimatedPageDragger({
-    this.slideDirection,
-    this.transitionGoal,
-    double slidePercentVer,
-    double slidePercentHor,
-    @required LiquidProvider slideUpdateStream,
-    TickerProvider vsync,
+    required this.slideDirection,
+    required this.transitionGoal,
+    required double slidePercentVer,
+    required double slidePercentHor,
+    required LiquidProvider slideUpdateStream,
+    required TickerProvider vsync,
   }) {
     final startSlidePercentHor = slidePercentHor;
     final startSlidePercentVer = slidePercentVer;
-    double endSlidePercentHor, endSlidePercentVer;
+    double? endSlidePercentHor, endSlidePercentVer;
     Duration duration;
 
     //We have to complete the page reveal
@@ -75,8 +75,8 @@ class AnimatedPageDragger {
         //Adding to slide update stream
         slideUpdateStream.updateSlide(SlideUpdate(
           slideDirection,
-          slidePercent,
-          slidePercentVer,
+          slidePercent!,
+          slidePercentVer!,
           UpdateType.animating,
         ));
       })

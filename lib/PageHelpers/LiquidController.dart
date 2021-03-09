@@ -39,7 +39,7 @@ import 'package:provider/provider.dart';
 ///
 class LiquidController {
   ///Provider model calls (not listenable) just used for calling its internal methods
-  LiquidProvider provider;
+  late LiquidProvider provider;
 
   LiquidController();
 
@@ -50,13 +50,13 @@ class LiquidController {
 
   ///Jump Directly to mentioned Page index but without Animation
   ///see also : [LiquidProvider.jumpToPage]
-  jumpToPage({@required int page}) {
+  jumpToPage({required int page}) {
     provider.jumpToPage(page);
   }
 
   ///Animate to mentioned page within given [Duration]
   ///Remember the [duration] here is the total duration in which it will animate though all pages not the single page
-  animateToPage({int page, int duration = 600}) {
+  animateToPage({required int page, int duration = 600}) {
     provider.animateToPage(page, duration);
   }
 
@@ -66,7 +66,7 @@ class LiquidController {
 
   ///Use this method to disable gestures during runtime, like on certain pages using [OnPageChangeCallback]
   ///If you want to disable gestures from start use [LiquidSwipe.disableUserGesture]
-  shouldDisableGestures({bool disable}) {
+  shouldDisableGestures({required bool disable}) {
     provider.setUserGesture = disable;
   }
 

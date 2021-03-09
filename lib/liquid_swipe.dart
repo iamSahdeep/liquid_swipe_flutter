@@ -173,7 +173,7 @@ class LiquidSwipe extends StatefulWidget {
   /// Required a Widget that will be visible only if [enableSlideIcon] is set to true
   ///
   /// If not provided and [enableSlideIcon] is set [true], `Icon(Icons.arrow_back_ios)` this will be used by default
-  final Widget slideIconWidget;
+  final Widget? slideIconWidget;
 
   /// Required a double value ranges from 0.0 - 1.0
   ///
@@ -184,19 +184,19 @@ class LiquidSwipe extends StatefulWidget {
   final bool enableLoop;
 
   ///Required a [LiquidController] object for some magic methods
-  final LiquidController liquidController;
+  final LiquidController? liquidController;
 
   ///Type of Wave you want, its a enum, you might have to import helpers.dart
   final WaveType waveType;
 
   ///see [OnPageChangeCallback]
-  final OnPageChangeCallback onPageChangeCallback;
+  final OnPageChangeCallback? onPageChangeCallback;
 
   ///see [CurrentUpdateTypeCallback]
-  final CurrentUpdateTypeCallback currentUpdateTypeCallback;
+  final CurrentUpdateTypeCallback? currentUpdateTypeCallback;
 
   ///see [SlidePercentCallback]
-  final SlidePercentCallback slidePercentCallback;
+  final SlidePercentCallback? slidePercentCallback;
 
   ///Required a bool value for disabling Fast Animation between pages
   ///
@@ -209,12 +209,12 @@ class LiquidSwipe extends StatefulWidget {
   final bool disableUserGesture;
 
   const LiquidSwipe({
-    Key key,
-    @required this.pages,
+    Key? key,
+    required this.pages,
     this.fullTransitionValue = FULL_TRANSITION_PX,
     this.initialPage = 0,
-    this.slideIconWidget ,
-    this.positionSlideIcon = 0.54,
+    this.slideIconWidget,
+    this.positionSlideIcon = 0.8,
     this.enableLoop = true,
     this.liquidController,
     this.waveType = WaveType.liquidReveal,
@@ -223,12 +223,8 @@ class LiquidSwipe extends StatefulWidget {
     this.slidePercentCallback,
     this.ignoreUserGestureWhileAnimating = false,
     this.disableUserGesture = false,
-  })  : assert(pages != null),
-        assert(fullTransitionValue != null),
-        assert(initialPage != null &&
-            initialPage >= 0 &&
-            initialPage < pages.length),
-        assert(positionSlideIcon >= -1 && positionSlideIcon <= 1),
+  })  : assert(initialPage >= 0 && initialPage < pages.length),
+        assert(positionSlideIcon >= 0 && positionSlideIcon <= 1),
         super(key: key);
 
   @override
@@ -236,7 +232,7 @@ class LiquidSwipe extends StatefulWidget {
 }
 
 class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
-  LiquidController liquidController;
+  late LiquidController liquidController;
 
   @override
   void initState() {
@@ -255,9 +251,9 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             length: pages.length,
             vsync: this,
             slideIcon: widget.positionSlideIcon,
-            onPageChangeCallback: widget.onPageChangeCallback,
             currentUpdateTypeCallback: widget.currentUpdateTypeCallback,
             slidePercentCallback: widget.slidePercentCallback,
+            onPageChangeCallback: widget.onPageChangeCallback,
             disableGesture: widget.disableUserGesture);
       },
       child: Consumer(builder: (BuildContext context, LiquidProvider model, _) {

@@ -19,19 +19,19 @@ import '../Clippers/WaveLayer.dart';
 class PageReveal extends StatelessWidget {
   final double horizontalReveal;
   final Widget child;
-  final SlideDirection slideDirection;
+  final SlideDirection? slideDirection;
   final Size iconSize;
   final WaveType waveType;
   final double verticalReveal;
 
   ///Constructor for [PageReveal].
   PageReveal({
-    this.horizontalReveal,
-    this.child,
+    required this.horizontalReveal,
+    required this.child,
     this.slideDirection,
-    this.iconSize,
-    this.waveType,
-    this.verticalReveal,
+    required this.iconSize,
+    required this.waveType,
+    required this.verticalReveal,
   });
 
   @override
@@ -49,7 +49,6 @@ class PageReveal extends StatelessWidget {
           ),
           child: child,
         );
-        break;
       default:
         return ClipPath(
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -63,7 +62,6 @@ class PageReveal extends StatelessWidget {
           ),
           child: child,
         );
-        break;
     }
   }
 }
