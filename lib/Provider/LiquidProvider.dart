@@ -76,6 +76,9 @@ class LiquidProvider extends ChangeNotifier {
 
   Size iconSize = Size.zero;
 
+  Timer? _timer;
+  Timer? _timerInner;
+
   ///Constructor
   ///Contains Default value or Developer desired Values
   /// [initialPage] - Initial Page of the LiquidSwipe (0 - n)
@@ -127,33 +130,32 @@ class LiquidProvider extends ChangeNotifier {
   /// If you encounter this and have suggestions don't forget to raise an Issue.
   ///
   ///Not making it for Public usage for now due to the mentioned Issue
-  // ignore: unused_element
-  _animateDirectlyToPage(int page, int duration) {
-    if (isInProgress || activePageIndex == page) return;
-    isInProgress = true;
-    activePageIndex = page - 1;
-    nextPageIndex = page;
-    if (activePageIndex < 0) {
-      activePageIndex = 0;
-      jumpToPage(page);
-      return;
-    }
-    Timer.periodic(const Duration(milliseconds: 1), (t) {
-      if (t.tick < duration / 2) {
-        updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
-            1, UpdateType.dragging));
-      } else if (t.tick < duration) {
-        updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
-            1, UpdateType.animating));
-      } else {
-        updateSlide(SlideUpdate(
-            SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
-        t.cancel();
-        isInProgress = false;
-      }
-    });
-  }
-
+  /// _animateDirectlyToPage(int page, int duration) {
+  ///   if (isInProgress || activePageIndex == page) return;
+  ///   isInProgress = true;
+  ///   activePageIndex = page - 1;
+  ///   nextPageIndex = page;
+  ///   if (activePageIndex < 0) {
+  ///     activePageIndex = 0;
+  ///     jumpToPage(page);
+  ///     return;
+  ///   }
+  ///   _timer = Timer.periodic(const Duration(milliseconds: 1), (t) {
+  ///     if (t.tick < duration / 2) {
+  ///       updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
+  ///           1, UpdateType.dragging));
+  ///     } else if (t.tick < duration) {
+  ///       updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
+  ///           1, UpdateType.animating));
+  ///     } else {
+  ///       updateSlide(SlideUpdate(
+  ///           SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
+  ///       t.cancel();
+  ///       isInProgress = false;
+  ///     }
+  ///   });
+  /// }
+  ///
   ///Animating to the Page in One-by-One manner
   ///Required parameters :
   /// - [page], the page index you want to animate to.
@@ -162,11 +164,13 @@ class LiquidProvider extends ChangeNotifier {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
     int diff = 0;
+    _timer?.cancel();
+    _timerInner?.cancel();
     if (activePageIndex < page) {
       diff = page - activePageIndex;
       int newDuration = duration ~/ diff;
-      Timer.periodic(Duration(milliseconds: newDuration), (callback) {
-        Timer.periodic(const Duration(milliseconds: 1), (t) {
+      _timer = Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        _timerInner = Timer.periodic(const Duration(milliseconds: 1), (t) {
           if (t.tick < newDuration / 2) {
             updateSlide(SlideUpdate(SlideDirection.rightToLeft,
                 t.tick / newDuration, positionSlideIcon, UpdateType.dragging));
@@ -187,8 +191,8 @@ class LiquidProvider extends ChangeNotifier {
     } else {
       diff = activePageIndex - page;
       int newDuration = duration ~/ diff;
-      Timer.periodic(Duration(milliseconds: newDuration), (callback) {
-        Timer.periodic(const Duration(milliseconds: 1), (t) {
+      _timer = Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        _timerInner = Timer.periodic(const Duration(milliseconds: 1), (t) {
           if (t.tick < newDuration / 2) {
             updateSlide(SlideUpdate(SlideDirection.leftToRight,
                 t.tick / newDuration, positionSlideIcon, UpdateType.dragging));
@@ -379,5 +383,12 @@ class LiquidProvider extends ChangeNotifier {
   setIconSize(Size size) {
     iconSize = size;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _timerInner?.cancel();
+    super.dispose();
   }
 }

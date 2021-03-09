@@ -259,6 +259,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
       child: Consumer(builder: (BuildContext context, LiquidProvider model, _) {
         liquidController.setContext(context);
         return Stack(
+          alignment: Alignment.center,
           children: <Widget>[
             model.slideDirection == SlideDirection.leftToRight
                 ? pages[model.activePageIndex]
