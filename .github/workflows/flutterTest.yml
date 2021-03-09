@@ -3,6 +3,8 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: macos-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     steps:
     - uses: actions/checkout@v1
     - name: Install Flutter
