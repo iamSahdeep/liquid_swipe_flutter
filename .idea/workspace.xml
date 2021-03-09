@@ -19,20 +19,21 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:v1.2.0" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b04d5b3a-dc41-4077-ba5e-a292d819e0ae" name="Default Changelist" comment="minor fixes">
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+    <list default="true" id="b04d5b3a-dc41-4077-ba5e-a292d819e0ae" name="Default Changelist" comment="all fixes">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/PageHelpers/page_dragger.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/PageHelpers/page_dragger.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Provider/LiquidProvider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Provider/LiquidProvider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/liquid_swipe.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/liquid_swipe.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +43,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[bfd5cab4]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -57,6 +57,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="Git.Update.Project.Info.Tabs.Properties">
     <option name="RECENT_FILTERS">
@@ -94,13 +95,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="/usr/lib/dart" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -394,7 +397,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="minor bug fixes" />
     <MESSAGE value="Fixed: Make Pages Widget" />
     <MESSAGE value="Jump to Page with Controller" />
     <MESSAGE value="Animating Page with Controller" />
@@ -419,13 +421,10 @@
     <MESSAGE value="Added next reveal support" />
     <MESSAGE value="jump to page without loop" />
     <MESSAGE value="icon size fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="icon size fix" />
+    <MESSAGE value="all fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="all fixes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605606564074">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605606564074" />
     <state x="214" y="0" key="CommitChangelistDialog2" timestamp="1610534064475">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -434,38 +433,46 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1610529898669" />
-    <state width="1236" height="147" key="GridCell.Tab.0.bottom" timestamp="1610534172484">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1358" height="260" key="GridCell.Tab.0.bottom" timestamp="1615292687363">
+      <screen x="0" y="25" width="1792" height="1013" />
     </state>
     <state width="1236" height="147" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1610534172484" />
-    <state width="1236" height="147" key="GridCell.Tab.0.center" timestamp="1610534172483">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1358" height="260" key="GridCell.Tab.0.bottom/0.25.1792.1013@0.25.1792.1013" timestamp="1615292687363" />
+    <state width="1358" height="260" key="GridCell.Tab.0.center" timestamp="1615292687362">
+      <screen x="0" y="25" width="1792" height="1013" />
     </state>
     <state width="1236" height="147" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1610534172483" />
-    <state width="1236" height="147" key="GridCell.Tab.0.left" timestamp="1610534172483">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1358" height="260" key="GridCell.Tab.0.center/0.25.1792.1013@0.25.1792.1013" timestamp="1615292687362" />
+    <state width="1358" height="260" key="GridCell.Tab.0.left" timestamp="1615292687362">
+      <screen x="0" y="25" width="1792" height="1013" />
     </state>
     <state width="1236" height="147" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1610534172483" />
-    <state width="1236" height="147" key="GridCell.Tab.0.right" timestamp="1610534172484">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1358" height="260" key="GridCell.Tab.0.left/0.25.1792.1013@0.25.1792.1013" timestamp="1615292687362" />
+    <state width="1358" height="260" key="GridCell.Tab.0.right" timestamp="1615292687362">
+      <screen x="0" y="25" width="1792" height="1013" />
     </state>
     <state width="1236" height="147" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1610534172484" />
+    <state width="1358" height="260" key="GridCell.Tab.0.right/0.25.1792.1013@0.25.1792.1013" timestamp="1615292687362" />
     <state x="324" y="43" key="RollbackChangesDialog" timestamp="1610527289091">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="324" y="43" key="RollbackChangesDialog/0.0.1280.680@0.0.1280.680" timestamp="1610527289091" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1605607335297">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="200" y="160" key="SettingsEditor" timestamp="1614875843004">
+      <screen x="0" y="25" width="1792" height="1017" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1605607335297" />
-    <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604686579126">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1604686579126" />
+    <state x="200" y="160" key="SettingsEditor/0.25.1792.1017@0.25.1792.1017" timestamp="1614875843004" />
     <state x="277" y="20" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1607627002136">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="277" y="20" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.680@0.0.1280.680" timestamp="1607627002136" />
+    <state x="483" y="443" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614875545975">
+      <screen x="0" y="25" width="1792" height="1017" />
+    </state>
+    <state x="483" y="443" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1792.1017@0.25.1792.1017" timestamp="1614875545975" />
+    <state x="365" y="252" width="670" height="676" key="search.everywhere.popup" timestamp="1615291082930">
+      <screen x="0" y="25" width="1792" height="1013" />
+    </state>
+    <state x="365" y="252" width="670" height="676" key="search.everywhere.popup/0.25.1792.1013@0.25.1792.1013" timestamp="1615291082930" />
   </component>
   <component name="masterDetails">
     <states>

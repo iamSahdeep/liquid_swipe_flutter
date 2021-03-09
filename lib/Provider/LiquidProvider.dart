@@ -14,10 +14,10 @@ import 'package:provider/provider.dart';
 /// Every Change is notified from it.
 /// Methods Included :
 ///  -  [animateToPage]
-///  -  [animateDirectlyToPage]
+///  -  [_animateDirectlyToPage]
 ///  -  [jumpToPage]
 ///  -  [updateData]
-///  -  some more.
+///  -  some more, soon.
 class LiquidProvider extends ChangeNotifier {
   /// A [SlideUpdate] type for storing the current Slide Update.
   SlideUpdate slideUpdate;
@@ -37,7 +37,7 @@ class LiquidProvider extends ChangeNotifier {
   SlideDirection slideDirection = SlideDirection.none;
 
   /// percentage of slide both Horizontal and Vertical, during touch
-  double slidePercentHor = 0.01;
+  double slidePercentHor = 0.00;
   double slidePercentVer = 0.00;
 
   ///Storing Previous [UpdateType]
@@ -54,9 +54,6 @@ class LiquidProvider extends ChangeNotifier {
 
   ///SlideIcon position, always Horizontal, used in [PageDragger]
   double positionSlideIcon;
-
-  ///see [OnPageChangeCallback]
-  OnPageChangeCallback _onPageChangeCallback;
 
   ///see [CurrentUpdateTypeCallback]
   CurrentUpdateTypeCallback _currentUpdateTypeCallback;
@@ -91,7 +88,7 @@ class LiquidProvider extends ChangeNotifier {
       CurrentUpdateTypeCallback currentUpdateTypeCallback,
       SlidePercentCallback slidePercentCallback,
       bool disableGesture}) {
-    slidePercentHor = 0.01;
+    slidePercentHor = 0.00;
     slidePercentVer = 0.00;
     activePageIndex = initialPage;
     nextPageIndex = initialPage;
@@ -100,13 +97,12 @@ class LiquidProvider extends ChangeNotifier {
     singleTickerProviderStateMixin = vsync;
     positionSlideIcon = slideIcon;
     _currentUpdateTypeCallback = currentUpdateTypeCallback;
-    _onPageChangeCallback = onPageChangeCallback;
     _slidePercentCallback = slidePercentCallback;
     shouldDisableUserGesture = disableGesture;
 
     updateSlide(SlideUpdate(
       SlideDirection.rightToLeft,
-      0.01,
+      0.00,
       positionSlideIcon,
       UpdateType.dragging,
     ));
@@ -127,8 +123,8 @@ class LiquidProvider extends ChangeNotifier {
   /// If you encounter this and have suggestions don't forget to raise an Issue.
   ///
   ///Not making it for Public usage for now due to the mentioned Issue
-  @deprecated
-  animateDirectlyToPage(int page, int duration) {
+  // ignore: unused_element
+  _animateDirectlyToPage(int page, int duration) {
     if (isInProgress || activePageIndex == page) return;
     isInProgress = true;
     activePageIndex = page - 1;
@@ -138,7 +134,7 @@ class LiquidProvider extends ChangeNotifier {
       jumpToPage(page);
       return;
     }
-    new Timer.periodic(const Duration(milliseconds: 1), (t) {
+    Timer.periodic(const Duration(milliseconds: 1), (t) {
       if (t.tick < duration / 2) {
         updateSlide(SlideUpdate(SlideDirection.rightToLeft, t.tick / duration,
             1, UpdateType.dragging));
@@ -165,17 +161,17 @@ class LiquidProvider extends ChangeNotifier {
     if (activePageIndex < page) {
       diff = page - activePageIndex;
       int newDuration = duration ~/ diff;
-      new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
-        new Timer.periodic(const Duration(milliseconds: 1), (t) {
+      Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        Timer.periodic(const Duration(milliseconds: 1), (t) {
           if (t.tick < newDuration / 2) {
             updateSlide(SlideUpdate(SlideDirection.rightToLeft,
-                t.tick / newDuration, 1, UpdateType.dragging));
+                t.tick / newDuration, positionSlideIcon, UpdateType.dragging));
           } else if (t.tick < newDuration) {
             updateSlide(SlideUpdate(SlideDirection.rightToLeft,
-                t.tick / newDuration, 1, UpdateType.animating));
+                t.tick / newDuration, positionSlideIcon, UpdateType.animating));
           } else {
             updateSlide(SlideUpdate(
-                SlideDirection.rightToLeft, 1, 1, UpdateType.doneAnimating));
+                SlideDirection.rightToLeft, 1, positionSlideIcon, UpdateType.doneAnimating));
             t.cancel();
           }
         });
@@ -187,17 +183,17 @@ class LiquidProvider extends ChangeNotifier {
     } else {
       diff = activePageIndex - page;
       int newDuration = duration ~/ diff;
-      new Timer.periodic(Duration(milliseconds: newDuration), (callback) {
-        new Timer.periodic(const Duration(milliseconds: 1), (t) {
+      Timer.periodic(Duration(milliseconds: newDuration), (callback) {
+        Timer.periodic(const Duration(milliseconds: 1), (t) {
           if (t.tick < newDuration / 2) {
             updateSlide(SlideUpdate(SlideDirection.leftToRight,
-                t.tick / newDuration, 1, UpdateType.dragging));
+                t.tick / newDuration, positionSlideIcon, UpdateType.dragging));
           } else if (t.tick < newDuration) {
             updateSlide(SlideUpdate(SlideDirection.leftToRight,
-                t.tick / newDuration, 1, UpdateType.animating));
+                t.tick / newDuration, positionSlideIcon, UpdateType.animating));
           } else {
             updateSlide(SlideUpdate(
-                SlideDirection.leftToRight, 1, 1, UpdateType.doneAnimating));
+                SlideDirection.leftToRight, 1, positionSlideIcon, UpdateType.doneAnimating));
             t.cancel();
           }
         });
@@ -323,7 +319,7 @@ class LiquidProvider extends ChangeNotifier {
     //done animating
     activePageIndex = nextPageIndex;
     slideDirection = SlideDirection.rightToLeft;
-    slidePercentHor = 0.01;
+    slidePercentHor = 0.00;
     slidePercentVer = positionSlideIcon;
     nextPageIndex = activePageIndex;
 

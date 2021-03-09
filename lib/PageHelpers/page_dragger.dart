@@ -13,10 +13,7 @@ class PageDragger extends StatefulWidget {
   /// default : [FULL_TRANSITION_PX]
   final double fullTransitionPX;
 
-  ///Should enable the slide icon
-  final bool enableSlideIcon;
-
-  ///if [enableSlideIcon] is true then we will make this widget visible
+  /// Slide Icon whichever provided
   final Widget slideIconWidget;
 
   /// double value should range from 0.0 - 1.0
@@ -28,7 +25,6 @@ class PageDragger extends StatefulWidget {
   ///Constructor with some default values
   PageDragger({
     this.fullTransitionPX = FULL_TRANSITION_PX,
-    this.enableSlideIcon = false,
     this.slideIconWidget,
     this.iconPosition,
     this.ignoreUserGestureWhileAnimating = false,
@@ -134,27 +130,28 @@ class _PageDraggerState extends State<PageDragger> {
     final model = Provider.of<LiquidProvider>(context, listen: false);
 
     return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onHorizontalDragStart: model.isInProgress ? null : onDragStart,
-      onHorizontalDragUpdate: model.isInProgress ? null : onDragUpdate,
-      onHorizontalDragEnd: model.isInProgress ? null : onDragEnd,
-      child: widget.enableSlideIcon
-          ? Align(
-              alignment: Alignment(
-                1 - slidePercentHor,
-                -1.0 + Utils.handleIconAlignment(widget.iconPosition) * 2,
-              ),
-              child: Opacity(
-                opacity: 1 - slidePercentHor,
-                child: slideDirection != SlideDirection.leftToRight
-                    ? SizedBox(
-                        key: _keyIcon,
-                        child: widget.slideIconWidget,
-                      )
-                    : null,
-              ),
-            )
-          : null,
-    );
+        behavior: HitTestBehavior.translucent,
+        onHorizontalDragStart: model.isInProgress ? null : onDragStart,
+        onHorizontalDragUpdate: model.isInProgress ? null : onDragUpdate,
+        onHorizontalDragEnd: model.isInProgress ? null : onDragEnd,
+        child: Align(
+          alignment: Alignment(
+            1 - slidePercentHor,
+            -1.0 + Utils.handleIconAlignment(widget.iconPosition) * 2,
+          ),
+          child: Opacity(
+            opacity: 1 - slidePercentHor,
+            child: slideDirection != SlideDirection.leftToRight && widget.slideIconWidget != null
+                ? SizedBox(
+                  key: _keyIcon,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                          horizontal: 2.0, vertical: 10.0),
+                    child: widget.slideIconWidget,
+                  ),
+                )
+                : null,
+          ),
+        ));
   }
 }

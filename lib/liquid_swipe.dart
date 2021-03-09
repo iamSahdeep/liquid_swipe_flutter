@@ -170,9 +170,6 @@ class LiquidSwipe extends StatefulWidget {
   /// Required a int value which should be greater than or equals to 0 and less then the pages length other wise exception will be thrown.
   final int initialPage;
 
-  /// Required a bool value, whether to enable or disable the [slideIconWidget]
-  final bool enableSlideIcon;
-
   /// Required a Widget that will be visible only if [enableSlideIcon] is set to true
   ///
   /// If not provided and [enableSlideIcon] is set [true], `Icon(Icons.arrow_back_ios)` this will be used by default
@@ -216,8 +213,7 @@ class LiquidSwipe extends StatefulWidget {
     @required this.pages,
     this.fullTransitionValue = FULL_TRANSITION_PX,
     this.initialPage = 0,
-    this.enableSlideIcon = false,
-    this.slideIconWidget = const Icon(Icons.arrow_back_ios),
+    this.slideIconWidget ,
     this.positionSlideIcon = 0.54,
     this.enableLoop = true,
     this.liquidController,
@@ -286,7 +282,6 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
             PageDragger(
               //Used for gesture control
               fullTransitionPX: widget.fullTransitionValue,
-              enableSlideIcon: widget.enableSlideIcon,
               slideIconWidget: widget.slideIconWidget,
               iconPosition: widget.positionSlideIcon,
               ignoreUserGestureWhileAnimating:
