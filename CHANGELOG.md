@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.0.0
+* Includes all Prereleases.
+
 ## 2.0.0-dev.3-nullsafety
 * Migrate to Dart Null Safety
 * Minor Bugs Fixes

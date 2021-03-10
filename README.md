@@ -95,12 +95,13 @@
 
 # Migration
 
-Some things to keep in mind while updateing to v2.0.0 from any version.
+Some things to keep in mind while updating to v2.0.0 from any version.
  * v2.0.0 is migrated to null safety. See [migration](https://dart.dev/null-safety/migration-guide)
  * Attribute `enableSlideIcon` is removed from LiquidSwipe. You can simply pass `null` to `slideIconWidget` to enable and disable it.
  * Attribute `positionSlideIcon` is now ranged from 0.0 to 1.0.
+ * Next Reveal is there by default. If you want to disable it you might want to make changes in your fork. Create an issue I will help.
 
-Thats it ;)
+That's it ;)
 
 # Sample APK
 
@@ -171,7 +172,7 @@ Please Refer to [API documentation](https://pub.dev/documentation/liquid_swipe/l
 
 
 # Credits
-   - [Cuberto](https://github.com/Cuberto) for awesome imlemented [Liquid Swipe](https://github.com/Cuberto/liquid-swipe) in Swift.
+   - [Cuberto](https://github.com/Cuberto) for awesome implemented [Liquid Swipe](https://github.com/Cuberto/liquid-swipe) in Swift.
    - [@aagarwal1012](https://github.com/aagarwal1012) for [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter), it made my work too easy.
  
  
