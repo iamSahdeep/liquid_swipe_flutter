@@ -1,5 +1,16 @@
 # ChangeLog
 
+## 2.0.0-dev.3-nullsafety
+* Migrate to Dart Null Safety
+* Minor Bugs Fixes
+
+## 2.0.0-dev.2
+* Added Next Page minor reveal support, same as Original LiquidSwipe. Please don't use this version if you don't want it.
+* Minor Bugs Fixes
+
+## 2.0.0-dev.1
+* Api Documentation
+
 ## 1.5.0
 * Includes all Prereleases.
 

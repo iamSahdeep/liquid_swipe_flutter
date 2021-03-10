@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 /// Custom clipper for circular page reveal.
-/// Copied from IntroViews.See Credits in Readme.md
-
 class CircularWave extends CustomClipper<Path> {
   final double revealPercent;
-  final double iconPosition;
+  final Size iconSize;
   final double verReveal;
 
   CircularWave(
-    this.iconPosition,
+    this.iconSize,
     this.revealPercent,
     this.verReveal,
   );
@@ -18,9 +16,9 @@ class CircularWave extends CustomClipper<Path> {
   Path getClip(Size size) {
     final center = Offset(
       size.width,
-      size.height * (2 * verReveal / 3),
+      size.height * verReveal,
     );
-    final radius = 1000 * revealPercent;
+    final radius = 1000 * revealPercent + iconSize.width * 2;
     final diameter = 2 * radius;
     final path = Path();
 

@@ -3,21 +3,22 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 
+///Liquid Type PathClipper
 class WaveLayer extends CustomClipper<Path> {
   double revealPercent;
   double verReveal;
-  double waveCenterY;
-  double waveHorRadius;
-  double waveVertRadius;
-  double sideWidth;
-  double iconPosition;
-  SlideDirection slideDirection;
+  late double waveCenterY;
+  late double waveHorRadius;
+  late double waveVertRadius;
+  late double sideWidth;
+  Size iconSize;
+  SlideDirection? slideDirection;
 
   WaveLayer({
-    @required this.revealPercent,
-    @required this.slideDirection,
-    @required this.iconPosition,
-    @required this.verReveal,
+    required this.revealPercent,
+    required this.slideDirection,
+    required this.iconSize,
+    required this.verReveal,
   });
 
   @override
@@ -26,7 +27,7 @@ class WaveLayer extends CustomClipper<Path> {
     sideWidth = sidewidth(size);
     waveVertRadius = waveVertRadiusF(size);
 
-    waveCenterY = size.height * (2 * verReveal / 3);
+    waveCenterY = size.height * verReveal;
     waveHorRadius = slideDirection == SlideDirection.leftToRight
         ? waveHorRadiusFBack(size)
         : waveHorRadiusF(size);
@@ -141,14 +142,14 @@ class WaveLayer extends CustomClipper<Path> {
     var p2 = 0.8;
 
     if (revealPercent <= p1) {
-      return 0.0;
+      return 15.0;
     }
 
     if (revealPercent >= p2) {
       return size.width;
     }
 
-    return (size.width - 15.0) * (revealPercent - p1) / (p2 - p1);
+    return 15 + (size.width - 15.0) * (revealPercent - p1) / (p2 - p1);
   }
 
   @override
@@ -160,19 +161,20 @@ class WaveLayer extends CustomClipper<Path> {
     var p1 = 0.4;
 
     if (revealPercent <= 0) {
-      return 82.0;
+      return iconSize.height;
     }
 
     if (revealPercent >= p1) {
       return size.height * 0.9;
     }
 
-    return 82.0 + ((size.height * 0.9) - 82.0) * revealPercent / p1;
+    return iconSize.height +
+        ((size.height * 0.9) - iconSize.height) * revealPercent / p1;
   }
 
   double waveHorRadiusF(Size size) {
     if (revealPercent <= 0) {
-      return 0;
+      return iconSize.width;
     }
 
     if (revealPercent >= 1) {
@@ -181,11 +183,12 @@ class WaveLayer extends CustomClipper<Path> {
 
     var p1 = 0.4;
     if (revealPercent <= p1) {
-      return 48.0 + revealPercent / p1 * ((size.width * 0.8) - 48.0);
+      return iconSize.width +
+          revealPercent / p1 * ((size.width * 0.8) - iconSize.width);
     }
 
     var t = (revealPercent - p1) / (1.0 - p1);
-    var A = size.width * 0.8;
+    var A = size.width * 0.9;
     var r = 40;
     var m = 9.8;
     var beta = r / (2 * m);
@@ -198,7 +201,7 @@ class WaveLayer extends CustomClipper<Path> {
 
   double waveHorRadiusFBack(Size size) {
     if (revealPercent <= 0) {
-      return 48;
+      return iconSize.width;
     }
 
     if (revealPercent >= 1) {
@@ -207,11 +210,11 @@ class WaveLayer extends CustomClipper<Path> {
 
     var p1 = 0.4;
     if (revealPercent <= p1) {
-      return 48.0 + revealPercent / p1 * 48.0;
+      return iconSize.width + revealPercent / p1 * iconSize.width;
     }
 
     var t = (revealPercent - p1) / (1.0 - p1);
-    var A = 96;
+    var A = iconSize.width + 8;
     var r = 40;
     var m = 9.8;
     var beta = r / (2 * m);
