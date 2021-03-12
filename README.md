@@ -52,7 +52,7 @@
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^2.0.0
+  liquid_swipe: ^2.0.1
   
   ```
 * Get the package from Pub:
@@ -158,8 +158,8 @@ Now simply add it to LiquidSwipe's Constructor
 Only Rules/Limitation to its Usage is For now you can't use any method in Liquid Controller before build method is being called in which LiquidSwipe is initialized. So we have to use them after LiquidSwipe is Built
 
 - Properties
-  - `currentPage` - Getter to get current Page
-  - `isUserGestureDisabled` - If somehow you want to check if gestures are disabled or not. Returns bool
+  - `currentPage` - Getter to get current Page. Default value is 0.
+  - `isUserGestureDisabled` - If somehow you want to check if gestures are disabled or not. Default value is false;
 - Methods
   - `animateToPage({required int page, int duration = 600})` 
      Animate to mentioned page within given Duration Remember the duration here is the total duration in which it will animate though all pages not the single page.
