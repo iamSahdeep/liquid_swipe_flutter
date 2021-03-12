@@ -39,38 +39,44 @@ import 'package:provider/provider.dart';
 ///
 class LiquidController {
   ///Provider model calls (not listenable) just used for calling its internal methods
-  late LiquidProvider provider;
+  LiquidProvider? _provider;
 
   LiquidController();
 
   ///Internal Method Should not be used.
   setContext(BuildContext context) {
-    provider = Provider.of<LiquidProvider>(context, listen: false);
+    _provider = Provider.of<LiquidProvider>(context, listen: false);
   }
 
   ///Jump Directly to mentioned Page index but without Animation
   ///see also : [LiquidProvider.jumpToPage]
   jumpToPage({required int page}) {
-    provider.jumpToPage(page);
+    assert(_provider != null,
+        "LiquidController not attached to any LiquidSwipe Widget.");
+    _provider?.jumpToPage(page);
   }
 
   ///Animate to mentioned page within given [Duration]
   ///Remember the [duration] here is the total duration in which it will animate though all pages not the single page
   animateToPage({required int page, int duration = 600}) {
-    provider.animateToPage(page, duration);
+    assert(_provider != null,
+        "LiquidController not attached to any LiquidSwipe Widget.");
+    _provider?.animateToPage(page, duration);
   }
 
   ///Getter to get current Page
   ///see also : [OnPageChangeCallback]
-  int get currentPage => provider.activePageIndex;
+  int get currentPage => _provider?.activePageIndex ?? 0;
 
   ///Use this method to disable gestures during runtime, like on certain pages using [OnPageChangeCallback]
   ///If you want to disable gestures from start use [LiquidSwipe.disableUserGesture]
   shouldDisableGestures({required bool disable}) {
-    provider.setUserGesture = disable;
+    assert(_provider != null,
+        "LiquidController not attached to any LiquidSwipe Widget.");
+    _provider?.setUserGesture = disable;
   }
 
   ///If somehow you want to check if gestures are disabled or not
   ///Returns [bool]
-  bool get isUserGestureDisabled => provider.isUserGestureDisabled;
+  bool get isUserGestureDisabled => _provider?.isUserGestureDisabled ?? false;
 }

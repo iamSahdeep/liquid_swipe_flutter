@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.0.1
+* fixed : #65
+
 ## 2.0.0
 * Includes all Prereleases.
 
