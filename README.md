@@ -174,7 +174,8 @@ Please Refer to [API documentation](https://pub.dev/documentation/liquid_swipe/l
 # Credits
    - [Cuberto](https://github.com/Cuberto) for awesome implemented [Liquid Swipe](https://github.com/Cuberto/liquid-swipe) in Swift.
    - [@aagarwal1012](https://github.com/aagarwal1012) for [IntroViews](https://github.com/aagarwal1012/IntroViews-Flutter), it made my work too easy.
- 
+
+### Disclaimer : This project is not anyhow connected to Cuberto, but have apprised them through this [issue](https://github.com/Cuberto/liquid-swipe/issues/10).  
  
 # Author & support
 This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See credits.
