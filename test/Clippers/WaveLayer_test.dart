@@ -8,7 +8,7 @@ final clipPathWidget = WaveLayer(
     slideDirection: SlideDirection.leftToRight,
     iconSize: iconSize,
     verReveal: 0.0,
-    enableSideReveal: false);
+    enableSideReveal: true);
 
 final clipPathWidget2 = WaveLayer(
     revealPercent: 1,
