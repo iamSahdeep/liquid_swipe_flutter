@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.1.0
+* fixes : #66 (new builder constructor to dynamically create pages)
+
 ## 2.0.2
 * fixes : #67 (made side reveal optional)
 
