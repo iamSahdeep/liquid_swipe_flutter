@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
-import 'package:liquid_swipe/Helpers/slide_update.dart';
+import 'package:liquid_swipe/Helpers/SlideUpdate.dart';
 import 'package:liquid_swipe/PageHelpers/animated_page_dragger.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
@@ -86,7 +86,8 @@ class LiquidProvider extends ChangeNotifier {
   /// [initialPage] - Initial Page of the LiquidSwipe (0 - n)
   /// [loop]  - Should Enable Loop between Pages
   /// [length]  - Total Number of Pages
-  LiquidProvider({required int initialPage,
+  LiquidProvider({
+    required int initialPage,
     required bool loop,
     required int length,
     required TickerProviderStateMixin vsync,

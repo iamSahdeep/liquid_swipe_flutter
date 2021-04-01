@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
-import 'package:liquid_swipe/Helpers/slide_update.dart';
+import 'package:liquid_swipe/Helpers/SlideUpdate.dart';
 import 'package:liquid_swipe/Provider/LiquidProvider.dart';
 
 /// Internal Class

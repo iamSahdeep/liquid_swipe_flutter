@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
+import 'package:liquid_swipe/Helpers/LiquidSwipeChildDelegate.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
 import 'package:liquid_swipe/PageHelpers/page_reveal.dart';
@@ -97,6 +98,7 @@ typedef SlidePercentCallback = void Function(
 ///
 /// An Example of LiquidSwipe with Default values (excluding callbacks) :
 ///
+/// [LiquidSwipe()]
 /// ```dart
 ///       LiquidSwipe(
 ///           pages: pages,
@@ -112,50 +114,25 @@ typedef SlidePercentCallback = void Function(
 ///           ignoreUserGestureWhileAnimating: false,
 ///        ),
 /// ```
+///
+/// [LiquidSwipe.builder(itemBuilder: itemBuilder, itemCount: itemCount)]
+/// ```dart
+///       LiquidSwipe.builder(
+///           itemCount : data.length,
+///           itemBuilder : (context, index) => Container(...),
+///           fullTransitionValue: FULL_TRANSITION_PX,
+///           initialPage: 0,
+///           enableSlideIcon: false,
+///           slideIconWidget: const Icon(Icons.arrow_back_ios),
+///           positionSlideIcon: 0.54,
+///           enableLoop: true,
+///           waveType: WaveType.liquidReveal,
+///           liquidController: liquidController,
+///           disableUserGesture: false,
+///           ignoreUserGestureWhileAnimating: false,
+///        ),
+/// ```
 class LiquidSwipe extends StatefulWidget {
-  ///Required List of Widgets like Container/SizedBox
-  ///
-  /// sample page :
-  ///
-  /// ```dart
-  ///     Container(
-  ///      color: Colors.pink,
-  ///      child: Column(
-  ///       crossAxisAlignment: CrossAxisAlignment.center,
-  ///       mainAxisSize: MainAxisSize.max,
-  ///       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  ///       children: <Widget>[
-  ///         Image.asset(
-  ///           'assets/1.png',
-  ///           fit: BoxFit.cover,
-  ///         ),
-  ///         Padding(
-  ///           padding: EdgeInsets.all(20.0),
-  ///         ),
-  ///         Column(
-  ///           children: <Widget>[
-  ///             Text(
-  ///               "Hi",
-  ///               style: MyApp.style,
-  ///             ),
-  ///             Text(
-  ///               "It's Me",
-  ///               style: MyApp.style,
-  ///             ),
-  ///             Text(
-  ///               "Sahdeep",
-  ///               style: MyApp.style,
-  ///             ),
-  ///           ],
-  ///         ),
-  ///       ],
-  ///     ),
-  ///   ),
-  /// ```
-  ///
-  /// You can just create a list using this type of widgets
-  final List<Widget> pages;
-
   /// Required a double value for swipe animation sensitivity
   ///
   /// Default : 400
@@ -211,9 +188,56 @@ class LiquidSwipe extends StatefulWidget {
   ///Required a bool to Enable or Disable the side reveal i.e., this clip area on the right side with 15.0px of reveal.
   final bool enableSideReveal;
 
-  const LiquidSwipe({
+  /// A Custom child delegate responsible for child creation in case of builder or fetcher in case of List.
+  ///
+  /// See also [LiquidSwipeChildDelegate]
+  final LiquidSwipeChildDelegate liquidSwipeChildDelegate;
+
+  /// Constructor for LiquidSwipe for predefined [pages]
+  ///Required List of Widgets like Container/SizedBox
+  ///
+  /// sample page :
+  ///
+  /// ```dart
+  ///     Container(
+  ///      color: Colors.pink,
+  ///      child: Column(
+  ///       crossAxisAlignment: CrossAxisAlignment.center,
+  ///       mainAxisSize: MainAxisSize.max,
+  ///       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  ///       children: <Widget>[
+  ///         Image.asset(
+  ///           'assets/1.png',
+  ///           fit: BoxFit.cover,
+  ///         ),
+  ///         Padding(
+  ///           padding: EdgeInsets.all(20.0),
+  ///         ),
+  ///         Column(
+  ///           children: <Widget>[
+  ///             Text(
+  ///               "Hi",
+  ///               style: MyApp.style,
+  ///             ),
+  ///             Text(
+  ///               "It's Me",
+  ///               style: MyApp.style,
+  ///             ),
+  ///             Text(
+  ///               "Sahdeep",
+  ///               style: MyApp.style,
+  ///             ),
+  ///           ],
+  ///         ),
+  ///       ],
+  ///     ),
+  ///   ),
+  /// ```
+  ///
+  /// You can just create a list using this type of widgets
+  LiquidSwipe({
     Key? key,
-    required this.pages,
+    required List<Widget> pages,
     this.fullTransitionValue = FULL_TRANSITION_PX,
     this.initialPage = 0,
     this.slideIconWidget,
@@ -229,6 +253,72 @@ class LiquidSwipe extends StatefulWidget {
     this.enableSideReveal = false,
   })  : assert(initialPage >= 0 && initialPage < pages.length),
         assert(positionSlideIcon >= 0 && positionSlideIcon <= 1),
+        liquidSwipeChildDelegate = LiquidSwipePagesChildDelegate(pages),
+        super(key: key);
+
+  ///A builder constructor with same fields but with [itemBuilder]
+  ///Sample itembuilder :
+  ///
+  ///               itemCount: data.length,
+  ///               itemBuilder: (context, index){
+  ///                 return Container(
+  ///                   color: data[index].color,
+  ///                   child: Column(
+  ///                     crossAxisAlignment: CrossAxisAlignment.center,
+  ///                     mainAxisSize: MainAxisSize.max,
+  ///                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  ///                     children: <Widget>[
+  ///                       Image.asset(
+  ///                         data[index].image,
+  ///                         fit: BoxFit.cover,
+  ///                       ),
+  ///                       Padding(
+  ///                         padding: EdgeInsets.all(20.0),
+  ///                       ),
+  ///                       Column(
+  ///                         children: <Widget>[
+  ///                           Text(
+  ///                             data[index].text1,
+  ///                             style: WithPages.style,
+  ///                           ),
+  ///                           Text(
+  ///                             data[index].text2,
+  ///                             style: WithPages.style,
+  ///                           ),
+  ///                           Text(
+  ///                             data[index].text3,
+  ///                             style: WithPages.style,
+  ///                           ),
+  ///                         ],
+  ///                       ),
+  ///                     ],
+  ///                   ),
+  ///                 );
+  ///               },
+  ///
+  /// See Example for complete reference.
+  LiquidSwipe.builder({
+    Key? key,
+    required IndexedWidgetBuilder itemBuilder,
+    required int itemCount,
+    this.fullTransitionValue = FULL_TRANSITION_PX,
+    this.initialPage = 0,
+    this.slideIconWidget,
+    this.positionSlideIcon = 0.8,
+    this.enableLoop = true,
+    this.liquidController,
+    this.waveType = WaveType.liquidReveal,
+    this.onPageChangeCallback,
+    this.currentUpdateTypeCallback,
+    this.slidePercentCallback,
+    this.ignoreUserGestureWhileAnimating = false,
+    this.disableUserGesture = false,
+    this.enableSideReveal = false,
+  })  : assert(itemCount > 0),
+        assert(initialPage >= 0 && initialPage < itemCount),
+        assert(positionSlideIcon >= 0 && positionSlideIcon <= 1),
+        liquidSwipeChildDelegate =
+            LiquidSwipeBuilderChildDelegate(itemBuilder, itemCount),
         super(key: key);
 
   @override
@@ -246,13 +336,12 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = widget.pages;
     return ChangeNotifierProvider<LiquidProvider>(
       create: (BuildContext context) {
         return LiquidProvider(
           initialPage: widget.initialPage,
           loop: widget.enableLoop,
-          length: pages.length,
+          length: widget.liquidSwipeChildDelegate.itemCount(),
           vsync: this,
           slideIcon: widget.positionSlideIcon,
           currentUpdateTypeCallback: widget.currentUpdateTypeCallback,
@@ -262,21 +351,26 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
           enableSideReveal: widget.enableSideReveal,
         );
       },
-      child: Consumer(builder: (BuildContext context, LiquidProvider notifier, _) {
+      child:
+          Consumer(builder: (BuildContext context, LiquidProvider notifier, _) {
         liquidController.setContext(context);
         return Stack(
           alignment: Alignment.center,
           children: <Widget>[
             notifier.slideDirection == SlideDirection.leftToRight
-                ? pages[notifier.activePageIndex]
-                : pages[notifier.nextPageIndex],
+                ? widget.liquidSwipeChildDelegate
+                    .getChildAtIndex(context, notifier.activePageIndex)
+                : widget.liquidSwipeChildDelegate
+                    .getChildAtIndex(context, notifier.nextPageIndex),
             //Pages
             PageReveal(
               //next page reveal
               horizontalReveal: notifier.slidePercentHor,
               child: notifier.slideDirection == SlideDirection.leftToRight
-                  ? pages[notifier.nextPageIndex]
-                  : pages[notifier.activePageIndex],
+                  ? widget.liquidSwipeChildDelegate
+                      .getChildAtIndex(context, notifier.nextPageIndex)
+                  : widget.liquidSwipeChildDelegate
+                      .getChildAtIndex(context, notifier.activePageIndex),
               slideDirection: notifier.slideDirection,
               iconSize: notifier.iconSize,
               waveType: widget.waveType,
