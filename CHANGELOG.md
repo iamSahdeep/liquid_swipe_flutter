@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.0.2
+* fixes : #67 (made side reveal optional)
+
 ## 2.0.1
 * fixed : #65
 

@@ -52,7 +52,7 @@
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^2.0.1
+  liquid_swipe: ^2.0.2
   
   ```
 * Get the package from Pub:
@@ -129,6 +129,7 @@ Please Refer to [API documentation](https://pub.dev/documentation/liquid_swipe/l
 | slidePercentCallback | `Callback` | Triggered on Swipe animation. Use carefully as its quite frequent on swipe. | null |
 | ignoreUserGestureWhileAnimating | `bool` | If you want to block gestures while swipe is still animating. See #5 | false |
 | disableUserGesture | `bool` | Disable user gesture, always. | false |
+| enableSideReveal | `bool` | Enable/Disable side reveal | false |
 
 ## LiquidController
 
@@ -155,7 +156,7 @@ Now simply add it to LiquidSwipe's Constructor
     ),
 ```
 
-Only Rules/Limitation to its Usage is For now you can't use any method in Liquid Controller before build method is being called in which LiquidSwipe is initialized. So we have to use them after LiquidSwipe is Built
+Only Rules/Limitation to its Usage is, you can't use any method in Liquid Controller before build method is being called in which LiquidSwipe is initialized. So we have to use them after LiquidSwipe is Built
 
 - Properties
   - `currentPage` - Getter to get current Page. Default value is 0.
