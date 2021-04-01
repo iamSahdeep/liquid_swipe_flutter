@@ -23,6 +23,7 @@ class PageReveal extends StatelessWidget {
   final Size iconSize;
   final WaveType waveType;
   final double verticalReveal;
+  final bool enableSideReveal;
 
   ///Constructor for [PageReveal].
   PageReveal({
@@ -32,6 +33,7 @@ class PageReveal extends StatelessWidget {
     required this.iconSize,
     required this.waveType,
     required this.verticalReveal,
+    required this.enableSideReveal,
   });
 
   @override
@@ -59,6 +61,7 @@ class PageReveal extends StatelessWidget {
             slideDirection: slideDirection,
             iconSize: iconSize,
             verReveal: verticalReveal,
+            enableSideReveal: enableSideReveal
           ),
           child: child,
         );

@@ -74,6 +74,8 @@ class LiquidProvider extends ChangeNotifier {
   ///default = false
   bool shouldDisableUserGesture = false;
 
+  bool enableSideReveal = false;
+
   Size iconSize = Size.zero;
 
   Timer? _timer;
@@ -84,16 +86,17 @@ class LiquidProvider extends ChangeNotifier {
   /// [initialPage] - Initial Page of the LiquidSwipe (0 - n)
   /// [loop]  - Should Enable Loop between Pages
   /// [length]  - Total Number of Pages
-  LiquidProvider(
-      {required int initialPage,
-      required bool loop,
-      required int length,
-      required TickerProviderStateMixin vsync,
-      required double slideIcon,
-      required OnPageChangeCallback? onPageChangeCallback,
-      required CurrentUpdateTypeCallback? currentUpdateTypeCallback,
-      required SlidePercentCallback? slidePercentCallback,
-      required bool disableGesture}) {
+  LiquidProvider({required int initialPage,
+    required bool loop,
+    required int length,
+    required TickerProviderStateMixin vsync,
+    required double slideIcon,
+    required OnPageChangeCallback? onPageChangeCallback,
+    required CurrentUpdateTypeCallback? currentUpdateTypeCallback,
+    required SlidePercentCallback? slidePercentCallback,
+    required bool disableGesture,
+    required bool enableSideReveal,
+  }) {
     slidePercentHor = 0.00;
     slidePercentVer = 0.00;
     activePageIndex = initialPage;
@@ -106,6 +109,7 @@ class LiquidProvider extends ChangeNotifier {
     _slidePercentCallback = slidePercentCallback;
     _onPageChangeCallback = onPageChangeCallback;
     shouldDisableUserGesture = disableGesture;
+    this.enableSideReveal = enableSideReveal;
 
     updateSlide(SlideUpdate(
       SlideDirection.rightToLeft,

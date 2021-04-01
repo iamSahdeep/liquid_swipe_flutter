@@ -13,12 +13,14 @@ class WaveLayer extends CustomClipper<Path> {
   late double sideWidth;
   Size iconSize;
   SlideDirection? slideDirection;
+  bool enableSideReveal;
 
   WaveLayer({
     required this.revealPercent,
     required this.slideDirection,
     required this.iconSize,
     required this.verReveal,
+    required this.enableSideReveal,
   });
 
   @override
@@ -142,7 +144,7 @@ class WaveLayer extends CustomClipper<Path> {
     var p2 = 0.8;
 
     if (revealPercent <= p1) {
-      return 15.0;
+      return enableSideReveal ? 15.0 : 0;
     }
 
     if (revealPercent >= p2) {
@@ -161,7 +163,7 @@ class WaveLayer extends CustomClipper<Path> {
     var p1 = 0.4;
 
     if (revealPercent <= 0) {
-      return iconSize.height;
+      return enableSideReveal ? iconSize.height : 0;
     }
 
     if (revealPercent >= p1) {

@@ -7,13 +7,15 @@ final clipPathWidget = WaveLayer(
     revealPercent: 0.0,
     slideDirection: SlideDirection.leftToRight,
     iconSize: iconSize,
-    verReveal: 0.0);
+    verReveal: 0.0,
+    enableSideReveal: false);
 
 final clipPathWidget2 = WaveLayer(
     revealPercent: 1,
     slideDirection: SlideDirection.rightToLeft,
     iconSize: iconSize,
-    verReveal: 1);
+    verReveal: 1,
+    enableSideReveal: true);
 
 final iconSize = Size(50, 50);
 
@@ -28,7 +30,7 @@ void main() {
     await tester.pumpWidget(ClipPath(
       clipper: clipPathWidget2,
     ));
-    final findClipPath2= find.byType(ClipPath);
+    final findClipPath2 = find.byType(ClipPath);
     expect(findClipPath2, findsOneWidget);
   });
 

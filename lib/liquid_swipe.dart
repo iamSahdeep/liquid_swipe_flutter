@@ -208,6 +208,9 @@ class LiquidSwipe extends StatefulWidget {
   ///see also for runtime changes : [LiquidController.shouldDisableGestures]
   final bool disableUserGesture;
 
+  ///Required a bool to Enable or Disable the side reveal i.e., this clip area on the right side with 15.0px of reveal.
+  final bool enableSideReveal;
+
   const LiquidSwipe({
     Key? key,
     required this.pages,
@@ -223,6 +226,7 @@ class LiquidSwipe extends StatefulWidget {
     this.slidePercentCallback,
     this.ignoreUserGestureWhileAnimating = false,
     this.disableUserGesture = false,
+    this.enableSideReveal = false,
   })  : assert(initialPage >= 0 && initialPage < pages.length),
         assert(positionSlideIcon >= 0 && positionSlideIcon <= 1),
         super(key: key);
@@ -246,35 +250,38 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
     return ChangeNotifierProvider<LiquidProvider>(
       create: (BuildContext context) {
         return LiquidProvider(
-            initialPage: widget.initialPage,
-            loop: widget.enableLoop,
-            length: pages.length,
-            vsync: this,
-            slideIcon: widget.positionSlideIcon,
-            currentUpdateTypeCallback: widget.currentUpdateTypeCallback,
-            slidePercentCallback: widget.slidePercentCallback,
-            onPageChangeCallback: widget.onPageChangeCallback,
-            disableGesture: widget.disableUserGesture);
+          initialPage: widget.initialPage,
+          loop: widget.enableLoop,
+          length: pages.length,
+          vsync: this,
+          slideIcon: widget.positionSlideIcon,
+          currentUpdateTypeCallback: widget.currentUpdateTypeCallback,
+          slidePercentCallback: widget.slidePercentCallback,
+          onPageChangeCallback: widget.onPageChangeCallback,
+          disableGesture: widget.disableUserGesture,
+          enableSideReveal: widget.enableSideReveal,
+        );
       },
-      child: Consumer(builder: (BuildContext context, LiquidProvider model, _) {
+      child: Consumer(builder: (BuildContext context, LiquidProvider notifier, _) {
         liquidController.setContext(context);
         return Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            model.slideDirection == SlideDirection.leftToRight
-                ? pages[model.activePageIndex]
-                : pages[model.nextPageIndex],
+            notifier.slideDirection == SlideDirection.leftToRight
+                ? pages[notifier.activePageIndex]
+                : pages[notifier.nextPageIndex],
             //Pages
             PageReveal(
               //next page reveal
-              horizontalReveal: model.slidePercentHor,
-              child: model.slideDirection == SlideDirection.leftToRight
-                  ? pages[model.nextPageIndex]
-                  : pages[model.activePageIndex],
-              slideDirection: model.slideDirection,
-              iconSize: model.iconSize,
+              horizontalReveal: notifier.slidePercentHor,
+              child: notifier.slideDirection == SlideDirection.leftToRight
+                  ? pages[notifier.nextPageIndex]
+                  : pages[notifier.activePageIndex],
+              slideDirection: notifier.slideDirection,
+              iconSize: notifier.iconSize,
               waveType: widget.waveType,
-              verticalReveal: model.slidePercentVer,
+              verticalReveal: notifier.slidePercentVer,
+              enableSideReveal: notifier.enableSideReveal,
             ),
             PageDragger(
               //Used for gesture control
