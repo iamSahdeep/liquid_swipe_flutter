@@ -52,7 +52,7 @@
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^2.0.2
+  liquid_swipe: ^2.1.0
   
   ```
 * Get the package from Pub:
