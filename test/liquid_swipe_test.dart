@@ -100,9 +100,7 @@ void main() {
     final findLiquidSwipeCR = find.byWidget(liquidSwipeWidgetCR);
     expect(findLiquidSwipeCR, findsOneWidget);
 
-    expect(liquidController.currentPage, 0);
-
-    await tester.drag(find.byType(MaterialApp), Offset(-400.0, 0.0));
+    await tester.drag(find.byType(MaterialApp), Offset(400.0, 0.0));
 
     await tester.pumpAndSettle();
 
@@ -118,7 +116,7 @@ void main() {
 
     liquidController.jumpToPage(page: 0);
 
-    await tester.drag(find.byType(MaterialApp), Offset(-400.0, 100.0));
+    await tester.drag(find.byType(MaterialApp), Offset(400.0, 100.0));
 
     await tester.pumpAndSettle();
 
@@ -126,11 +124,11 @@ void main() {
 
     liquidController.jumpToPage(page: 0);
 
-    await tester.drag(find.byType(MaterialApp), Offset(400.0, 100.0));
+    await tester.drag(find.byType(MaterialApp), Offset(-400.0, 100.0));
 
     await tester.pumpAndSettle();
 
-    expect(liquidController.currentPage, 0);
+    expect(liquidController.currentPage, 1);
 
   });
 }

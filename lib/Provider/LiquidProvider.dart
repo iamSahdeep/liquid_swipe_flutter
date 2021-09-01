@@ -244,10 +244,10 @@ class LiquidProvider extends ChangeNotifier {
   ///in this methods,
   ///All callbacks and factors are also managed by this method.
   updateData(SlideUpdate event) {
-    if (event.direction == SlideDirection.leftToRight && activePageIndex == 0) {
+    if (!enableLoop) if (event.direction == SlideDirection.leftToRight &&
+        activePageIndex == 0) {
       return;
-    }
-    if (event.direction == SlideDirection.rightToLeft &&
+    } else if (event.direction == SlideDirection.rightToLeft &&
         activePageIndex == pagesLength - 1) {
       return;
     }

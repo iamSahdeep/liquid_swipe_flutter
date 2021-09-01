@@ -124,7 +124,7 @@ class _WithBuilder extends State<WithBuilder> {
               liquidController: liquidController,
               fullTransitionValue: 880,
               enableSideReveal: true,
-              enableLoop: false,
+              enableLoop: true,
               ignoreUserGestureWhileAnimating: true,
             ),
             Padding(
