@@ -122,7 +122,9 @@ class _WithBuilder extends State<WithBuilder> {
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
               liquidController: liquidController,
+              fullTransitionValue: 880,
               enableSideReveal: true,
+              enableLoop: false,
               ignoreUserGestureWhileAnimating: true,
             ),
             Padding(
