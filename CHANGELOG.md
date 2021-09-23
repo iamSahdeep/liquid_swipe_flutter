@@ -1,5 +1,8 @@
 # ChangeLog
 
+## 2.1.1
+* Bug fixes
+
 ## 2.1.0
 * fixes : #66 (new builder constructor to dynamically create pages)
 
