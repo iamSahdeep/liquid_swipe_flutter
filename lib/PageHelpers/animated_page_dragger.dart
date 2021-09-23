@@ -75,8 +75,8 @@ class AnimatedPageDragger {
         //Adding to slide update stream
         slideUpdateStream.updateSlide(SlideUpdate(
           slideDirection,
-          slidePercent!,
-          slidePercentVer!,
+          slidePercent ?? 0,
+          slidePercentVer ?? 0,
           UpdateType.animating,
         ));
       })
