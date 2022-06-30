@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/Clippers/CircularWave.dart';
+import 'package:liquid_swipe/Clippers/WaveLayer.dart';
 import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
-
-import '../Clippers/WaveLayer.dart';
 
 /// Internal Class
 ///

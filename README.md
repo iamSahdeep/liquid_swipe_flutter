@@ -52,7 +52,7 @@
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^2.1.0
+  liquid_swipe: ^3.0.0
   
   ```
 * Get the package from Pub:
@@ -180,10 +180,7 @@ Please Refer to [API documentation](https://pub.dev/documentation/liquid_swipe/l
  
 # Author & support
 This project is created by [Sahdeep Singh](https://github.com/iamSahdeep) but with lots of support and help. See credits.
-> If you appreciate my work, consider buying me a cup of :coffee: to keep me recharged :metal:
->  + [PayPal](https://www.paypal.me/sahdeep)
->
-> Or you can also connect/endorse me on [LinkedIn](https://www.linkedin.com/in/iamsahdeep/) to keep me motivated.
+> If you appreciate my work you can connect/endorse me on [LinkedIn](https://www.linkedin.com/in/iamsahdeep/) to keep me motivated.
 
 
 <img src="https://cdn-images-1.medium.com/max/1200/1*2yFbiGdcACiuLGo4dMKmJw.jpeg" width="90" height="35">

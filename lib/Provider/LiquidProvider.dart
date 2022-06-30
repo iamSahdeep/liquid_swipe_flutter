@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/SlideUpdate.dart';
 import 'package:liquid_swipe/PageHelpers/animated_page_dragger.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';

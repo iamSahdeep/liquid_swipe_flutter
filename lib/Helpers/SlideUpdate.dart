@@ -1,4 +1,3 @@
-import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 ///A model class with data specific to Update in [LiquidController]
