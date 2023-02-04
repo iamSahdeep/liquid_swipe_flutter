@@ -278,43 +278,45 @@ class LiquidSwipe extends StatefulWidget {
 
   ///A builder constructor with same fields but with [itemBuilder]
   ///Sample itembuilder :
-  ///
-  ///               itemCount: data.length,
-  ///               itemBuilder: (context, index){
-  ///                 return Container(
-  ///                   color: data[index].color,
-  ///                   child: Column(
-  ///                     crossAxisAlignment: CrossAxisAlignment.center,
-  ///                     mainAxisSize: MainAxisSize.max,
-  ///                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  ///                     children: <Widget>[
-  ///                       Image.asset(
-  ///                         data[index].image,
-  ///                         fit: BoxFit.cover,
-  ///                       ),
-  ///                       Padding(
-  ///                         padding: EdgeInsets.all(20.0),
-  ///                       ),
-  ///                       Column(
-  ///                         children: <Widget>[
-  ///                           Text(
-  ///                             data[index].text1,
-  ///                             style: WithPages.style,
-  ///                           ),
-  ///                           Text(
-  ///                             data[index].text2,
-  ///                             style: WithPages.style,
-  ///                           ),
-  ///                           Text(
-  ///                             data[index].text3,
-  ///                             style: WithPages.style,
-  ///                           ),
-  ///                         ],
-  ///                       ),
-  ///                     ],
-  ///                   ),
-  ///                 );
-  ///               },
+  ///```dart
+  /// LiquidSwipe.builder(
+  ///   itemCount: data.length,
+  ///   itemBuilder: (context, index){
+  ///   return Container(
+  ///     color: data[index].color,
+  ///     child: Column(
+  ///       crossAxisAlignment: CrossAxisAlignment.center,
+  ///       mainAxisSize: MainAxisSize.max,
+  ///       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  ///       children: <Widget>[
+  ///         Image.asset(
+  ///           data[index].image,
+  ///           fit: BoxFit.cover,
+  ///         ),
+  ///         Padding(
+  ///           padding: EdgeInsets.all(20.0),
+  ///         ),
+  ///         Column(
+  ///           children: <Widget>[
+  ///             Text(
+  ///               data[index].text1,
+  ///               style: WithPages.style,
+  ///             ),
+  ///             Text(
+  ///               data[index].text2,
+  ///               style: WithPages.style,
+  ///             ),
+  ///             Text(
+  ///               data[index].text3,
+  ///               style: WithPages.style,
+  ///             ),
+  ///           ],
+  ///         ),
+  ///       ],
+  ///      ),
+  ///   );}
+  /// ),
+  ///```
   ///
   /// See Example for complete reference.
   LiquidSwipe.builder({
