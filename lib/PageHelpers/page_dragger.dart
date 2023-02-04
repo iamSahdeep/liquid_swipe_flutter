@@ -17,7 +17,7 @@ class PageDragger extends StatefulWidget {
   final WaveType waveType;
   final double verticalReveal;
   final bool enableSideReveal;
-  final bool allowDragOnlyFromRevealedArea;
+  final bool preferDragFromRevealedArea;
 
   /// Used to make animation faster or slower through it corresponding value
   /// default : [FULL_TRANSITION_PX]
@@ -41,7 +41,7 @@ class PageDragger extends StatefulWidget {
     required this.waveType,
     required this.verticalReveal,
     required this.enableSideReveal,
-    required this.allowDragOnlyFromRevealedArea,
+    required this.preferDragFromRevealedArea,
     this.fullTransitionPX = FULL_TRANSITION_PX,
     this.slideIconWidget,
     this.iconPosition,
@@ -149,20 +149,20 @@ class _PageDraggerState extends State<PageDragger> {
     final model = Provider.of<LiquidProvider>(context, listen: false);
 
     return GestureDetector(
-        behavior: widget.allowDragOnlyFromRevealedArea
+        behavior: widget.preferDragFromRevealedArea
             ? HitTestBehavior.translucent
             : null,
-        onHorizontalDragStart: widget.allowDragOnlyFromRevealedArea
+        onHorizontalDragStart: widget.preferDragFromRevealedArea
             ? model.isInProgress
                 ? null
                 : onDragStart
             : null,
-        onHorizontalDragUpdate: widget.allowDragOnlyFromRevealedArea
+        onHorizontalDragUpdate: widget.preferDragFromRevealedArea
             ? model.isInProgress
                 ? null
                 : onDragUpdate
             : null,
-        onHorizontalDragEnd: widget.allowDragOnlyFromRevealedArea
+        onHorizontalDragEnd: widget.preferDragFromRevealedArea
             ? model.isInProgress
                 ? null
                 : onDragEnd
@@ -180,20 +180,20 @@ class _PageDraggerState extends State<PageDragger> {
               child: widget.child,
             ),
             GestureDetector(
-              behavior: !widget.allowDragOnlyFromRevealedArea
+              behavior: !widget.preferDragFromRevealedArea
                   ? HitTestBehavior.translucent
                   : null,
-              onHorizontalDragStart: !widget.allowDragOnlyFromRevealedArea
+              onHorizontalDragStart: !widget.preferDragFromRevealedArea
                   ? model.isInProgress
                       ? null
                       : onDragStart
                   : null,
-              onHorizontalDragUpdate: !widget.allowDragOnlyFromRevealedArea
+              onHorizontalDragUpdate: !widget.preferDragFromRevealedArea
                   ? model.isInProgress
                       ? null
                       : onDragUpdate
                   : null,
-              onHorizontalDragEnd: !widget.allowDragOnlyFromRevealedArea
+              onHorizontalDragEnd: !widget.preferDragFromRevealedArea
                   ? model.isInProgress
                       ? null
                       : onDragEnd

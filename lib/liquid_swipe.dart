@@ -174,18 +174,25 @@ class LiquidSwipe extends StatefulWidget {
   ///see [SlidePercentCallback]
   final SlidePercentCallback? slidePercentCallback;
 
-  ///Required a bool value for disabling drag from the whole page and
-  /// allowing only from the revealed part of the screen and the icon
+  ///Required a bool value to prefer disabling the drag from the whole page and
+  /// allowing only from the revealed part of the screen and the icon.
   ///
-  /// Set this to true if facing problems in giving gesture controls to
-  /// the pages
+  /// When set to true, it will ignore any gesture arenas inside the container pages
+  /// allowing them to work properly. However the page will still be draggable from non
+  /// gesture arenas.
   ///
+  /// At least one of the [slideIconWidget] or [enableSideReveal] must be there
+  /// for this to work.
+  ///
+  /// Set this to true if facing problems in giving gesture controls inside the pages
+  ///
+  /// ----
   /// Refer to:
   ///
-  /// https://github.com/iamSahdeep/liquid_swipe_flutter/issues/85
+  /// * https://github.com/iamSahdeep/liquid_swipe_flutter/issues/85
   ///
-  /// https://github.com/iamSahdeep/liquid_swipe_flutter/issues/83
-  final bool allowDragOnlyFromRevealedArea;
+  /// * https://github.com/iamSahdeep/liquid_swipe_flutter/issues/83
+  final bool preferDragFromRevealedArea;
 
   ///Required a bool value for disabling Fast Animation between pages
   ///
@@ -260,7 +267,7 @@ class LiquidSwipe extends StatefulWidget {
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
     this.slidePercentCallback,
-    this.allowDragOnlyFromRevealedArea = false,
+    this.preferDragFromRevealedArea = false,
     this.ignoreUserGestureWhileAnimating = false,
     this.disableUserGesture = false,
     this.enableSideReveal = false,
@@ -324,7 +331,7 @@ class LiquidSwipe extends StatefulWidget {
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
     this.slidePercentCallback,
-    this.allowDragOnlyFromRevealedArea = false,
+    this.preferDragFromRevealedArea = false,
     this.ignoreUserGestureWhileAnimating = false,
     this.disableUserGesture = false,
     this.enableSideReveal = false,
@@ -385,7 +392,7 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
               waveType: widget.waveType,
               verticalReveal: notifier.slidePercentVer,
               enableSideReveal: notifier.enableSideReveal,
-              allowDragOnlyFromRevealedArea: widget.allowDragOnlyFromRevealedArea,
+              preferDragFromRevealedArea: widget.preferDragFromRevealedArea,
               fullTransitionPX: widget.fullTransitionValue,
               slideIconWidget: widget.slideIconWidget,
               iconPosition: widget.positionSlideIcon,
