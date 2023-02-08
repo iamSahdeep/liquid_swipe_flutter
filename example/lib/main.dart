@@ -6,8 +6,8 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 void main() {
   /// Comment or uncomment to run both examples
   runApp(
-    WithBuilder(),
-    //WithPages()
+      WithBuilder()
+      // WithPages()
   );
 }
 
@@ -30,8 +30,8 @@ class WithBuilder extends StatefulWidget {
 
 class _WithBuilder extends State<WithBuilder> {
   int page = 0;
-  LiquidController liquidController;
-  UpdateType updateType;
+  late LiquidController liquidController;
+  late UpdateType updateType;
 
   List<ItemData> data = [
     ItemData(Colors.blue, "assets/1.png", "Hi", "It's Me", "Sahdeep"),
@@ -40,6 +40,8 @@ class _WithBuilder extends State<WithBuilder> {
     ItemData(Colors.green, "assets/1.png", "Liked?", "Fork!", "Give Star!"),
     ItemData(Colors.yellow, "assets/1.png", "Can be", "Used for",
         "Onboarding design"),
+    ItemData(
+        Colors.pink, "assets/1.png", "Example", "of a page", "with Gesture"),
     ItemData(Colors.red, "assets/1.png", "Do", "try it", "Thank you"),
   ];
 
@@ -91,12 +93,19 @@ class _WithBuilder extends State<WithBuilder> {
                     children: <Widget>[
                       Image.asset(
                         data[index].image,
-                        height: 400,
+                        height: 300,
                         fit: BoxFit.contain,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(20.0),
+                        padding: EdgeInsets.all(index != 4 ? 24.0 : 0),
                       ),
+                      index == 4
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 70.0),
+                              child: ExampleSlider(),
+                            )
+                          : SizedBox.shrink(),
                       Column(
                         children: <Widget>[
                           Text(
@@ -124,6 +133,7 @@ class _WithBuilder extends State<WithBuilder> {
               liquidController: liquidController,
               fullTransitionValue: 880,
               enableSideReveal: true,
+              preferDragFromRevealedArea: true,
               enableLoop: true,
               ignoreUserGestureWhileAnimating: true,
             ),
@@ -143,13 +153,15 @@ class _WithBuilder extends State<WithBuilder> {
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {
                     liquidController.animateToPage(
                         page: data.length - 1, duration: 700);
                   },
                   child: Text("Skip to End"),
-                  color: Colors.white.withOpacity(0.01),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.01),
+                      foregroundColor: Colors.black),
                 ),
               ),
             ),
@@ -157,7 +169,7 @@ class _WithBuilder extends State<WithBuilder> {
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {
                     liquidController.jumpToPage(
                         page: liquidController.currentPage + 1 > data.length - 1
@@ -165,7 +177,9 @@ class _WithBuilder extends State<WithBuilder> {
                             : liquidController.currentPage + 1);
                   },
                   child: Text("Next"),
-                  color: Colors.white.withOpacity(0.01),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.01),
+                      foregroundColor: Colors.black),
                 ),
               ),
             )
@@ -196,18 +210,11 @@ class WithPages extends StatefulWidget {
 
 class _WithPages extends State<WithPages> {
   int page = 0;
-  LiquidController liquidController;
-  UpdateType updateType;
-
-  @override
-  void initState() {
-    liquidController = LiquidController();
-    super.initState();
-  }
-
+  late LiquidController liquidController;
+  late UpdateType updateType;
   final pages = [
     Container(
-      color: Colors.pink,
+      color: Colors.blue,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
@@ -218,7 +225,7 @@ class _WithPages extends State<WithPages> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(24.0),
           ),
           Column(
             children: <Widget>[
@@ -251,7 +258,7 @@ class _WithPages extends State<WithPages> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(24.0),
           ),
           Column(
             children: <Widget>[
@@ -273,7 +280,7 @@ class _WithPages extends State<WithPages> {
       ),
     ),
     Container(
-      color: Colors.greenAccent,
+      color: Colors.green,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
@@ -284,7 +291,7 @@ class _WithPages extends State<WithPages> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(24.0),
           ),
           Column(
             children: <Widget>[
@@ -306,7 +313,7 @@ class _WithPages extends State<WithPages> {
       ),
     ),
     Container(
-      color: Colors.yellowAccent,
+      color: Colors.yellow,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
@@ -317,7 +324,7 @@ class _WithPages extends State<WithPages> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(24.0),
           ),
           Column(
             children: <Widget>[
@@ -339,7 +346,7 @@ class _WithPages extends State<WithPages> {
       ),
     ),
     Container(
-      color: Colors.redAccent,
+      color: Colors.pink,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
@@ -350,7 +357,41 @@ class _WithPages extends State<WithPages> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 70.0),
+            child: ExampleSlider(),
+          ),
+          Column(
+            children: <Widget>[
+              Text(
+                "Example",
+                style: WithPages.style,
+              ),
+              Text(
+                "of a page",
+                style: WithPages.style,
+              ),
+              Text(
+                "with Gesture",
+                style: WithPages.style,
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+    Container(
+      color: Colors.red,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Image.asset(
+            'assets/1.png',
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: EdgeInsets.all(24.0),
           ),
           Column(
             children: <Widget>[
@@ -372,6 +413,12 @@ class _WithPages extends State<WithPages> {
       ),
     ),
   ];
+
+  @override
+  void initState() {
+    liquidController = LiquidController();
+    super.initState();
+  }
 
   Widget _buildDot(int index) {
     double selectedness = Curves.easeOut.transform(
@@ -404,12 +451,16 @@ class _WithPages extends State<WithPages> {
           children: <Widget>[
             LiquidSwipe(
               pages: pages,
+              positionSlideIcon: 0.8,
+              fullTransitionValue: 880,
               slideIconWidget: Icon(Icons.arrow_back_ios),
               onPageChangeCallback: pageChangeCallback,
               waveType: WaveType.liquidReveal,
               liquidController: liquidController,
+              preferDragFromRevealedArea: true,
               enableSideReveal: true,
               ignoreUserGestureWhileAnimating: true,
+              enableLoop: true,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -427,13 +478,15 @@ class _WithPages extends State<WithPages> {
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {
                     liquidController.animateToPage(
                         page: pages.length - 1, duration: 700);
                   },
                   child: Text("Skip to End"),
-                  color: Colors.white.withOpacity(0.01),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.01),
+                      foregroundColor: Colors.black),
                 ),
               ),
             ),
@@ -441,7 +494,7 @@ class _WithPages extends State<WithPages> {
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {
                     liquidController.jumpToPage(
                         page:
@@ -450,7 +503,9 @@ class _WithPages extends State<WithPages> {
                                 : liquidController.currentPage + 1);
                   },
                   child: Text("Next"),
-                  color: Colors.white.withOpacity(0.01),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.01),
+                      foregroundColor: Colors.black),
                 ),
               ),
             )
@@ -464,5 +519,29 @@ class _WithPages extends State<WithPages> {
     setState(() {
       page = lpage;
     });
+  }
+}
+
+class ExampleSlider extends StatefulWidget {
+  const ExampleSlider({Key? key}) : super(key: key);
+
+  @override
+  State<ExampleSlider> createState() => _ExampleSliderState();
+}
+
+class _ExampleSliderState extends State<ExampleSlider> {
+  double sliderVal = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slider(
+        value: sliderVal,
+        activeColor: Colors.white,
+        inactiveColor: Colors.red,
+        onChanged: (val) {
+          setState(() {
+            sliderVal = val;
+          });
+        });
   }
 }

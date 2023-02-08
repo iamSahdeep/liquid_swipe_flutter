@@ -4,7 +4,6 @@ import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/LiquidSwipeChildDelegate.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 import 'package:liquid_swipe/PageHelpers/page_dragger.dart';
-import 'package:liquid_swipe/PageHelpers/page_reveal.dart';
 import 'package:liquid_swipe/Provider/LiquidProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -175,6 +174,26 @@ class LiquidSwipe extends StatefulWidget {
   ///see [SlidePercentCallback]
   final SlidePercentCallback? slidePercentCallback;
 
+  ///Required a bool value to prefer disabling the drag from the whole page and
+  /// allowing only from the revealed part of the screen and the icon.
+  ///
+  /// When set to true, it will ignore any gesture arenas inside the container pages
+  /// allowing them to work properly. However the page will still be draggable from non
+  /// gesture arenas.
+  ///
+  /// At least one of the [slideIconWidget] or [enableSideReveal] must be there
+  /// for this to work.
+  ///
+  /// Set this to true if facing problems in giving gesture controls inside the pages
+  ///
+  /// ----
+  /// Refer to:
+  ///
+  /// * https://github.com/iamSahdeep/liquid_swipe_flutter/issues/85
+  ///
+  /// * https://github.com/iamSahdeep/liquid_swipe_flutter/issues/83
+  final bool preferDragFromRevealedArea;
+
   ///Required a bool value for disabling Fast Animation between pages
   ///
   /// If true fast swiping is disabled
@@ -248,6 +267,7 @@ class LiquidSwipe extends StatefulWidget {
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
     this.slidePercentCallback,
+    this.preferDragFromRevealedArea = false,
     this.ignoreUserGestureWhileAnimating = false,
     this.disableUserGesture = false,
     this.enableSideReveal = false,
@@ -258,43 +278,45 @@ class LiquidSwipe extends StatefulWidget {
 
   ///A builder constructor with same fields but with [itemBuilder]
   ///Sample itembuilder :
-  ///
-  ///               itemCount: data.length,
-  ///               itemBuilder: (context, index){
-  ///                 return Container(
-  ///                   color: data[index].color,
-  ///                   child: Column(
-  ///                     crossAxisAlignment: CrossAxisAlignment.center,
-  ///                     mainAxisSize: MainAxisSize.max,
-  ///                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  ///                     children: <Widget>[
-  ///                       Image.asset(
-  ///                         data[index].image,
-  ///                         fit: BoxFit.cover,
-  ///                       ),
-  ///                       Padding(
-  ///                         padding: EdgeInsets.all(20.0),
-  ///                       ),
-  ///                       Column(
-  ///                         children: <Widget>[
-  ///                           Text(
-  ///                             data[index].text1,
-  ///                             style: WithPages.style,
-  ///                           ),
-  ///                           Text(
-  ///                             data[index].text2,
-  ///                             style: WithPages.style,
-  ///                           ),
-  ///                           Text(
-  ///                             data[index].text3,
-  ///                             style: WithPages.style,
-  ///                           ),
-  ///                         ],
-  ///                       ),
-  ///                     ],
-  ///                   ),
-  ///                 );
-  ///               },
+  ///```dart
+  /// LiquidSwipe.builder(
+  ///   itemCount: data.length,
+  ///   itemBuilder: (context, index){
+  ///   return Container(
+  ///     color: data[index].color,
+  ///     child: Column(
+  ///       crossAxisAlignment: CrossAxisAlignment.center,
+  ///       mainAxisSize: MainAxisSize.max,
+  ///       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  ///       children: <Widget>[
+  ///         Image.asset(
+  ///           data[index].image,
+  ///           fit: BoxFit.cover,
+  ///         ),
+  ///         Padding(
+  ///           padding: EdgeInsets.all(20.0),
+  ///         ),
+  ///         Column(
+  ///           children: <Widget>[
+  ///             Text(
+  ///               data[index].text1,
+  ///               style: WithPages.style,
+  ///             ),
+  ///             Text(
+  ///               data[index].text2,
+  ///               style: WithPages.style,
+  ///             ),
+  ///             Text(
+  ///               data[index].text3,
+  ///               style: WithPages.style,
+  ///             ),
+  ///           ],
+  ///         ),
+  ///       ],
+  ///      ),
+  ///   );}
+  /// ),
+  ///```
   ///
   /// See Example for complete reference.
   LiquidSwipe.builder({
@@ -311,6 +333,7 @@ class LiquidSwipe extends StatefulWidget {
     this.onPageChangeCallback,
     this.currentUpdateTypeCallback,
     this.slidePercentCallback,
+    this.preferDragFromRevealedArea = false,
     this.ignoreUserGestureWhileAnimating = false,
     this.disableUserGesture = false,
     this.enableSideReveal = false,
@@ -363,28 +386,26 @@ class _LiquidSwipe extends State<LiquidSwipe> with TickerProviderStateMixin {
                 : widget.liquidSwipeChildDelegate
                     .getChildAtIndex(context, notifier.nextPageIndex),
             //Pages
-            PageReveal(
-              //next page reveal
+            PageDragger(
+              //Used for gesture control
               horizontalReveal: notifier.slidePercentHor,
-              child: notifier.slideDirection == SlideDirection.leftToRight
-                  ? widget.liquidSwipeChildDelegate
-                      .getChildAtIndex(context, notifier.nextPageIndex)
-                  : widget.liquidSwipeChildDelegate
-                      .getChildAtIndex(context, notifier.activePageIndex),
               slideDirection: notifier.slideDirection,
               iconSize: notifier.iconSize,
               waveType: widget.waveType,
               verticalReveal: notifier.slidePercentVer,
               enableSideReveal: notifier.enableSideReveal,
-            ),
-            PageDragger(
-              //Used for gesture control
+              preferDragFromRevealedArea: widget.preferDragFromRevealedArea,
               fullTransitionPX: widget.fullTransitionValue,
               slideIconWidget: widget.slideIconWidget,
               iconPosition: widget.positionSlideIcon,
               ignoreUserGestureWhileAnimating:
                   widget.ignoreUserGestureWhileAnimating,
-            ), //PageDragger
+              child: notifier.slideDirection == SlideDirection.leftToRight
+                  ? widget.liquidSwipeChildDelegate
+                      .getChildAtIndex(context, notifier.nextPageIndex)
+                  : widget.liquidSwipeChildDelegate
+                      .getChildAtIndex(context, notifier.activePageIndex),
+            ),
           ], //Widget//Stack
         );
       }),

@@ -3,12 +3,22 @@ import 'package:liquid_swipe/Helpers/Helpers.dart';
 import 'package:liquid_swipe/Helpers/SlideUpdate.dart';
 import 'package:liquid_swipe/Provider/LiquidProvider.dart';
 import 'package:provider/provider.dart';
+import 'page_reveal.dart';
 
 /// Internal Widget
 ///
 /// PageDragger is a Widget that handles user gestures and provide the data to the [LiquidProvider]
 /// from where we perform animations various other methods.
 class PageDragger extends StatefulWidget {
+  final double horizontalReveal;
+  final Widget child;
+  final SlideDirection? slideDirection;
+  final Size iconSize;
+  final WaveType waveType;
+  final double verticalReveal;
+  final bool enableSideReveal;
+  final bool preferDragFromRevealedArea;
+
   /// Used to make animation faster or slower through it corresponding value
   /// default : [FULL_TRANSITION_PX]
   final double fullTransitionPX;
@@ -24,6 +34,14 @@ class PageDragger extends StatefulWidget {
 
   ///Constructor with some default values
   PageDragger({
+    required this.horizontalReveal,
+    required this.child,
+    this.slideDirection,
+    required this.iconSize,
+    required this.waveType,
+    required this.verticalReveal,
+    required this.enableSideReveal,
+    required this.preferDragFromRevealedArea,
     this.fullTransitionPX = FULL_TRANSITION_PX,
     this.slideIconWidget,
     this.iconPosition,
@@ -131,29 +149,77 @@ class _PageDraggerState extends State<PageDragger> {
     final model = Provider.of<LiquidProvider>(context, listen: false);
 
     return GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onHorizontalDragStart: model.isInProgress ? null : onDragStart,
-        onHorizontalDragUpdate: model.isInProgress ? null : onDragUpdate,
-        onHorizontalDragEnd: model.isInProgress ? null : onDragEnd,
-        child: Align(
-          alignment: Alignment(
-            1 - slidePercentHor,
-            -1.0 + Utils.handleIconAlignment(widget.iconPosition!) * 2,
-          ),
-          child: Opacity(
-            opacity: 1 - slidePercentHor,
-            child: slideDirection != SlideDirection.leftToRight &&
-                    widget.slideIconWidget != null
-                ? SizedBox(
-                    key: _keyIcon,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 2.0, vertical: 10.0),
-                      child: widget.slideIconWidget,
-                    ),
-                  )
-                : null,
-          ),
+        behavior: widget.preferDragFromRevealedArea
+            ? HitTestBehavior.translucent
+            : null,
+        onHorizontalDragStart: widget.preferDragFromRevealedArea
+            ? model.isInProgress
+                ? null
+                : onDragStart
+            : null,
+        onHorizontalDragUpdate: widget.preferDragFromRevealedArea
+            ? model.isInProgress
+                ? null
+                : onDragUpdate
+            : null,
+        onHorizontalDragEnd: widget.preferDragFromRevealedArea
+            ? model.isInProgress
+                ? null
+                : onDragEnd
+            : null,
+        child: Stack(
+          children: [
+            PageReveal(
+              //next page reveal
+              horizontalReveal: widget.horizontalReveal,
+              slideDirection: widget.slideDirection,
+              iconSize: widget.iconSize,
+              waveType: widget.waveType,
+              verticalReveal: widget.verticalReveal,
+              enableSideReveal: widget.enableSideReveal,
+              child: widget.child,
+            ),
+            GestureDetector(
+              behavior: !widget.preferDragFromRevealedArea
+                  ? HitTestBehavior.translucent
+                  : null,
+              onHorizontalDragStart: !widget.preferDragFromRevealedArea
+                  ? model.isInProgress
+                      ? null
+                      : onDragStart
+                  : null,
+              onHorizontalDragUpdate: !widget.preferDragFromRevealedArea
+                  ? model.isInProgress
+                      ? null
+                      : onDragUpdate
+                  : null,
+              onHorizontalDragEnd: !widget.preferDragFromRevealedArea
+                  ? model.isInProgress
+                      ? null
+                      : onDragEnd
+                  : null,
+              child: Align(
+                alignment: Alignment(
+                  1 - slidePercentHor,
+                  -1.0 + Utils.handleIconAlignment(widget.iconPosition!) * 2,
+                ),
+                child: Opacity(
+                  opacity: 1 - slidePercentHor,
+                  child: slideDirection != SlideDirection.leftToRight &&
+                          widget.slideIconWidget != null
+                      ? SizedBox(
+                          key: _keyIcon,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 2.0, vertical: 10.0),
+                            child: widget.slideIconWidget,
+                          ),
+                        )
+                      : null,
+                ),
+              ),
+            ),
+          ],
         ));
   }
 }
