@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:liquid_swipe/Clippers/CircularWave.dart';
-import 'package:liquid_swipe/Clippers/WaveLayer.dart';
-import 'package:liquid_swipe/Helpers/Helpers.dart';
 
 final clipPathWidget = CircularWave(iconSize, 0.0, 0.0);
 

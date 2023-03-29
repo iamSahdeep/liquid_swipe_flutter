@@ -1,4 +1,7 @@
 # ChangeLog
+## 3.1.0
+* Fixes #83 & #85
+
 ## 3.0.0
 * Flutter 3.0 support
 

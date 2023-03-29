@@ -52,7 +52,7 @@
 * Add this to your pubspec.yaml
   ```
   dependencies:
-  liquid_swipe: ^3.0.0
+  liquid_swipe: ^3.1.0
   
   ```
 * Get the package from Pub:
@@ -130,6 +130,7 @@ Please Refer to [API documentation](https://pub.dev/documentation/liquid_swipe/l
 | ignoreUserGestureWhileAnimating | `bool` | If you want to block gestures while swipe is still animating. See #5 | false |
 | disableUserGesture | `bool` | Disable user gesture, always. | false |
 | enableSideReveal | `bool` | Enable/Disable side reveal | false |
+| preferDragFromRevealedArea | `bool` |  Disabling the drag from the whole page and allowing only from the revealed part of the screen and the icon | false |
 
 ## LiquidController
 

@@ -55,7 +55,7 @@ class _WithBuilder extends State<WithBuilder> {
     double selectedness = Curves.easeOut.transform(
       max(
         0.0,
-        1.0 - ((page ?? 0) - index).abs(),
+        1.0 - ((page) - index).abs(),
       ),
     );
     double zoom = 1.0 + (2.0 - 1.0) * selectedness;
@@ -424,7 +424,7 @@ class _WithPages extends State<WithPages> {
     double selectedness = Curves.easeOut.transform(
       max(
         0.0,
-        1.0 - ((page ?? 0) - index).abs(),
+        1.0 - ((page) - index).abs(),
       ),
     );
     double zoom = 1.0 + (2.0 - 1.0) * selectedness;
